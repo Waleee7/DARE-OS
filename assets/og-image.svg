@@ -103,6 +103,6 @@
 
   <!-- Footer URL -->
   <text x="60" y="600" font-family="Menlo, Consolas, monospace" font-size="13" fill="rgba(207,231,255,0.4)" letter-spacing="3">
-    DARE_OS :: v2.0 :: waleee7.github.io/DARE-OS
+    DARE_OS :: v2.0 :: dare-os.vercel.app
   </text>
 </svg>
