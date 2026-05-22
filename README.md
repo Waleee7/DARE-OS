@@ -1,6 +1,6 @@
 # DARE_OS · v2.0
 
-🌐 **Live:** [waleee7.github.io/dogg-os-portfolio](https://waleee7.github.io/dogg-os-portfolio/)
+🌐 **Live:** [waleee7.github.io/DARE-OS](https://waleee7.github.io/DARE-OS/)
 
 Personal portfolio for **Akinwale "Josh" Dare** — student-athlete · AI engineer · builder of brains.
 
