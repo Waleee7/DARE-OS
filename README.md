@@ -1,44 +1,32 @@
-# DOGG_OS v1.0
+# DARE_OS · v2.0
 
-🌐 **Live Demo:** [DOGG_OS Portfolio](https://waleee7.github.io/dogg-os-portfolio/)
+🌐 **Live:** [waleee7.github.io/dogg-os-portfolio](https://waleee7.github.io/dogg-os-portfolio/)
 
-A web-based interactive portfolio designed to mimic a fully functional operating system. Perfect for showcasing skills, projects, and experience in a playful, immersive way.
+Personal portfolio for **Akinwale "Josh" Dare** — student-athlete · AI engineer · builder of brains.
 
-🚀 Features
+CS undergrad at Life University, front-end dev at DailyIFA, and a regular at hackathons (including the May 2026 SF Anthropic Hackathon that produced [Sandy](https://github.com/Waleee7/chain-recall)). Throws discus and hammer — top-3 all-time Georgia HS boys discus, [verified athlete profile on World Athletics](https://worldathletics.org/athletes/united-states/joshua-dare-14939088).
 
-OS-Style Interface – Interactive, animated interface that feels like a real desktop OS
+## What's on the page
 
-Modal-Based Apps – About, Skills, Projects, and Experience accessible via clickable modals
+- **Hero** — rotating operator core (animated SVG), name, tagline, CTAs
+- **Currently building** — Echo · Sandy · Trading Signals Discord · Maestro/Scout/Forge (with status pills: shipped · in build · stealth)
+- **Selected projects** — Echo, Sandy, Options Trading Course, ThrowingTracker, GlobalLingo, DOGG_OS
+- **Athletics** — PRs (48.06m discus + 16.31m shot put both at Hayward Field), #3 GA HS all-time badge, championship photos, link to World Athletics profile
+- **About** — the operator narrative
+- **Timeline** — SF Anthropic Hackathon · DailyIFA · Life University · Independent
+- **Contact** — email · LinkedIn · GitHub · World Athletics
 
-Keyboard & Mouse Interactions – Realistic OS feel with functional controls
+## Stack
 
-Responsive Design – Optimized for desktops, tablets, and mobile devices
+Pure HTML + CSS + vanilla JS. One file, GitHub Pages friendly. Animations via CSS keyframes, SMIL on the SVG, IntersectionObserver for scroll-reveal. Fonts: Inter + JetBrains Mono.
 
-Lightweight & Fast – Pure HTML, CSS, and JS for instant loading and smooth performance
+## Roadmap
 
-### Interactive Components
+- v2.0 — full content rewrite, Jarvis aesthetic, animated SVG hero, athletics with PRs ✅
+- v2.1 — case-study pages for Echo & Sandy with screenshots and architecture
+- v2.2 — blog section pulling from a Markdown folder
+- v3.0 — possible rebuild on Next.js + R3F to share components with Echo
 
-Carousel / Media Vault – Showcase images, projects, or achievements with navigation controls
+## License
 
-Modal Windows – Pop-up apps for each portfolio section with seamless transitions
-
-Dynamic Animations – Hover effects, transitions, and OS-style task interactions 
-
-Production-Ready Design – Clean, modular code structure for maintainability and scaling
-
-Cross-Browser Compatible – Tested across Chrome, Firefox, Safari, and Edge
-
-Keyboard Accessibility – Navigate modals and apps using keyboard shortcuts
-
-🧠 Tech Stack
-
-HTML5
-
-CSS3 (animations, layouts, transitions)
-
-Vanilla JavaScript (dynamic interactions & modal logic)
-
-
-## 📌 Purpose
-
-DOGG_OS was created to demonstrate front-end engineering skills, UI/UX creativity, and production-ready web design in a fun, interactive, and memorable way. The OS-style portfolio allows users to explore skills and projects in an engaging, immersive environment.
+MIT — fork it, build your own.

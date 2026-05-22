@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="bg" cx="20%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#0a1828"/>
+      <stop offset="100%" stop-color="#050b14"/>
+    </radialGradient>
+    <radialGradient id="orb" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#9DDCFF" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#4FC3FF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4FC3FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="name" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#9DDCFF"/>
+      <stop offset="100%" stop-color="#4FC3FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- HUD corner brackets -->
+  <g stroke="rgba(79,195,255,0.55)" stroke-width="2" fill="none">
+    <path d="M 24 60 L 24 24 L 60 24"/>
+    <path d="M 1140 24 L 1176 24 L 1176 60"/>
+    <path d="M 24 570 L 24 606 L 60 606"/>
+    <path d="M 1140 606 L 1176 606 L 1176 570"/>
+  </g>
+
+  <!-- Subtle scanlines -->
+  <g opacity="0.05">
+    <line x1="0" y1="100" x2="1200" y2="100" stroke="#4FC3FF" stroke-width="1"/>
+    <line x1="0" y1="200" x2="1200" y2="200" stroke="#4FC3FF" stroke-width="1"/>
+    <line x1="0" y1="300" x2="1200" y2="300" stroke="#4FC3FF" stroke-width="1"/>
+    <line x1="0" y1="400" x2="1200" y2="400" stroke="#4FC3FF" stroke-width="1"/>
+    <line x1="0" y1="500" x2="1200" y2="500" stroke="#4FC3FF" stroke-width="1"/>
+  </g>
+
+  <!-- Brain orb (right side) -->
+  <g transform="translate(900 315)">
+    <circle r="240" fill="url(#orb)" opacity="0.6"/>
+    <circle r="180" fill="none" stroke="rgba(79,195,255,0.2)" stroke-width="1"/>
+    <circle r="90" fill="none" stroke="#4FC3FF" stroke-width="1.5" opacity="0.7" stroke-dasharray="6 8"/>
+    <circle r="60" fill="none" stroke="#9DDCFF" stroke-width="1" opacity="0.6" stroke-dasharray="4 6"/>
+    <circle r="18" fill="#9DDCFF" opacity="0.85"/>
+    <!-- Memory dots -->
+    <circle cx="0"    cy="-145" r="9"  fill="hsl(200 80% 65%)"/>
+    <circle cx="115"  cy="-85"  r="9"  fill="hsl(280 80% 65%)"/>
+    <circle cx="-115" cy="-85"  r="9"  fill="hsl(165 80% 65%)"/>
+    <circle cx="0"    cy="20"   r="11" fill="hsl(220 85% 70%)"/>
+    <circle cx="98"   cy="115"  r="9"  fill="hsl(0 80% 65%)"/>
+    <circle cx="-98"  cy="115"  r="9"  fill="hsl(250 80% 70%)"/>
+    <!-- Edges -->
+    <g stroke="#4FC3FF" stroke-width="1" opacity="0.4">
+      <line x1="0" y1="-145" x2="0" y2="20"/>
+      <line x1="0" y1="20" x2="115" y2="-85"/>
+      <line x1="0" y1="20" x2="-115" y2="-85"/>
+      <line x1="0" y1="20" x2="98" y2="115"/>
+      <line x1="0" y1="20" x2="-98" y2="115"/>
+    </g>
+  </g>
+
+  <!-- Status pill: available -->
+  <g transform="translate(60 80)">
+    <circle cx="8" cy="8" r="8" fill="#6FFFAA"/>
+    <text x="28" y="14" font-family="Menlo, Consolas, monospace" font-size="16" fill="#cfe7ff" letter-spacing="4">SYS :: AVAILABLE FOR WORK</text>
+  </g>
+
+  <!-- Name -->
+  <text x="60" y="220" font-family="Inter, sans-serif" font-size="92" font-weight="800" fill="url(#name)" letter-spacing="-3">Akinwale Dare</text>
+  <text x="60" y="290" font-family="Inter, sans-serif" font-style="italic" font-size="48" font-weight="500" fill="#FFD080">— Josh —</text>
+
+  <!-- Positioning -->
+  <g transform="translate(60 340)">
+    <rect width="600" height="50" rx="25" fill="rgba(255,169,71,0.16)" stroke="rgba(255,180,90,0.4)" stroke-width="1"/>
+    <text x="24" y="32" font-family="Inter, sans-serif" font-size="20" fill="#cfe7ff">
+      The only AI engineer in his bracket who throws <tspan fill="#FFD080" font-weight="700">199 feet</tspan>.
+    </text>
+  </g>
+
+  <!-- Tagline -->
+  <text x="60" y="430" font-family="Inter, sans-serif" font-size="22" fill="rgba(207,231,255,0.75)">
+    NCAA throws athlete · AI engineer · builder of brains
+  </text>
+
+  <!-- Stats row -->
+  <g transform="translate(60 480)">
+    <g>
+      <text x="0" y="40" font-family="Inter, sans-serif" font-size="42" font-weight="800" fill="#4FC3FF">7</text>
+      <text x="0" y="68" font-family="Menlo, Consolas, monospace" font-size="11" fill="rgba(207,231,255,0.5)" letter-spacing="2">PROJECTS</text>
+    </g>
+    <g transform="translate(130 0)">
+      <text x="0" y="40" font-family="Inter, sans-serif" font-size="42" font-weight="800" fill="#4FC3FF">199ft</text>
+      <text x="0" y="68" font-family="Menlo, Consolas, monospace" font-size="11" fill="rgba(207,231,255,0.5)" letter-spacing="2">DISCUS PR</text>
+    </g>
+    <g transform="translate(280 0)">
+      <text x="0" y="40" font-family="Inter, sans-serif" font-size="42" font-weight="800" fill="#4FC3FF">5</text>
+      <text x="0" y="68" font-family="Menlo, Consolas, monospace" font-size="11" fill="rgba(207,231,255,0.5)" letter-spacing="2">MCP TOOLS</text>
+    </g>
+    <g transform="translate(380 0)">
+      <text x="0" y="40" font-family="Inter, sans-serif" font-size="42" font-weight="800" fill="#FFD080">#3</text>
+      <text x="0" y="68" font-family="Menlo, Consolas, monospace" font-size="11" fill="rgba(207,231,255,0.5)" letter-spacing="2">GA HS DISCUS</text>
+    </g>
+  </g>
+
+  <!-- Footer URL -->
+  <text x="60" y="600" font-family="Menlo, Consolas, monospace" font-size="13" fill="rgba(207,231,255,0.4)" letter-spacing="3">
+    DARE_OS :: v2.0 :: waleee7.github.io/dogg-os-portfolio
+  </text>
+</svg>

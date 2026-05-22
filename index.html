@@ -1,1817 +1,900 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOGG_OS v1.0</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary: #00ff88;
-            --secondary: #0088ff;
-            --accent: #ff0088;
-            --neon-cyan: #00ffff;
-            --neon-pink: #ff006e;
-            --dark: #000000;
-            --darker: #0a0a0a;
-            --text: #e0e0e0;
-        }
-        
-        body {
-            font-family: 'Share Tech Mono', monospace;
-            background: linear-gradient(45deg, #000000, #1a0033, #003366, #004d00, #330066, #000000);
-            background-size: 400% 400%;
-            animation: gradientFlow 15s ease infinite;
-            color: var(--text);
-            overflow-x: hidden;
-            overflow-y: auto;
-            min-height: 100vh;
-        }
-        
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Animated starfield background */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        
-        /* Startup Screen */
-        .startup-screen {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            transition: opacity 0.8s ease;
-        }
-        
-        .startup-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1999;
-            transition: opacity 0.8s ease;
-        }
-        
-        .loading-screen.active {
-            display: flex;
-        }
-        
-        .loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .loading-text {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 3rem;
-            text-align: left;
-            width: 500px;
-            max-width: 90%;
-        }
-        
-        .loading-message {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInMessage 0.5s ease forwards;
-        }
-        
-        .loading-message.visible {
-            opacity: 1;
-        }
-        
-        @keyframes fadeInMessage {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        .loading-bullet {
-            color: var(--secondary);
-            margin-right: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .loading-message-text {
-            color: var(--text);
-            font-size: 1.1rem;
-            line-height: 1.6;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid var(--primary);
-            animation: blink 0.7s step-end infinite;
-        }
-        
-        .loading-message-text.complete {
-            border-right: none;
-            animation: none;
-        }
-        
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-        
-        .loading-bar-container {
-            width: 400px;
-            height: 8px;
-            background: rgba(0, 255, 136, 0.2);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        
-        .loading-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            width: 0%;
-            animation: loadingProgress 2s ease forwards;
-            box-shadow: 0 0 20px var(--primary);
-        }
-        
-        @keyframes loadingProgress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-        
-        .startup-logo {
-            font-size: 5rem;
-            color: var(--primary);
-            text-shadow: 
-                0 0 20px var(--primary),
-                0 0 40px var(--primary),
-                0 0 60px var(--primary);
-            margin-bottom: 2rem;
-            animation: logoGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes logoGlow {
-            0%, 100% { 
-                text-shadow: 
-                    0 0 20px var(--primary),
-                    0 0 40px var(--primary),
-                    0 0 60px var(--primary);
-            }
-            50% { 
-                text-shadow: 
-                    0 0 30px var(--primary),
-                    0 0 60px var(--primary),
-                    0 0 90px var(--primary);
-            }
-        }
-        
-        .startup-text {
-            font-size: 2rem;
-            color: var(--text);
-            text-align: center;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .startup-subtitle {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .startup-name {
-            font-size: 1.5rem;
-            color: var(--accent);
-            text-align: center;
-            margin-bottom: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-        
-        .initialize-btn {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            padding: 1.5rem 4rem;
-            border: none;
-            font-family: inherit;
-            font-size: 1.3rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 3px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-        }
-        
-        .initialize-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(0, 255, 136, 0.8);
-        }
-        
-        .initialize-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.3);
-            transition: left 0.5s;
-        }
-        
-        .initialize-btn:hover::before {
-            left: 100%;
-        }
-        
-        /* Desktop Screen */
-        .desktop {
-            min-height: 100vh;
-            padding: 2rem;
-            padding-bottom: 8rem;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-            pointer-events: none;
-        }
-        
-        .desktop.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-        
-        /* Taskbar */
-        .taskbar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-top: 2px solid var(--primary);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            box-shadow: 0 -4px 30px rgba(0, 255, 136, 0.2);
-        }
-        
-        .logo {
-            font-size: 1.3rem;
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary);
-            letter-spacing: 2px;
-        }
-        
-        .system-info {
-            display: flex;
-            gap: 2rem;
-            font-size: 0.9rem;
-        }
-        
-        .stat {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--secondary);
-        }
-        
-        .stat-value {
-            color: var(--primary);
-        }
-        
-        /* App Icons Grid */
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 140px));
-            gap: 3rem;
-            padding: 3rem;
-            max-width: 1600px;
-            margin: 0 auto;
-            justify-content: center;
-            align-content: start;
-        }
-        
-        .app-icon {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .app-icon:nth-child(1) { animation-delay: 0s; }
-        .app-icon:nth-child(2) { animation-delay: 0.3s; }
-        .app-icon:nth-child(3) { animation-delay: 0.6s; }
-        .app-icon:nth-child(4) { animation-delay: 0.9s; }
-        .app-icon:nth-child(5) { animation-delay: 1.2s; }
-        .app-icon:nth-child(6) { animation-delay: 1.5s; }
-        .app-icon:nth-child(7) { animation-delay: 1.8s; }
-        .app-icon:nth-child(8) { animation-delay: 2.1s; }
-        
-        .app-icon:hover {
-            transform: translateY(-20px) scale(1.1);
-            animation-play-state: paused;
-        }
-        
-        .app-icon-box {
-            width: 120px;
-            height: 120px;
-            background: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            margin-bottom: 0.75rem;
-            position: relative;
-            transition: all 0.3s ease;
-            filter: drop-shadow(0 10px 20px rgba(0, 255, 136, 0.4));
-        }
-        
-        .app-icon-box span {
-            transform-style: preserve-3d;
-            transition: all 0.3s ease;
-            text-shadow: 
-                2px 2px 0px rgba(0, 0, 0, 0.3),
-                4px 4px 0px rgba(0, 0, 0, 0.2),
-                6px 6px 0px rgba(0, 0, 0, 0.1);
-        }
-        
-        .app-icon:hover .app-icon-box {
-            filter: drop-shadow(0 15px 30px rgba(0, 255, 255, 0.6));
-            transform: scale(1.1) rotateY(10deg);
-        }
-        
-        .app-icon:hover .app-icon-box span {
-            transform: translateZ(20px);
-        }
-        
-        .app-icon-box.pink {
-            filter: drop-shadow(0 10px 20px rgba(255, 0, 136, 0.4));
-        }
-        
-        .app-icon:hover .app-icon-box.pink {
-            filter: drop-shadow(0 15px 30px rgba(255, 0, 110, 0.6));
-        }
-        
-        .app-icon-box.cyan {
-            filter: drop-shadow(0 10px 20px rgba(0, 136, 255, 0.4));
-        }
-        
-        .app-icon:hover .app-icon-box.cyan {
-            filter: drop-shadow(0 15px 30px rgba(0, 255, 255, 0.6));
-        }
-        
-        .app-label {
-            font-size: 0.9rem;
-            text-align: center;
-            color: var(--text);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-        }
-        
-        /* Modal Window */
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-        
-        .modal.active {
-            display: flex;
-        }
-        
-        .window {
-            background: rgba(10, 10, 10, 0.95);
-            border: 2px solid var(--primary);
-            border-radius: 12px;
-            width: 90%;
-            max-width: 1200px;
-            max-height: 85vh;
-            overflow: hidden;
-            box-shadow: 
-                0 0 60px rgba(0, 255, 136, 0.4),
-                inset 0 0 30px rgba(0, 255, 136, 0.05);
-            animation: modalSlideIn 0.3s ease;
-            margin: auto;
-        }
-        
-        @keyframes modalSlideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        .window-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            color: var(--dark);
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .window-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 3s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
-        .window-title {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            z-index: 1;
-        }
-        
-        .window-icon {
-            font-size: 1.5rem;
-            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
-        }
-        
-        .window-controls {
-            display: flex;
-            gap: 0.5rem;
-            z-index: 1;
-        }
-        
-        .control-btn {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .control-btn:hover {
-            transform: scale(1.2);
-        }
-        
-        .control-btn.close { 
-            background: #ff5555;
-            box-shadow: 0 0 10px #ff5555;
-        }
-        .control-btn.minimize { 
-            background: #ffaa00;
-            box-shadow: 0 0 10px #ffaa00;
-        }
-        .control-btn.maximize { 
-            background: #00ff88;
-            box-shadow: 0 0 10px #00ff88;
-        }
-        
-        .window-content {
-            padding: 2rem;
-            max-height: calc(85vh - 80px);
-            overflow-y: auto;
-        }
-        
-        .window-content::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        .window-content::-webkit-scrollbar-track {
-            background: rgba(0, 255, 136, 0.1);
-        }
-        
-        .window-content::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-        
-        /* Content Styles */
-        .content-section {
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-        
-        .content-section p {
-            margin-bottom: 1rem;
-        }
-        
-        .content-section strong {
-            color: var(--primary);
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-        }
-        
-        .skill-card {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--primary);
-            padding: 1.5rem 1rem;
-            text-align: center;
-            border-radius: 10px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .skill-card:hover {
-            background: rgba(0, 255, 136, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
-        }
-        
-        .skill-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .skill-name {
-            color: var(--primary);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        .skill-level {
-            font-size: 0.8rem;
-            color: var(--secondary);
-        }
-        
-        .projects-grid {
-            display: grid;
-            gap: 1.5rem;
-        }
-        
-        .project-card {
-            background: rgba(0, 136, 255, 0.1);
-            border: 2px solid var(--secondary);
-            border-radius: 10px;
-            padding: 1.5rem;
-            transition: all 0.3s;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0, 136, 255, 0.4);
-            border-color: var(--primary);
-        }
-        
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .project-title {
-            color: var(--secondary);
-            font-size: 1.3rem;
-        }
-        
-        .project-status {
-            background: var(--primary);
-            color: var(--dark);
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-        }
-        
-        .project-desc {
-            color: var(--text);
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-        
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .tech-tag {
-            background: rgba(255, 0, 136, 0.2);
-            color: var(--accent);
-            padding: 0.25rem 0.75rem;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            border: 1px solid var(--accent);
-        }
-        
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .project-link {
-            color: var(--primary);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--primary);
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        
-        .project-link:hover {
-            background: var(--primary);
-            color: var(--dark);
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-        }
-        
-        .experience-timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-        
-        .experience-timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-        }
-        
-        .experience-item {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-        
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 0;
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--primary);
-        }
-        
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .experience-title {
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-        
-        .experience-company {
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .experience-date {
-            color: var(--accent);
-            font-size: 0.9rem;
-        }
-        
-        .experience-desc {
-            color: var(--text);
-            line-height: 1.6;
-            margin-top: 0.5rem;
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .contact-card {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--primary);
-            padding: 2rem;
-            text-align: center;
-            border-radius: 10px;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        
-        .contact-card:hover {
-            background: rgba(0, 255, 136, 0.2);
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
-        }
-        
-        .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .contact-label {
-            color: var(--primary);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .contact-value {
-            color: var(--secondary);
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .startup-logo {
-                font-size: 3rem;
-            }
-            
-            .startup-text {
-                font-size: 1.3rem;
-            }
-            
-            .app-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 120px));
-                gap: 2rem;
-                padding: 2rem;
-            }
-            
-            .system-info {
-                display: none;
-            }
-            
-            .window {
-                width: 95%;
-                max-height: 90vh;
-            }
-            
-            .window-content {
-                padding: 1.5rem;
-                max-height: calc(90vh - 80px);
-            }
-        }
-        
-        @media (min-width: 1920px) {
-            .app-grid {
-                max-width: 1800px;
-                gap: 4rem;
-            }
-            
-            .window {
-                max-width: 1400px;
-            }
-        }
-        
-        /* Fullscreen support */
-        .desktop:-webkit-full-screen {
-            width: 100vw;
-            height: 100vh;
-        }
-        
-        .desktop:-moz-full-screen {
-            width: 100vw;
-            height: 100vh;
-        }
-        
-        .desktop:fullscreen {
-            width: 100vw;
-            height: 100vh;
-        }
-        
-        /* Idle notification */
-        .idle-notification {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(10, 10, 10, 0.98);
-            border: 2px solid var(--accent);
-            border-radius: 12px;
-            padding: 2rem 3rem;
-            z-index: 2001;
-            display: none;
-            text-align: center;
-            box-shadow: 0 0 60px rgba(255, 0, 136, 0.6);
-            animation: popIn 0.3s ease;
-        }
-        
-        .idle-notification.active {
-            display: block;
-        }
-        
-        @keyframes popIn {
-            from {
-                transform: translate(-50%, -50%) scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 1;
-            }
-        }
-        
-        .idle-notification h3 {
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .idle-notification p {
-            color: var(--text);
-            margin-bottom: 1.5rem;
-        }
-        
-        .idle-notification button {
-            background: linear-gradient(45deg, var(--accent), var(--secondary));
-            color: var(--dark);
-            border: none;
-            padding: 0.75rem 2rem;
-            font-family: inherit;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        
-        .idle-notification button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 0, 136, 0.8);
-        }
-        
-        /* Media Vault Carousel */
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .carousel-image {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3);
-            display: none;
-        }
-        
-        .carousel-image.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .carousel-btn {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            border: none;
-            padding: 0.75rem 2rem;
-            font-family: inherit;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.3s;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        
-        .carousel-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
-        }
-        
-        .carousel-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: scale(1);
-        }
-        
-        .carousel-counter {
-            text-align: center;
-            color: var(--primary);
-            font-size: 1.1rem;
-            margin-top: 1rem;
-        }
-        
-        .carousel-caption {
-            text-align: center;
-            color: var(--text);
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Akinwale "Josh" Dare — Student-athlete · AI engineer</title>
+<meta name="description" content="Akinwale (Josh) Dare — NCAA throws athlete building AI memory systems. CS @ Life University. #3 all-time GA HS boys discus." />
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Akinwale 'Josh' Dare — NCAA throws athlete building AI" />
+<meta property="og:description" content="The only AI engineer in his bracket who throws 199 feet. Builds AI memory systems, MCP servers, agent ecosystems." />
+<meta property="og:image" content="https://waleee7.github.io/dogg-os-portfolio/assets/og-image.svg" />
+<meta property="og:url" content="https://waleee7.github.io/dogg-os-portfolio/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Akinwale 'Josh' Dare" />
+<meta name="twitter:description" content="NCAA throws athlete building AI memory systems · #3 all-time GA HS discus" />
+<meta name="twitter:image" content="https://waleee7.github.io/dogg-os-portfolio/assets/og-image.svg" />
+
+<!-- Favicon (inline SVG — cyan core) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23050b14' stroke='%234FC3FF' stroke-width='1.5'/><circle cx='16' cy='16' r='9' fill='none' stroke='%234FC3FF' stroke-width='1' stroke-dasharray='2 2' opacity='0.6'/><circle cx='16' cy='16' r='4' fill='%239DDCFF' opacity='0.9'/></svg>" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-0: #050b14;
+    --bg-1: #0a1828;
+    --bg-2: #112236;
+    --line: rgba(79, 195, 255, 0.18);
+    --line-warm: rgba(255, 180, 90, 0.25);
+    --text: #cfe7ff;
+    --text-dim: rgba(207, 231, 255, 0.65);
+    --text-faint: rgba(207, 231, 255, 0.40);
+    --cyan: #4FC3FF;
+    --cyan-soft: #9DDCFF;
+    --amber: #FFD080;
+    --amber-warm: #FFA947;
+    --emerald: #6FFFAA;
+    --magenta: #FF7AD9;
+    --violet: #B47BFF;
+    --rose: #FF6E8A;
+    --shadow-cyan: 0 0 30px rgba(79, 195, 255, 0.25);
+    --shadow-glow: 0 0 50px rgba(79, 195, 255, 0.45);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg-0);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--cyan); color: var(--bg-0); }
+  a { color: var(--cyan); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: var(--cyan-soft); }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: -2;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(79, 195, 255, 0.18), transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(180, 123, 255, 0.14), transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(255, 208, 128, 0.05), transparent 70%);
+    animation: bg-drift 24s ease-in-out infinite alternate;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: repeating-linear-gradient(0deg,
+      rgba(79, 195, 255, 0.022) 0px, rgba(79, 195, 255, 0.022) 1px,
+      transparent 1px, transparent 3px);
+    mix-blend-mode: screen;
+  }
+  @keyframes bg-drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-3%, 2%) scale(1.05); }
+  }
+
+  .hud-corner {
+    position: fixed; width: 26px; height: 26px;
+    border: 1.5px solid rgba(79, 195, 255, 0.5);
+    filter: drop-shadow(0 0 4px rgba(79, 195, 255, 0.4));
+    z-index: 5; pointer-events: none;
+  }
+  .hud-corner.tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
+  .hud-corner.tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
+  .hud-corner.bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0; }
+  .hud-corner.br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    backdrop-filter: blur(14px) saturate(140%);
+    background: rgba(5, 11, 20, 0.6);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  }
+  nav .brand { color: var(--cyan); letter-spacing: 0.25em; text-transform: uppercase; }
+  nav .brand .dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cyan); box-shadow: 0 0 10px var(--cyan);
+    animation: pulse 2s ease-in-out infinite; margin-right: 8px;
+  }
+  nav ul { display: flex; gap: 22px; list-style: none; }
+  nav ul a { color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.15em; }
+  nav ul a:hover { color: var(--cyan); }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  section { max-width: 1100px; margin: 0 auto; padding: 110px 32px 60px; position: relative; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--cyan); letter-spacing: 0.3em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .section-label::before {
+    content: ""; display: inline-block; width: 24px; height: 1px; background: var(--cyan);
+  }
+  h2.section-title {
+    font-size: clamp(28px, 4vw, 44px); font-weight: 700; margin-bottom: 36px;
+    letter-spacing: -0.02em;
+  }
+  h2.section-title .accent { color: var(--cyan); }
+
+  .hero {
+    min-height: 92vh;
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    gap: 50px; align-items: center; padding-top: 130px;
+  }
+  .hero-text .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--cyan); letter-spacing: 0.3em; text-transform: uppercase;
+    margin-bottom: 18px; display: inline-flex; align-items: center; gap: 10px;
+  }
+  .hero-text .eyebrow::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--emerald); box-shadow: 0 0 12px var(--emerald);
+    animation: pulse 1.8s infinite;
+  }
+  .hero-text h1 {
+    font-size: clamp(40px, 6.5vw, 78px); line-height: 1.02;
+    font-weight: 800; letter-spacing: -0.035em; margin-bottom: 12px;
+    background: linear-gradient(135deg, #ffffff 0%, var(--cyan-soft) 60%, var(--cyan) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-text h1 .alt {
+    color: var(--amber); -webkit-text-fill-color: var(--amber);
+    font-style: italic; font-weight: 500;
+  }
+  .hero-text .positioning {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(255, 169, 71, 0.16), rgba(79, 195, 255, 0.16));
+    border: 1px solid var(--line-warm);
+    padding: 9px 16px; border-radius: 999px;
+    font-size: clamp(14px, 1.3vw, 16px); color: var(--text);
+    margin-bottom: 18px; font-weight: 500;
+  }
+  .hero-text .positioning strong {
+    color: var(--amber); font-weight: 700;
+  }
+  .hero-text .tagline {
+    font-size: clamp(15px, 1.4vw, 18px); color: var(--text-dim);
+    margin-bottom: 12px; max-width: 540px; font-weight: 500;
+  }
+  .hero-text .tagline .pipe { color: var(--cyan); margin: 0 10px; opacity: 0.7; }
+  .hero-text .subline {
+    font-size: 14px; color: var(--text-dim); max-width: 540px; margin-bottom: 28px;
+  }
+  .stats-row {
+    display: flex; gap: 22px; margin-bottom: 30px; flex-wrap: wrap;
+  }
+  .stat { display: flex; flex-direction: column; min-width: 80px; }
+  .stat .num {
+    font-size: clamp(26px, 3vw, 34px); font-weight: 800;
+    color: var(--cyan); line-height: 1;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 12px rgba(79, 195, 255, 0.4);
+  }
+  .stat .lbl {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--text-faint); text-transform: uppercase;
+    letter-spacing: 0.15em; margin-top: 4px;
+  }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 22px; border-radius: 999px; font-size: 13px;
+    font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+    transition: all 0.25s; cursor: pointer; border: 1px solid;
+  }
+  .btn-primary {
+    background: var(--cyan); color: var(--bg-0); border-color: var(--cyan);
+    box-shadow: 0 0 24px rgba(79, 195, 255, 0.4);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px); box-shadow: 0 0 36px rgba(79, 195, 255, 0.7);
+    color: var(--bg-0);
+  }
+  .btn-ghost {
+    background: transparent; color: var(--text); border-color: rgba(207, 231, 255, 0.25);
+  }
+  .btn-ghost:hover {
+    border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px);
+  }
+
+  .hero-orb { display: flex; align-items: center; justify-content: center; position: relative; flex-direction: column; gap: 10px; }
+  .hero-orb svg {
+    width: clamp(280px, 35vw, 420px); height: auto;
+    filter: drop-shadow(0 0 40px rgba(79, 195, 255, 0.25));
+  }
+  /* Live Echo embed — the actual deployed brain dashboard */
+  .echo-live-wrap {
+    position: relative; width: clamp(300px, 36vw, 440px);
+    aspect-ratio: 1; border-radius: 18px; overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--bg-0);
+    box-shadow: 0 0 60px rgba(79, 195, 255, 0.25), inset 0 0 30px rgba(79, 195, 255, 0.1);
+  }
+  .echo-live-wrap iframe {
+    position: absolute; top: -60px; left: -380px;
+    width: 1200px; height: 720px;
+    border: 0; transform-origin: top left;
+    transform: scale(0.55); pointer-events: none;
+  }
+  .echo-live-badge {
+    position: absolute; top: 10px; left: 10px; z-index: 5;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(5, 11, 20, 0.85); backdrop-filter: blur(8px);
+    border: 1px solid rgba(111, 255, 170, 0.5);
+    color: var(--emerald); padding: 5px 10px; border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    text-transform: uppercase; letter-spacing: 0.2em;
+  }
+  .echo-live-badge .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--emerald); box-shadow: 0 0 8px var(--emerald);
+    animation: pulse 1.4s infinite;
+  }
+  .echo-live-cta {
+    position: absolute; bottom: 10px; right: 10px; z-index: 5;
+    background: rgba(5, 11, 20, 0.85); backdrop-filter: blur(8px);
+    border: 1px solid var(--cyan);
+    color: var(--cyan); padding: 7px 14px; border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .echo-live-cta:hover {
+    background: var(--cyan); color: var(--bg-0); transform: translateY(-1px);
+  }
+  .echo-caption {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.2em;
+    text-align: center;
+  }
+
+  .scroll-cue {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.3em; color: var(--text-faint); text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    animation: float 2.5s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(-50%, 0); opacity: 0.6; }
+    50% { transform: translate(-50%, 6px); opacity: 1; }
+  }
+
+  .build-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .build-card {
+    border: 1px solid var(--line);
+    background: linear-gradient(150deg, rgba(17, 34, 54, 0.7), rgba(10, 24, 40, 0.5));
+    backdrop-filter: blur(8px);
+    padding: 20px; border-radius: 12px; position: relative; overflow: hidden;
+    transition: all 0.3s;
+  }
+  .build-card::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--accent, var(--cyan));
+    box-shadow: 0 0 12px var(--accent, var(--cyan));
+  }
+  .build-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent, var(--cyan));
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  }
+  .build-card .head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px; gap: 10px;
+  }
+  .build-card .name { font-weight: 700; font-size: 16px; color: var(--text); }
+  .build-card .status {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    padding: 3px 8px; border-radius: 999px; text-transform: uppercase;
+    letter-spacing: 0.15em; white-space: nowrap;
+  }
+  .status-shipped { background: rgba(111, 255, 170, 0.15); color: var(--emerald); border: 1px solid rgba(111, 255, 170, 0.4); }
+  .status-live    { background: rgba(79, 195, 255, 0.15); color: var(--cyan); border: 1px solid rgba(79, 195, 255, 0.4); }
+  .status-build   { background: rgba(255, 208, 128, 0.15); color: var(--amber); border: 1px solid rgba(255, 208, 128, 0.4); }
+  .status-stealth { background: rgba(180, 123, 255, 0.15); color: var(--violet); border: 1px solid rgba(180, 123, 255, 0.4); }
+  .build-card .desc { color: var(--text-dim); font-size: 14px; margin-bottom: 14px; }
+  .build-card .stack {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+  }
+  .build-card .stack span {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--text-faint); padding: 2px 7px; border-radius: 4px;
+    background: rgba(207, 231, 255, 0.05); border: 1px solid var(--line);
+  }
+  .build-card .links a {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    margin-right: 14px; color: var(--accent, var(--cyan));
+  }
+  .build-card .links a:hover { text-decoration: underline; }
+
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .project {
+    border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+    background: rgba(10, 24, 40, 0.5); backdrop-filter: blur(8px);
+    transition: all 0.3s; position: relative;
+  }
+  .project:hover {
+    transform: translateY(-3px); border-color: var(--accent, var(--cyan));
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), 0 0 30px var(--glow, rgba(79, 195, 255, 0.25));
+  }
+  .project .top {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+  }
+  .project .icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--accent, var(--cyan));
+    box-shadow: 0 0 16px var(--glow, rgba(79, 195, 255, 0.25));
+  }
+  .project h3 { font-size: 17px; font-weight: 700; }
+  .project p { color: var(--text-dim); font-size: 14px; margin-bottom: 14px; }
+  .project .stack {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+  }
+  .project .stack span {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--text-faint); padding: 2px 7px; border-radius: 4px;
+    background: rgba(207, 231, 255, 0.05); border: 1px solid var(--line);
+  }
+  .project .links a {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    margin-right: 14px; color: var(--accent, var(--cyan));
+  }
+  .project .links a:hover { text-decoration: underline; }
+
+  .athletics {
+    border: 1px solid var(--line-warm); border-radius: 14px;
+    padding: 28px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 169, 71, 0.06), rgba(10, 24, 40, 0.55));
+  }
+  .athletics::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 90% 10%, rgba(255, 169, 71, 0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .athletics-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 24px; margin-bottom: 22px; flex-wrap: wrap; position: relative;
+  }
+  .athletics .head { flex: 1; min-width: 260px; }
+  .athletics .head h3 {
+    font-size: 22px; font-weight: 700; margin-bottom: 6px;
+  }
+  .athletics .head .school {
+    color: var(--text-dim); font-size: 14px; margin-bottom: 12px;
+  }
+  .athletics .verified {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(111, 255, 170, 0.1); color: var(--emerald);
+    padding: 6px 12px; border-radius: 999px; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; border: 1px solid rgba(111, 255, 170, 0.35);
+    text-transform: uppercase; letter-spacing: 0.15em;
+  }
+  .pr-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px; position: relative; margin-bottom: 18px;
+  }
+  .pr {
+    background: rgba(5, 11, 20, 0.55); border: 1px solid var(--line);
+    border-radius: 10px; padding: 16px; transition: border-color 0.25s;
+  }
+  .pr:hover { border-color: var(--amber); }
+  .pr .ev { font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--amber); text-transform: uppercase; letter-spacing: 0.2em; }
+  .pr .mark { font-size: 30px; font-weight: 800; line-height: 1;
+    margin: 8px 0 4px; color: #fff; letter-spacing: -0.02em; }
+  .pr .where { font-size: 12px; color: var(--text-dim); }
+  .pr .where strong { color: var(--cyan-soft); }
+  .achievements {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; position: relative;
+  }
+  .achievements img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px;
+    border: 1px solid var(--line); transition: all 0.3s; cursor: pointer;
+  }
+  .achievements img:hover {
+    border-color: var(--amber); transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 169, 71, 0.2);
+  }
+  .badge-3 {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--amber), var(--amber-warm));
+    color: var(--bg-0); padding: 10px 18px; border-radius: 999px;
+    font-weight: 800; font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.1em; box-shadow: 0 0 24px rgba(255, 169, 71, 0.4);
+  }
+  .badge-3 .num {
+    background: var(--bg-0); color: var(--amber);
+    width: 28px; height: 28px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+
+  .about p {
+    font-size: 17px; line-height: 1.7; color: var(--text);
+    max-width: 720px; margin-bottom: 16px;
+  }
+  .about p strong { color: var(--cyan); font-weight: 600; }
+
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--cyan), transparent);
+  }
+  .tl-item { position: relative; margin-bottom: 32px; padding-left: 12px; }
+  .tl-item::before {
+    content: ""; position: absolute; left: -28px; top: 6px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--bg-0); border: 2px solid var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+  }
+  .tl-item .role { font-size: 17px; font-weight: 700; margin-bottom: 3px; }
+  .tl-item .org {
+    color: var(--cyan); font-size: 14px; margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .tl-item .date {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .tl-item .desc { color: var(--text-dim); font-size: 14px; }
+
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .contact-card {
+    border: 1px solid var(--line); border-radius: 12px; padding: 20px;
+    text-align: center; transition: all 0.3s;
+    background: rgba(10, 24, 40, 0.5); backdrop-filter: blur(8px);
+  }
+  .contact-card:hover {
+    transform: translateY(-3px); border-color: var(--cyan);
+    box-shadow: var(--shadow-cyan);
+  }
+  .contact-card .icon { font-size: 28px; margin-bottom: 8px; }
+  .contact-card .lbl {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.2em;
+  }
+  .contact-card .val {
+    color: var(--text); font-weight: 600; font-size: 14px; margin-top: 4px;
+    word-break: break-all;
+  }
+
+  footer {
+    text-align: center; padding: 40px 32px 30px;
+    border-top: 1px solid var(--line); margin-top: 60px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--text-faint); letter-spacing: 0.15em;
+  }
+  footer .ticker { color: var(--cyan); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s ease-out; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 880px) {
+    nav { padding: 12px 18px; }
+    nav ul { display: none; }
+    section { padding: 90px 18px 40px; }
+    .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 100px; gap: 30px; }
+    .hero-orb { order: -1; }
+    .hero-orb svg { width: 220px; }
+    .hud-corner { width: 18px; height: 18px; }
+  }
+</style>
 </head>
 <body>
-    <!-- Starfield Background -->
-    <div class="stars" id="stars"></div>
 
-    <!-- Startup Screen -->
-    <div class="startup-screen" id="startupScreen">
-        <div class="startup-logo">🥏</div>
-        <div class="startup-text">Dogg Operating Systems</div>
-        <div class="startup-subtitle">Application Engineer | Innovator | Futurist</div>
-        <div class="startup-name">Akinwale Dare</div>
-        <button class="initialize-btn" onclick="initialize()">INITIALIZE SYSTEM</button>
+<div class="hud-corner tl"></div>
+<div class="hud-corner tr"></div>
+<div class="hud-corner bl"></div>
+<div class="hud-corner br"></div>
+
+<nav>
+  <div class="brand"><span class="dot"></span>DARE_OS · v2.0</div>
+  <ul>
+    <li><a href="#building">Building</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#athletics">Athletics</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-text reveal">
+    <div class="eyebrow">SYS :: AVAILABLE FOR WORK</div>
+    <h1>Akinwale Dare<br><span class="alt">— Josh —</span></h1>
+    <p class="positioning">
+      The only AI engineer in his bracket who throws <strong>199 feet</strong>.
+    </p>
+    <p class="tagline">
+      NCAA throws athlete <span class="pipe">·</span> AI engineer <span class="pipe">·</span> builder of brains
+    </p>
+    <p class="subline">
+      Discipline from the throwing circle, shipped to the terminal. CS @ Life University,
+      shipping production AI tools, MCP servers, and agent systems.
+    </p>
+
+    <!-- Animated stats counter -->
+    <div class="stats-row">
+      <div class="stat"><span class="num" data-target="7">0</span><span class="lbl">projects shipped</span></div>
+      <div class="stat"><span class="num" data-target="199" data-suffix="ft">0</span><span class="lbl">discus PR</span></div>
+      <div class="stat"><span class="num" data-target="5">0</span><span class="lbl">MCP tools live</span></div>
+      <div class="stat"><span class="num" data-target="3" data-prefix="#">0</span><span class="lbl">all-time GA discus</span></div>
     </div>
-
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-text" id="loadingMessages">
-            <!-- Messages will be dynamically added here -->
-        </div>
-        <div class="loading-bar-container">
-            <div class="loading-bar-fill"></div>
-        </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#projects">View work →</a>
+      <a class="btn btn-ghost" href="https://github.com/Waleee7" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/akinwaledare" target="_blank" rel="noopener">LinkedIn</a>
     </div>
+  </div>
+  <div class="hero-orb reveal">
+    <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-label="Rotating operator core">
+      <defs>
+        <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#9DDCFF" stop-opacity="0.9"/>
+          <stop offset="60%" stop-color="#4FC3FF" stop-opacity="0.22"/>
+          <stop offset="100%" stop-color="#4FC3FF" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="glw" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2"/>
+        </filter>
+      </defs>
+      <circle cx="160" cy="160" r="120" fill="url(#g1)" opacity="0.7"/>
+      <g opacity="0.55">
+        <animateTransform attributeName="transform" type="rotate" from="0 160 160" to="360 160 160" dur="38s" repeatCount="indefinite"/>
+        <g transform="translate(160 160)">
+          <circle cx="0" cy="-110" r="1.1" fill="#4FC3FF"/>
+          <circle cx="34" cy="-104" r="1" fill="#4FC3FF"/>
+          <circle cx="-38" cy="-100" r="1.1" fill="#4FC3FF"/>
+          <circle cx="60" cy="-88" r="1" fill="#4FC3FF"/>
+          <circle cx="-65" cy="-82" r="1.1" fill="#4FC3FF"/>
+          <circle cx="86" cy="-68" r="1" fill="#4FC3FF"/>
+          <circle cx="-92" cy="-60" r="1" fill="#4FC3FF"/>
+          <circle cx="104" cy="-44" r="1.1" fill="#4FC3FF"/>
+          <circle cx="-106" cy="-36" r="1" fill="#4FC3FF"/>
+          <circle cx="112" cy="-16" r="1" fill="#4FC3FF"/>
+          <circle cx="-110" cy="-6" r="1.1" fill="#4FC3FF"/>
+          <circle cx="110" cy="14" r="1" fill="#4FC3FF"/>
+          <circle cx="-108" cy="24" r="1" fill="#4FC3FF"/>
+          <circle cx="102" cy="42" r="1.1" fill="#4FC3FF"/>
+          <circle cx="-98" cy="50" r="1" fill="#4FC3FF"/>
+          <circle cx="88" cy="66" r="1" fill="#4FC3FF"/>
+          <circle cx="-82" cy="72" r="1.1" fill="#4FC3FF"/>
+          <circle cx="68" cy="86" r="1" fill="#4FC3FF"/>
+          <circle cx="-58" cy="92" r="1" fill="#4FC3FF"/>
+          <circle cx="40" cy="100" r="1.1" fill="#4FC3FF"/>
+          <circle cx="-30" cy="104" r="1" fill="#4FC3FF"/>
+          <circle cx="14" cy="108" r="1" fill="#4FC3FF"/>
+        </g>
+      </g>
+      <g filter="url(#glw)">
+        <animateTransform attributeName="transform" type="rotate" from="0 160 160" to="-360 160 160" dur="52s" repeatCount="indefinite"/>
+        <g transform="translate(160 160)">
+          <line x1="0" y1="-98" x2="0" y2="12" stroke="#4FC3FF" stroke-width="0.6" opacity="0.35"/>
+          <line x1="0" y1="12" x2="76" y2="-56" stroke="#4FC3FF" stroke-width="0.6" opacity="0.35"/>
+          <line x1="0" y1="12" x2="-76" y2="-56" stroke="#4FC3FF" stroke-width="0.6" opacity="0.35"/>
+          <line x1="0" y1="12" x2="64" y2="76" stroke="#4FC3FF" stroke-width="0.6" opacity="0.35"/>
+          <line x1="0" y1="12" x2="-64" y2="76" stroke="#4FC3FF" stroke-width="0.6" opacity="0.35"/>
+          <circle cx="0" cy="-98" r="5" fill="hsl(200 80% 65%)"><animate attributeName="r" values="4;6;4" dur="3.2s" repeatCount="indefinite"/></circle>
+          <circle cx="76" cy="-56" r="5" fill="hsl(280 80% 65%)"><animate attributeName="r" values="4;6;4" dur="2.8s" repeatCount="indefinite"/></circle>
+          <circle cx="-76" cy="-56" r="5" fill="hsl(165 80% 65%)"><animate attributeName="r" values="4;6;4" dur="3.6s" repeatCount="indefinite"/></circle>
+          <circle cx="0" cy="12" r="6" fill="hsl(220 85% 70%)"><animate attributeName="r" values="5;7;5" dur="2.4s" repeatCount="indefinite"/></circle>
+          <circle cx="64" cy="76" r="5" fill="hsl(0 80% 65%)"><animate attributeName="r" values="4;6;4" dur="3.4s" repeatCount="indefinite"/></circle>
+          <circle cx="-64" cy="76" r="5" fill="hsl(250 80% 70%)"><animate attributeName="r" values="4;6;4" dur="3.8s" repeatCount="indefinite"/></circle>
+        </g>
+      </g>
+      <g transform="translate(160 160)" filter="url(#glw)">
+        <circle r="40" fill="none" stroke="#4FC3FF" stroke-width="1" opacity="0.6" stroke-dasharray="3 4">
+          <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="12s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="26" fill="none" stroke="#9DDCFF" stroke-width="0.8" opacity="0.55" stroke-dasharray="2 3">
+          <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="8s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="7" fill="#9DDCFF" opacity="0.8">
+          <animate attributeName="opacity" values="0.55;0.95;0.55" dur="2.6s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+    </svg>
+  </div>
+  <div class="scroll-cue">SCROLL<br>▼</div>
+</section>
 
-    <!-- Idle Notification -->
-    <div class="idle-notification" id="idleNotification">
-        <h3>👋 Hey, you still there?</h3>
-        <p>You've been idle for a while. Click below to continue exploring.</p>
-        <button onclick="dismissIdle()">I'M STILL HERE</button>
+<section id="building">
+  <div class="reveal">
+    <div class="section-label">/ in-flight</div>
+    <h2 class="section-title">Currently <span class="accent">building</span></h2>
+  </div>
+  <div class="build-grid">
+    <div class="build-card reveal" style="--accent: var(--cyan);">
+      <div class="head">
+        <div class="name">🧠 Echo</div>
+        <div class="status status-shipped">Shipped · v0.2</div>
+      </div>
+      <p class="desc">Personal memory MCP server + 3D brain dashboard. Voice-to-save, hover-dwell gestures, chat-preview replay of how every memory was born. Wired into Claude as a live tool.</p>
+      <div class="stack"><span>TypeScript</span><span>Next.js 15</span><span>R3F</span><span>MCP</span><span>MediaPipe</span></div>
+      <div class="links">
+        <a href="https://echo-ruby-omega.vercel.app" target="_blank" rel="noopener">Live demo →</a>
+        <a href="https://github.com/Waleee7/echo" target="_blank" rel="noopener">Repo</a>
+      </div>
     </div>
-
-    <!-- Desktop -->
-    <div class="desktop" id="desktop">
-        <!-- Taskbar -->
-        <div class="taskbar">
-            <div class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="font-size: 1.5rem;">🥏</span>
-                <span>DOGG_OS v1.0</span>
-            </div>
-            <div class="system-info">
-                <div class="stat">
-                    <span>STATUS:</span>
-                    <span class="stat-value">ONLINE</span>
-                </div>
-                <div class="stat">
-                    <span>TIME:</span>
-                    <span class="stat-value" id="time">00:00:00</span>
-                </div>
-                <button onclick="toggleFullscreen()" style="background: none; border: 1px solid var(--primary); color: var(--primary); padding: 0.5rem 1rem; cursor: pointer; font-family: inherit; border-radius: 4px; margin-left: 1rem; transition: all 0.3s; display: none;" id="fullscreenBtn">
-                    ⛶ FULLSCREEN
-                </button>
-            </div>
-        </div>
-
-        <!-- App Icons Grid -->
-        <div class="app-grid">
-            <div class="app-icon" onclick="openModal('about')">
-                <div class="app-icon-box">
-                    <span>👤</span>
-                </div>
-                <div class="app-label">About Me</div>
-            </div>
-
-            <div class="app-icon" onclick="openModal('skills')">
-                <div class="app-icon-box cyan">
-                    <span>⚡</span>
-                </div>
-                <div class="app-label">Skills Matrix</div>
-            </div>
-
-            <div class="app-icon" onclick="openModal('projects')">
-                <div class="app-icon-box pink">
-                    <span>🚀</span>
-                </div>
-                <div class="app-label">Projects</div>
-            </div>
-
-            <div class="app-icon" onclick="openModal('experience')">
-                <div class="app-icon-box">
-                    <span>📚</span>
-                </div>
-                <div class="app-label">Experience</div>
-            </div>
-
-            <div class="app-icon" onclick="openModal('contact')">
-                <div class="app-icon-box pink">
-                    <span>📡</span>
-                </div>
-                <div class="app-label">Contact Info</div>
-            </div>
-
-            <div class="app-icon" onclick="openModal('media')">
-                <div class="app-icon-box cyan">
-                    <span>🎬</span>
-                </div>
-                <div class="app-label">Media Vault</div>
-            </div>
-
-            <a href="https://www.linkedin.com/in/akinwaledare/" target="_blank" class="app-icon">
-                <div class="app-icon-box">
-                    <span>💼</span>
-                </div>
-                <div class="app-label">LinkedIn</div>
-            </a>
-
-            <div class="app-icon" onclick="openModal('settings')">
-                <div class="app-icon-box cyan">
-                    <span>⚙️</span>
-                </div>
-                <div class="app-label">Settings</div>
-            </div>
-        </div>
+    <div class="build-card reveal" style="--accent: var(--violet);">
+      <div class="head">
+        <div class="name">🤫 Sandy / chain-recall</div>
+        <div class="status status-shipped">Hackathon · May '26</div>
+      </div>
+      <p class="desc">Silent institutional memory for a members' club chain. Built at <strong>SF Anthropic Hackathon, May 2026</strong> against top-level competition.</p>
+      <div class="stack"><span>TypeScript</span><span>Claude API</span><span>Memory</span></div>
+      <div class="links">
+        <a href="https://github.com/Waleee7/chain-recall" target="_blank" rel="noopener">Repo →</a>
+      </div>
     </div>
-
-    <!-- Modal Windows -->
-    <div class="modal" id="aboutModal">
-        <div class="window">
-            <div class="window-header">
-                <div class="window-title">
-                    <span class="window-icon">👤</span>
-                    <span>SYSTEM.PROFILE // ABOUT_ME.EXE</span>
-                </div>
-                <div class="window-controls">
-                    <div class="control-btn minimize"></div>
-                    <div class="control-btn maximize"></div>
-                    <div class="control-btn close" onclick="closeModal('about')"></div>
-                </div>
-            </div>
-            <div class="window-content">
-                <div class="content-section">
-                    <p>I am a senior at Life University majoring in Computer Information & Systems with a concentration in artificial intelligence and machine learning. I focus on building applied, production-ready solutions that move from concept to deployment. My experience includes full-stack web development, front-end engineering, and AI-driven systems such as predictive and classification models, automated trading signal platforms, and scalable web applications with integrated APIs.</p>
-                    <p>I regularly work with modern web technologies, version control, and iterative development practices to deliver maintainable, high-performing applications.</p>
-                    <p>As a collegiate track and field athlete and 2025 Peach Belt Conference champion in discus, I bring discipline, time management, and performance under pressure to technical work. I am actively developing projects at the intersection of web development and AI and seeking internships and early-career roles in software engineering and intelligent systems.</p>
-                    <p style="margin-top: 1.5rem;"><strong>Expected Graduation:</strong> Fall 2026 | <strong>Degree:</strong> BS in Computer Science</p>
-                </div>
-            </div>
-        </div>
+    <div class="build-card reveal" style="--accent: var(--amber);">
+      <div class="head">
+        <div class="name">📈 Trading Signals Discord</div>
+        <div class="status status-build">In build</div>
+      </div>
+      <p class="desc">Paid options-signal community on Whop with a curated channel layout, structured signal posts, and member tiers. Mid-build: channel topology + Whop config next.</p>
+      <div class="stack"><span>Whop</span><span>Discord</span><span>Options</span></div>
     </div>
-
-    <div class="modal" id="skillsModal">
-        <div class="window">
-            <div class="window-header">
-                <div class="window-title">
-                    <span class="window-icon">⚡</span>
-                    <span>CORE.CAPABILITIES // SKILLS_MATRIX.SYS</span>
-                </div>
-                <div class="window-controls">
-                    <div class="control-btn minimize"></div>
-                    <div class="control-btn maximize"></div>
-                    <div class="control-btn close" onclick="closeModal('skills')"></div>
-                </div>
-            </div>
-            <div class="window-content">
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <div class="skill-icon">🤖</div>
-                        <div class="skill-name">Machine Learning</div>
-                        <div class="skill-level">Advanced</div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🐍</div>
-                        <div class="skill-name">Python</div>
-                        <div class="skill-level">Advanced</div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">📊</div>
-                        <div class="skill-name">Data Analysis</div>
-                        <div class="skill-level">Advanced</div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🧠</div>
-                        <div class="skill-name">AI/Deep Learning</div>
-                        <div class="skill-level">Advanced</div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">⚙️</div>
-                        <div class="skill-name">Automation</div>
-                        <div class="skill-level">Advanced</div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">💹</div>
-                        <div class="skill-name">Trading Bots</div>
-                        <div class="skill-level">Advanced</div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🌐</div>
-                        <div class="skill-name">Web Development</div>
-                        <div class="skill-level">Advanced</div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🎨</div>
-                        <div class="skill-name">Front-End</div>
-                        <div class="skill-level">Advanced</div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🗄️</div>
-                        <div class="skill-name">Backend Systems</div>
-                        <div class="skill-level">Intermediate</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="build-card reveal" style="--accent: var(--magenta);">
+      <div class="head">
+        <div class="name">🎩 Maestro · Scout · Forge</div>
+        <div class="status status-stealth">Stealth build</div>
+      </div>
+      <p class="desc">Multi-agent ecosystem in TypeScript + Claude Agent SDK. Maestro conducts, Scout searches, Forge writes. Active build target.</p>
+      <div class="stack"><span>TypeScript</span><span>Claude SDK</span><span>Agents</span></div>
     </div>
+  </div>
+</section>
 
-    <div class="modal" id="projectsModal">
-        <div class="window">
-            <div class="window-header">
-                <div class="window-title">
-                    <span class="window-icon">🚀</span>
-                    <span>PROJECT.ARCHIVE // DEPLOYED_SYSTEMS.APP</span>
-                </div>
-                <div class="window-controls">
-                    <div class="control-btn minimize"></div>
-                    <div class="control-btn maximize"></div>
-                    <div class="control-btn close" onclick="closeModal('projects')"></div>
-                </div>
-            </div>
-            <div class="window-content">
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-title">AI Trading Signal System</div>
-                            <div class="project-status">IN PRODUCTION</div>
-                        </div>
-                        <p class="project-desc">
-                            Engineered an automated trading bot using machine learning models and real-time data analysis 
-                            to generate actionable trading signals with high accuracy and efficiency.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Machine Learning</span>
-                            <span class="tech-tag">APIs</span>
-                            <span class="tech-tag">Data Analysis</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/waleee7" target="_blank" class="project-link">GitHub</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-title">Predictive ML Models</div>
-                            <div class="project-status">IN PRODUCTION</div>
-                        </div>
-                        <p class="project-desc">
-                            Developed classification and predictive models for real-world applications, 
-                            focusing on robustness, performance optimization, and maintainability in production environments.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">Scikit-learn</span>
-                            <span class="tech-tag">Pandas</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/waleee7" target="_blank" class="project-link">GitHub</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-title">Full-Stack Web Applications</div>
-                            <div class="project-status">CONCEPT</div>
-                        </div>
-                        <p class="project-desc">
-                            Building scalable web applications with integrated backend logic, clean architecture, 
-                            and data-driven features designed for operational efficiency and user experience.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Backend APIs</span>
-                            <span class="tech-tag">Database</span>
-                            <span class="tech-tag">Frontend</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/waleee7" target="_blank" class="project-link">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section id="projects">
+  <div class="reveal">
+    <div class="section-label">/ shipped</div>
+    <h2 class="section-title">Selected <span class="accent">projects</span></h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project reveal" style="--accent: var(--cyan); --glow: rgba(79, 195, 255, 0.3);">
+      <div class="top"><div class="icon">🧠</div><h3>Echo</h3></div>
+      <p>Memory MCP server with a 3D brain. Hover-dwell gestures, voice-to-save, chat-preview overlay. Demo seeds each visitor with their own browser-local brain.</p>
+      <div class="stack"><span>Next.js</span><span>R3F</span><span>MCP</span></div>
+      <div class="links">
+        <a href="https://echo-ruby-omega.vercel.app" target="_blank">Demo →</a>
+        <a href="https://github.com/Waleee7/echo" target="_blank">Repo</a>
+      </div>
     </div>
-
-    <div class="modal" id="experienceModal">
-        <div class="window">
-            <div class="window-header">
-                <div class="window-title">
-                    <span class="window-icon">📚</span>
-                    <span>TIMELINE.DATABASE // EXPERIENCE_LOG.DAT</span>
-                </div>
-                <div class="window-controls">
-                    <div class="control-btn minimize"></div>
-                    <div class="control-btn maximize"></div>
-                    <div class="control-btn close" onclick="closeModal('experience')"></div>
-                </div>
-            </div>
-            <div class="window-content">
-                <div class="experience-timeline">
-                    <div class="experience-item">
-                        <div class="experience-header">
-                            <div>
-                                <div class="experience-title">Front-End Developer</div>
-                                <div class="experience-company">DailyIFA.com</div>
-                            </div>
-                            <div class="experience-date">Aug 2025 - Present</div>
-                        </div>
-                        <p class="experience-desc">
-                            Collaborated with a small development team to design, build, and launch a modern, responsive website from concept to production. Directed UI/UX decisions by translating ideas and requirements into functional layouts, interactions, and visual structure. Led debugging, testing, and iteration cycles, resolving issues and refining features based on feedback and performance insights. Managed version control, deployments, and post-launch updates, driving continuous improvement of the platform.
-                        </p>
-                    </div>
-
-                    <div class="experience-item">
-                        <div class="experience-header">
-                            <div>
-                                <div class="experience-title">BS in Computer Science</div>
-                                <div class="experience-company">Life University</div>
-                            </div>
-                            <div class="experience-date">Expected Fall 2026</div>
-                        </div>
-                        <p class="experience-desc">
-                            Major: Computer Information & Systems with concentration in Artificial Intelligence and Machine Learning. 
-                            Building expertise in machine learning models, full-stack web development, front-end engineering, automation systems, 
-                            data analysis, and production-oriented software solutions. Focused on modern development practices, version control, 
-                            and deploying maintainable applications.
-                        </p>
-                    </div>
-
-                    <div class="experience-item">
-                        <div class="experience-header">
-                            <div>
-                                <div class="experience-title">AI & Automation Projects</div>
-                                <div class="experience-company">Independent Development</div>
-                            </div>
-                            <div class="experience-date">2023 - Present</div>
-                        </div>
-                        <p class="experience-desc">
-                            Designing and deploying production-grade ML models, automated trading systems, and scalable web applications. 
-                            Focus on building robust, maintainable solutions with real-world applications and measurable impact.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="project reveal" style="--accent: var(--violet); --glow: rgba(180, 123, 255, 0.3);">
+      <div class="top"><div class="icon">🤫</div><h3>Sandy</h3></div>
+      <p>Silent institutional memory for a members' club chain. Built at SF Anthropic Hackathon 2026.</p>
+      <div class="stack"><span>TypeScript</span><span>Claude API</span></div>
+      <div class="links"><a href="https://github.com/Waleee7/chain-recall" target="_blank">Repo →</a></div>
     </div>
-
-    <div class="modal" id="contactModal">
-        <div class="window">
-            <div class="window-header">
-                <div class="window-title">
-                    <span class="window-icon">📡</span>
-                    <span>NETWORK.INTERFACE // CONTACT_PROTOCOL.CMD</span>
-                </div>
-                <div class="window-controls">
-                    <div class="control-btn minimize"></div>
-                    <div class="control-btn maximize"></div>
-                    <div class="control-btn close" onclick="closeModal('contact')"></div>
-                </div>
-            </div>
-            <div class="window-content">
-                <div class="contact-grid">
-                    <a href="mailto:jdare354@gmail.com" class="contact-card">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-label">Email</div>
-                        <div class="contact-value">jdare354@gmail.com</div>
-                    </a>
-                    <a href="https://github.com/waleee7" target="_blank" class="contact-card">
-                        <div class="contact-icon">💻</div>
-                        <div class="contact-label">GitHub</div>
-                        <div class="contact-value">@waleee7</div>
-                    </a>
-                    <a href="https://instagram.com/dare.joshh" target="_blank" class="contact-card">
-                        <div class="contact-icon">📸</div>
-                        <div class="contact-label">Instagram</div>
-                        <div class="contact-value">@dare.joshh</div>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="project reveal" style="--accent: var(--amber); --glow: rgba(255, 208, 128, 0.3);">
+      <div class="top"><div class="icon">📚</div><h3>Options Trading Course</h3></div>
+      <p>Interactive Next.js course with modules, quizzes, challenges, and gamified XP/badges. Live and shipped.</p>
+      <div class="stack"><span>Next.js</span><span>Tailwind</span><span>Gamification</span></div>
+      <div class="links">
+        <a href="https://optionstradingcourse.vercel.app" target="_blank">Live →</a>
+        <a href="https://github.com/Waleee7/options-trading-course" target="_blank">Repo</a>
+      </div>
     </div>
-
-    <div class="modal" id="mediaModal">
-        <div class="window">
-            <div class="window-header">
-                <div class="window-title">
-                    <span class="window-icon">🎬</span>
-                    <span>MEDIA.STORAGE // VAULT_ACCESS.DAT</span>
-                </div>
-                <div class="window-controls">
-                    <div class="control-btn minimize"></div>
-                    <div class="control-btn maximize"></div>
-                    <div class="control-btn close" onclick="closeModal('media')"></div>
-                </div>
-            </div>
-            <div class="window-content">
-                <div class="carousel-container">
-                    <img src="assets/Championship_results.jpeg" alt="2025 PBC Championship - 1st Place Discus 49.07m" class="carousel-image active" id="img0">
-                    <img src="assets/pbc_champion.jpg.jpeg" alt="Peach Belt Conference Champion" class="carousel-image" id="img1">
-                    <img src="assets/outstanding_athlete.png.jpeg" alt="Outstanding Field Athlete Award" class="carousel-image" id="img2">
-                    <img src="assets/training_rain.jpeg" alt="Training in the rain" class="carousel-image" id="img3">
-
-                    <button id="prevBtn">Prev</button>
-                    <button id="nextBtn">Next</button>
-                    
-                    <div class="carousel-counter" id="carouselCounter">1 / 4</div>
-                    <div class="carousel-caption" id="carouselCaption">2025 PBC Championship - 1st Place Discus 49.07m</div>
-                </div>
-                
-                <div class="carousel-controls">
-                    <button class="carousel-btn" onclick="previousImage()" id="prevBtn">← Previous</button>
-                    <button class="carousel-btn" onclick="nextImage()" id="nextBtn">Next →yes</button>
-                </div>
-                
-                <div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 136, 255, 0.1); border: 1px solid var(--secondary); border-radius: 8px;">
-                    <p style="color: var(--text); line-height: 1.6; text-align: center;">
-                        <strong style="color: var(--primary);">🏆 Athletic Achievements</strong><br>
-                        2025 Peach Belt Conference Champion in Discus (49.07m)<br>
-                        Outstanding Field Athlete Award Winner
-                    </p>
-                </div>
-            </div>
-        </div>
+    <div class="project reveal" style="--accent: var(--emerald); --glow: rgba(111, 255, 170, 0.3);">
+      <div class="top"><div class="icon">🥏</div><h3>ThrowingTracker</h3></div>
+      <p>Personal throws tracker — log discus and hammer sessions, surface PR progression, and visualize training load over a season.</p>
+      <div class="stack"><span>TypeScript</span><span>Web</span></div>
+      <div class="links"><a href="https://github.com/Waleee7/ThrowingTracker" target="_blank">Repo →</a></div>
     </div>
-
-    <div class="modal" id="settingsModal">
-        <div class="window">
-            <div class="window-header">
-                <div class="window-title">
-                    <span class="window-icon">⚙️</span>
-                    <span>SYSTEM.CONFIG // SETTINGS_PANEL.CFG</span>
-                </div>
-                <div class="window-controls">
-                    <div class="control-btn minimize"></div>
-                    <div class="control-btn maximize"></div>
-                    <div class="control-btn close" onclick="closeModal('settings')"></div>
-                </div>
-            </div>
-            <div class="window-content">
-                <div class="content-section">
-                    <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">⚙️ SYSTEM SETTINGS</h3>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <label style="color: var(--secondary); display: block; margin-bottom: 0.5rem; font-size: 1.1rem;">🌍 Language / Idioma / Langue</label>
-                        <select id="languageSelect" onchange="changeLanguage(this.value)" style="width: 100%; padding: 0.75rem; background: rgba(0, 255, 136, 0.1); border: 1px solid var(--primary); color: var(--text); font-family: inherit; font-size: 1rem; border-radius: 8px; cursor: pointer;">
-                            <option value="en">English</option>
-                            <option value="es">Español (Spanish)</option>
-                            <option value="fr">Français (French)</option>
-                            <option value="de">Deutsch (German)</option>
-                            <option value="pt">Português (Portuguese)</option>
-                            <option value="zh">中文 (Chinese)</option>
-                            <option value="ja">日本語 (Japanese)</option>
-                            <option value="ko">한국어 (Korean)</option>
-                        </select>
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--accent);">Note: Language translation coming soon. Currently English only.</p>
-                    </div>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <label style="color: var(--secondary); display: block; margin-bottom: 0.5rem; font-size: 1.1rem;">🕐 Time Format</label>
-                        <select id="timeFormatSelect" onchange="changeTimeFormat(this.value)" style="width: 100%; padding: 0.75rem; background: rgba(0, 255, 136, 0.1); border: 1px solid var(--primary); color: var(--text); font-family: inherit; font-size: 1rem; border-radius: 8px; cursor: pointer;">
-                            <option value="12">12-Hour (AM/PM)</option>
-                            <option value="24">24-Hour (Military)</option>
-                        </select>
-                    </div>
-                    
-                    <div style="padding: 1rem; background: rgba(0, 136, 255, 0.1); border: 1px solid var(--secondary); border-radius: 8px;">
-                        <p style="color: var(--text); line-height: 1.6;">
-                            <strong style="color: var(--primary);">🌐 Timezone:</strong> Auto-detected based on your location<br>
-                            <strong style="color: var(--primary);">Current Time:</strong> <span id="currentTimeDisplay"></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="project reveal" style="--accent: var(--rose); --glow: rgba(255, 110, 138, 0.3);">
+      <div class="top"><div class="icon">🌍</div><h3>GlobalLingo</h3></div>
+      <p>Web-based language learning experience focused on rapid practice loops.</p>
+      <div class="stack"><span>JavaScript</span><span>Web</span></div>
+      <div class="links"><a href="https://github.com/Waleee7/GlobalLingo" target="_blank">Repo →</a></div>
     </div>
+    <div class="project reveal" style="--accent: var(--magenta); --glow: rgba(255, 122, 217, 0.3);">
+      <div class="top"><div class="icon">💻</div><h3>DOGG_OS</h3></div>
+      <p>The OS-style original portfolio that launched this site. This page is its v2 evolution.</p>
+      <div class="stack"><span>HTML</span><span>CSS</span><span>JS</span></div>
+      <div class="links"><a href="https://github.com/Waleee7/dogg-os-portfolio" target="_blank">Repo →</a></div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // User preferences
-        let timeFormat = '12'; // Default to 12-hour format
-        let currentLanguage = 'en';
-        let idleTimer;
-        let idleTime = 0;
-        const IDLE_TIMEOUT = 5 * 60 * 1000; // 5 minutes in milliseconds
-        let currentImageIndex = 0;
-        const totalImages = 4;
-        let discusRotation = 0;
+<section id="athletics">
+  <div class="reveal">
+    <div class="section-label">/ on the track</div>
+    <h2 class="section-title">Throws stuff <span class="accent" style="color: var(--amber);">far</span></h2>
+  </div>
+  <div class="athletics reveal">
+    <div class="athletics-top">
+      <div class="head">
+        <h3>Discus · Hammer · Shot Put</h3>
+        <div class="school">Life University · Marietta, GA</div>
+        <div class="badge-3"><span class="num">3</span> All-time GA HS Boys Discus</div>
+      </div>
+      <a class="verified" href="https://worldathletics.org/athletes/united-states/joshua-dare-14939088" target="_blank" rel="noopener">
+        ✓ World Athletics profile
+      </a>
+    </div>
+    <div class="pr-grid">
+      <div class="pr">
+        <div class="ev">Discus · 1.75kg</div>
+        <div class="mark">48.06m</div>
+        <div class="where">at <strong>Hayward Field</strong>, Eugene OR · 2022</div>
+      </div>
+      <div class="pr">
+        <div class="ev">Discus · Open</div>
+        <div class="mark">45.30m</div>
+        <div class="where">George C. Griffin Track, Atlanta GA · 2023</div>
+      </div>
+      <div class="pr">
+        <div class="ev">Shot Put · 6kg</div>
+        <div class="mark">16.31m</div>
+        <div class="where">at <strong>Hayward Field</strong>, Eugene OR · 2022</div>
+      </div>
+      <div class="pr">
+        <div class="ev">Shot Put · Open</div>
+        <div class="mark">14.51m</div>
+        <div class="where">Birmingham AL · 2022</div>
+      </div>
+    </div>
+    <div class="achievements">
+      <img src="assets/Championship_results.jpeg" alt="Championship results" loading="lazy"/>
+      <img src="assets/outstanding_athlete.png.jpeg" alt="Outstanding athlete award" loading="lazy"/>
+      <img src="assets/pbc_champion.jpg.jpeg" alt="PBC Champion" loading="lazy"/>
+      <img src="assets/training_rain.jpeg" alt="Training in the rain" loading="lazy"/>
+    </div>
+  </div>
+</section>
 
-        // Image captions
-        const imageCaptions = [
-            "2025 PBC Championship - 1st Place Discus 49.07m",
-            "Peach Belt Conference Champion",
-            "Outstanding Field Athlete Award",
-            "Training in the rain - Dedication and discipline"
-        ];
+<section id="about" class="about">
+  <div class="reveal">
+    <div class="section-label">/ system bio</div>
+    <h2 class="section-title">The <span class="accent">operator</span></h2>
+    <p>
+      Engineer who throws, thrower who engineers. I split my time between
+      <strong>training rings</strong> and <strong>terminal windows</strong> — the discipline that
+      ranks me top-3 all-time Georgia HS in the discus is the same discipline I bring to shipping
+      production AI tools.
+    </p>
+    <p>
+      Currently a CS undergrad at <strong>Life University</strong> (expected Fall 2026), front-end
+      dev at <strong>DailyIFA.com</strong>, and a regular at hackathons — including the SF Anthropic
+      hackathon that produced <strong>Sandy</strong> and the late-night session that produced
+      <strong>Echo</strong>.
+    </p>
+    <p>
+      I build with TypeScript, React, Next.js, R3F, MCP, and the Claude API. I like systems that
+      think, interfaces that feel alive, and tools that the user actually wants to keep open.
+    </p>
+  </div>
+</section>
 
-        // Generate starfield
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 200; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starsContainer.appendChild(star);
-            }
-        }
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">/ timeline</div>
+    <h2 class="section-title">Track <span class="accent">record</span></h2>
+  </div>
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <div class="role">SF Anthropic Hackathon — Built Sandy</div>
+      <div class="org">San Francisco · 2026</div>
+      <div class="date">May 2026</div>
+      <div class="desc">Shipped <em>Sandy</em> (chain-recall), a silent institutional-memory tool for a members' club chain. Competed against top-level builders. Came home and shipped Echo the next sprint.</div>
+    </div>
+    <div class="tl-item">
+      <div class="role">Front-End Developer</div>
+      <div class="org">DailyIFA.com</div>
+      <div class="date">Aug 2025 — Present</div>
+      <div class="desc">Production front-end work for a daily insights publication. Building UI, shipping features, owning what I ship.</div>
+    </div>
+    <div class="tl-item">
+      <div class="role">BS, Computer Science</div>
+      <div class="org">Life University · Marietta, GA</div>
+      <div class="date">Expected Fall 2026</div>
+      <div class="desc">Student-athlete: NCAA throws (discus, hammer, shot put). Member of the track &amp; field program.</div>
+    </div>
+    <div class="tl-item">
+      <div class="role">AI &amp; Automation — Independent</div>
+      <div class="org">Self-directed builds</div>
+      <div class="date">2023 — Present</div>
+      <div class="desc">Echo, Sandy, Options Trading Course, Trading Signals Discord, Maestro/Scout/Forge agents ecosystem. TypeScript-first, ship-first.</div>
+    </div>
+  </div>
+</section>
 
-        // Initialize system
-        function initialize() {
-            document.getElementById('startupScreen').classList.add('hidden');
-            document.getElementById('loadingScreen').classList.add('active');
-            
-            // Loading messages to display
-            const messages = [
-                "Welcome User...",
-                "Initializing DOGG_OS...",
-                "Loading your content...",
-                "Preparing workspace...",
-                "System ready!"
-            ];
-            
-            let currentMessage = 0;
-            
-            function showNextMessage() {
-                if (currentMessage < messages.length) {
-                    const messageDiv = document.createElement('div');
-                    messageDiv.className = 'loading-message';
-                    
-                    const bullet = document.createElement('span');
-                    bullet.className = 'loading-bullet';
-                    bullet.textContent = '▸';
-                    
-                    const text = document.createElement('span');
-                    text.className = 'loading-message-text';
-                    
-                    messageDiv.appendChild(bullet);
-                    messageDiv.appendChild(text);
-                    document.getElementById('loadingMessages').appendChild(messageDiv);
-                    
-                    // Trigger fade in
-                    setTimeout(() => messageDiv.classList.add('visible'), 10);
-                    
-                    // Type out the message
-                    typeWriter(text, messages[currentMessage], 0, () => {
-                        text.classList.add('complete');
-                        currentMessage++;
-                        setTimeout(showNextMessage, 300);
-                    });
-                } else {
-                    // All messages shown, transition to desktop
-                    setTimeout(() => {
-                        document.getElementById('loadingScreen').classList.add('hidden');
-                        setTimeout(() => {
-                            document.getElementById('loadingScreen').classList.remove('active');
-                            document.getElementById('desktop').classList.add('active');
-                            startIdleTimer();
-                        }, 800);
-                    }, 500);
-                }
-            }
-            
-            function typeWriter(element, text, index, callback) {
-                if (index < text.length) {
-                    element.textContent += text.charAt(index);
-                    setTimeout(() => typeWriter(element, text, index + 1, callback), 50);
-                } else {
-                    if (callback) callback();
-                }
-            }
-            
-            showNextMessage();
-        }
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">/ open channel</div>
+    <h2 class="section-title">Get <span class="accent">in touch</span></h2>
+  </div>
+  <div class="contact-grid">
+    <a class="contact-card reveal" href="mailto:jdare354@gmail.com">
+      <div class="icon">✉️</div>
+      <div class="lbl">Email</div>
+      <div class="val">jdare354@gmail.com</div>
+    </a>
+    <a class="contact-card reveal" href="https://www.linkedin.com/in/akinwaledare" target="_blank" rel="noopener">
+      <div class="icon">💼</div>
+      <div class="lbl">LinkedIn</div>
+      <div class="val">akinwaledare</div>
+    </a>
+    <a class="contact-card reveal" href="https://github.com/Waleee7" target="_blank" rel="noopener">
+      <div class="icon">🐙</div>
+      <div class="lbl">GitHub</div>
+      <div class="val">@Waleee7</div>
+    </a>
+    <a class="contact-card reveal" href="https://worldathletics.org/athletes/united-states/joshua-dare-14939088" target="_blank" rel="noopener">
+      <div class="icon">🥏</div>
+      <div class="lbl">World Athletics</div>
+      <div class="val">Joshua DARE</div>
+    </a>
+  </div>
+</section>
 
-        // Open modal
-        function openModal(type) {
-            document.getElementById(type + 'Modal').classList.add('active');
-            if (type === 'settings') {
-                updateCurrentTimeDisplay();
-            }
-            if (type === 'media') {
-                currentImageIndex = 0;
-                showImage(0);
-            }
-            resetIdleTimer();
-            rotateDiscus();
-        }
+<footer>
+  <div>DARE_OS <span class="ticker">::</span> v2.0 <span class="ticker">::</span> shipped from a hackathon high</div>
+  <div style="margin-top: 6px; opacity: 0.6;">© Akinwale Dare · built with HTML, CSS, JS &amp; the Jarvis mode</div>
+</footer>
 
-        // Close modal
-        function closeModal(type) {
-            document.getElementById(type + 'Modal').classList.remove('active');
-            resetIdleTimer();
-        }
-        
-        // Carousel functions
-        function showImage(index) {
-            const images = document.querySelectorAll('.carousel-image');
-            images.forEach((img, i) => {
-                img.classList.remove('active');
-                if (i === index) {
-                    img.classList.add('active');
-                }
-            });
-            
-            document.getElementById('carouselCounter').textContent = `${index + 1} / ${totalImages}`;
-            document.getElementById('carouselCaption').textContent = imageCaptions[index];
-            
-            // Update button states
-            document.getElementById('prevBtn').disabled = (index === 0);
-            document.getElementById('nextBtn').disabled = (index === totalImages - 1);
-        }
-        
-        function nextImage() {
-            if (currentImageIndex < totalImages - 1) {
-                currentImageIndex++;
-                showImage(currentImageIndex);
-                resetIdleTimer();
-            }
-        }
-        
-        function previousImage() {
-            if (currentImageIndex > 0) {
-                currentImageIndex--;
-                showImage(currentImageIndex);
-                resetIdleTimer();
-            }
-        }
-        
-        // Rotate discus effect when opening modals
-        function rotateDiscus() {
-            const logo = document.querySelector('.logo');
-            if (logo) {
-                discusRotation += 360;
-                logo.style.transition = 'transform 0.6s ease';
-                logo.style.transform = `rotate(${discusRotation}deg)`;
-            }
-        }
-
-        // Update time with format preference
-        function updateTime() {
-            const now = new Date();
-            let hours = now.getHours();
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            
-            let timeString;
-            if (timeFormat === '12') {
-                const ampm = hours >= 12 ? 'PM' : 'AM';
-                hours = hours % 12;
-                hours = hours ? hours : 12; // 0 should be 12
-                timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
-            } else {
-                timeString = `${String(hours).padStart(2, '0')}:${minutes}:${seconds}`;
-            }
-            
-            document.getElementById('time').textContent = timeString;
-        }
-
-        // Update current time display in settings
-        function updateCurrentTimeDisplay() {
-            const now = new Date();
-            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            const displayElement = document.getElementById('currentTimeDisplay');
-            if (displayElement) {
-                displayElement.textContent = `${now.toLocaleString()} (${timezone})`;
-            }
-        }
-
-        // Change time format
-        function changeTimeFormat(format) {
-            timeFormat = format;
-            updateTime();
-            updateCurrentTimeDisplay();
-            resetIdleTimer();
-        }
-
-        // Change language (placeholder for future implementation)
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            console.log('Language changed to:', lang);
-            resetIdleTimer();
-        }
-
-        // Idle timer functions
-        function startIdleTimer() {
-            idleTimer = setTimeout(showIdleNotification, IDLE_TIMEOUT);
-            
-            // Reset idle timer on user activity
-            document.addEventListener('mousemove', resetIdleTimer);
-            document.addEventListener('keypress', resetIdleTimer);
-            document.addEventListener('click', resetIdleTimer);
-            document.addEventListener('scroll', resetIdleTimer);
-        }
-
-        function resetIdleTimer() {
-            clearTimeout(idleTimer);
-            idleTimer = setTimeout(showIdleNotification, IDLE_TIMEOUT);
-        }
-
-        function showIdleNotification() {
-            document.getElementById('idleNotification').classList.add('active');
-        }
-
-        function dismissIdle() {
-            document.getElementById('idleNotification').classList.remove('active');
-            resetIdleTimer();
-        }
-
-        // Fullscreen toggle with permission check
-        function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                // Check if fullscreen is supported
-                const elem = document.documentElement;
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen().catch(err => {
-                        alert('Fullscreen is not supported in this environment. Note: Claude.ai artifacts don\'t support fullscreen due to permission policies. To use fullscreen, download this HTML file and open it in your browser.');
-                        console.log('Fullscreen error:', err);
-                    });
-                } else if (elem.webkitRequestFullscreen) {
-                    elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) {
-                    elem.msRequestFullscreen();
-                } else {
-                    alert('Fullscreen is not supported by your browser.');
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-            }
-            resetIdleTimer();
-        }
-
-        // Check if fullscreen is available
-        function checkFullscreenSupport() {
-            const elem = document.documentElement;
-            const isSupported = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.msRequestFullscreen;
-            
-            // Note: In Claude.ai artifacts, fullscreen is blocked by permissions policy
-            // Show button but it will display an alert explaining the limitation
-            const fullscreenBtn = document.getElementById('fullscreenBtn');
-            if (fullscreenBtn && isSupported) {
-                fullscreenBtn.style.display = 'block';
-            }
-        }
-
-        // Initialize on load
-        createStars();
-        setInterval(updateTime, 1000);
-        updateTime();
-        checkFullscreenSupport();
-
-        // Close modal when clicking outside
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    resetIdleTimer();
-                }
-            });
-        });
-(function(){
-  // Inline SVG fallback so carousel images always show something when external loads fail
-  const fallbackSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
-    <rect width="100%" height="100%" fill="#0A0A0A"/>
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-      fill="#8BFFB8" font-family="Arial, Helvetica, sans-serif" font-size="36">
-      Image unavailable
-    </text>
-  </svg>`;
-  const fallback = 'data:image/svg+xml;utf8,' + encodeURIComponent(fallbackSVG);
-
-  function applyFallback(img) {
-    try {
-      img.onerror = null; // avoid loops
-      if (img.src === fallback) return;
-      img.src = fallback;
-      img.style.display = 'block'; // ensure visible even if previously hidden
-      img.classList.add('broken-image');
-    } catch (e) {
-      // noop
-    }
-  }
-
-  function installHandlers() {
-    const imgs = document.querySelectorAll('.carousel-image');
-    imgs.forEach(img => {
-      // Remove any inline onerror that hides the element
-      if (img.getAttribute('onerror')) img.removeAttribute('onerror');
-
-      // Attach robust error handler
-      img.addEventListener('error', function() { applyFallback(this); });
-
-      // If the image has already failed to load by the time the script runs:
-      if (img.complete && img.naturalWidth === 0) {
-        applyFallback(img);
+<script>
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
       }
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 6) * 40 + 'ms';
+    io.observe(el);
+  });
 
-      // Optional: add lazy loading for performance if not set
-      if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
-    });
-  }
+  // Animated stats counter — count up when visible
+  const statIO = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const el = e.target;
+      const target = parseInt(el.dataset.target, 10);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1200;
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = prefix + Math.round(target * eased) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      statIO.unobserve(el);
+    }
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat .num').forEach(el => statIO.observe(el));
+</script>
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', installHandlers);
-  } else {
-    installHandlers();
-  }
-     let current = 0;
-  const images = document.querySelectorAll('.carousel-image');
-
-  function showImage(index) {
-    images.forEach(img => img.classList.remove('active'));
-    images[index].classList.add('active');
-  }
-
-  function showNext() {
-    current = (current + 1) % images.length;
-    showImage(current);
-  }
-
-  function showPrev() {
-    current = (current - 1 + images.length) % images.length;
-    showImage(current);
-  }
-
-  // Attach buttons
-  document.getElementById('nextBtn').addEventListener('click', showNext);
-  document.getElementById('prevBtn').addEventListener('click', showPrev);
-})();       
-    </script>
 </body>
 </html>
-                
