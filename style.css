@@ -848,3 +848,14 @@ html:not([data-theme="retro98"]) .status { justify-content: space-between; flex-
 [data-theme="retro98"] .w-ask button { color: #000; background: #c0c0c0; box-shadow: var(--bevel-out); }
 [data-theme="throws"] .w-ask input, [data-theme="mac"] .w-ask input, [data-theme="win11"] .w-ask input { border-radius: 10px; }
 [data-theme="throws"] .w-ask button, [data-theme="mac"] .w-ask button, [data-theme="win11"] .w-ask button { border-radius: 10px; }
+
+/* DISCUS DISASTER, embedded in The Circle's window */
+.dd-app { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 8px; padding: 0; height: 100%; }
+.dd-frame { position: relative; min-height: 360px; background: #05070c; }
+.dd-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.dd-wait { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: #9aa3b5; font: 600 13px/1 var(--font-mono); letter-spacing: .12em; pointer-events: none; }
+.dd-frame.ready .dd-wait { display: none; }
+.dd-bar { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: space-between; align-items: center; margin: 0; padding: 4px 10px 8px; font-size: 13px; }
+.dd-bar a { font-weight: 700; color: var(--link); white-space: nowrap; min-height: 32px; display: inline-flex; align-items: center; }
+[data-theme="retro98"] .dd-app { padding: 4px; }
+@media (max-width: 760px) { .dd-frame { min-height: 70vh; } }

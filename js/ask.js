@@ -125,7 +125,7 @@
     contact: () => reply(byId('contact'), { match: 'COMMAND · /CONTACT' }),
     about: () => reply(byId('about'), { match: 'COMMAND · /ABOUT' }),
     resume: () => reply(byId('resume'), { match: 'COMMAND · /RESUME' }),
-    throw: () => ({ id: 'cmd.throw', text: 'Heading to the circle. Hold to spin, let go in the red.', acts: [{ label: 'TAKE A THROW', do: 'throw', auto: true }], chips: [], match: 'COMMAND · /THROW' }),
+    throw: () => ({ id: 'cmd.throw', text: 'Opening DISCUS DISASTER. Hold to spin, let go in the green.', acts: [{ label: 'TAKE A THROW', do: 'throw', auto: true }], chips: [], match: 'COMMAND · /THROW' }),
     email: () => ({ id: 'cmd.email', text: 'Copying the address to your clipboard.', acts: [{ label: 'COPY EMAIL', do: 'copy', auto: true }], chips: [], match: 'COMMAND · /EMAIL' }),
     clear: () => ({ id: 'cmd.clear', clear: true }),
   };

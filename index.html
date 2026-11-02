@@ -6,6 +6,8 @@
 <title>Joshua Dare | Software Engineer, Student-Athlete</title>
 <meta name="description" content="Joshua Dare: software engineer and college thrower (discus, hammer) in Atlanta. A computer-vision app that measures throws from a phone, live client builds, a browser game, an MCP server and a GPU video engine, with every number measured.">
 <link rel="canonical" href="https://dare-os.vercel.app/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="img/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <meta property="og:title" content="Joshua Dare | Software Engineer, Student-Athlete">
@@ -36,7 +38,7 @@
 <script src="js/shell.js" defer></script>
 <script src="js/main.js" defer></script>
 <script src="js/chat.js" defer></script>
-<script src="js/throw.js" defer></script>
+<script src="js/discus.js" defer></script>
 <script src="js/term.js" defer></script>
 <script src="js/live.js" defer></script>
 </head>
@@ -64,7 +66,7 @@
   <b class="mb-name">Josh Dare</b>
   <nav class="mb-menu" aria-label="Menu">
     <button type="button" data-launch="projects">Projects</button>
-    <button type="button" data-launch="circle">The Circle</button>
+    <button type="button" data-launch="circle">DISCUS DISASTER</button>
     <button type="button" data-launch="ask">Ask</button>
     <button type="button" data-launch="contact">Contact</button>
   </nav>
@@ -225,35 +227,15 @@
     </div>
   </section>
 
-  <!-- ============ THE CIRCLE ============ -->
-  <section class="win" id="w-circle" data-app="circle" data-icon="discus" data-size="1060x640" data-min="420x420" data-pos="center" role="dialog" aria-labelledby="t-circle">
-    <header class="wt"><h2 class="wt-t" id="t-circle">The Circle</h2></header>
-    <div class="wb circle-app" id="throw">
-      <div class="field">
-        <canvas aria-hidden="true"></canvas>
-        <button type="button" class="hold" aria-describedby="throw-help"><span class="sr">Hold to spin, release to throw</span></button>
-        <p class="f-prompt" aria-hidden="true"><b>HOLD</b> TO SPIN · LET GO IN THE <b>RED</b></p>
+  <!-- ============ DISCUS DISASTER (app id: circle) ============ -->
+  <section class="win" id="w-circle" data-app="circle" data-icon="discus" data-size="1100x700" data-min="420x420" data-pos="center" role="dialog" aria-labelledby="t-circle">
+    <header class="wt"><h2 class="wt-t" id="t-circle">DISCUS DISASTER</h2></header>
+    <div class="wb dd-app">
+      <div class="dd-frame">
+        <iframe title="DISCUS DISASTER, a 3D discus game" data-src="https://discus-disaster.vercel.app/?from=dare-os" allow="fullscreen; gamepad; autoplay" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        <p class="dd-wait" aria-hidden="true">LOADING THE STADIUM…</p>
       </div>
-      <div class="hud">
-        <p class="c-lede">Hold to spin. Let go while the implement crosses the red window. Release speed, angle and height decide the mark: the same three numbers SECTOR measures from a phone video.</p>
-        <div class="imp" role="group" aria-label="Implement">
-          <button type="button" data-impl="discus" aria-pressed="true">DISCUS <span>2 KG</span></button>
-          <button type="button" data-impl="hammer" aria-pressed="false">HAMMER <span>7.26 KG</span></button>
-        </div>
-        <div class="readout" aria-hidden="true">
-          <span class="r-label" data-r="label">MARK</span>
-          <div class="r-num"><b data-r="num">0.00</b><span data-r="unit">m</span></div>
-          <p class="r-line"><span class="verdict" data-r="verdict"></span><span data-r="rel">Hold to spin. Let go in the red.</span></p>
-        </div>
-        <dl class="r-stats">
-          <div><dt>YOUR BEST</dt><dd data-r="best">—</dd></div>
-          <div><dt>ATTEMPTS</dt><dd data-r="tries">0</dd></div>
-        </dl>
-        <p class="r-ref" data-r="ref">Alekna's 75.56 m world record needed a 25.33 m/s release at 36°.<cite>SECTOR'S RECONSTRUCTION</cite></p>
-        <a class="r-link" href="#w-p-sector" data-open="sector">THE REAL THING: SECTOR MEASURES THROWS FROM VIDEO →</a>
-      </div>
-      <p class="sr" id="throw-help">Press and hold, or hold Space, to spin. Let go while the implement passes the red window to land inside the sector.</p>
-      <p class="sr" aria-live="polite" data-r="live"></p>
+      <p class="dd-bar"><span>3D discus throw with real aerodynamics. Hold to spin, let go in the green.</span><a href="https://discus-disaster.vercel.app" target="_blank" rel="noopener">OPEN FULL SCREEN ↗</a></p>
     </div>
   </section>
 

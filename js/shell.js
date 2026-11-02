@@ -15,7 +15,7 @@
   const APPS = [
     { id: 'readme', icon: 'doc', name: 'README', retro98: 'README.TXT' },
     { id: 'projects', icon: 'folder', name: 'Projects', retro98: 'My Projects' },
-    { id: 'circle', icon: 'discus', name: 'The Circle' },
+    { id: 'circle', icon: 'discus', name: 'DISCUS DISASTER' },
     { id: 'ask', icon: 'chat', name: 'Ask Josh' },
     { id: 'athlete', icon: 'medal', name: 'Athlete' },
     { id: 'contact', icon: 'mail', name: 'Contact' },

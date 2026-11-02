@@ -4,7 +4,7 @@
 //
 // Markup in `text`: **bold**, [label](url), and [label](mailto) for Josh's email.
 // `acts` become buttons: tab:<id> opens a project's window, embed:<id> runs it inline,
-// app:<id> opens a desktop app, throw opens The Circle, copy copies the email.
+// app:<id> opens a desktop app, throw opens DISCUS DISASTER, copy copies the email.
 // `auto` runs the first act.
 (function (root) {
   const GH = 'https://github.com/Waleee7/';
@@ -58,7 +58,7 @@
       { id: 'lingo', name: 'GLOBALLINGO', alias: ['globallingo', 'global lingo', 'translation', 'translate', 'globe', 'language app'] },
       { id: 'course', name: 'OPTIONS COURSE', alias: ['options course', 'options trading course', 'trading course', 'course', 'quiz', 'options lab'] },
       { id: 'infinite', name: 'INFINITE EDITION', alias: ['infinite edition', 'infinite', 'racing', 'racing game', 'racer', 'drift'] },
-      { id: 'circle', name: 'THE CIRCLE', alias: ['the circle', 'throw game', 'throwing game', 'take a throw', 'this throw', 'the throw', 'spin game'] },
+      { id: 'circle', name: 'DISCUS DISASTER', alias: ['discus disaster', 'discus game', 'the circle', 'throw game', 'throwing game', 'take a throw', 'this throw', 'the throw', 'spin game'] },
     ],
 
     entries: [
@@ -195,7 +195,7 @@
       { id: 'infinite.what', topic: 'infinite', intent: 'what', src: FILE,
         text: `**Infinite Edition** is an arcade racing game with drift physics, built in Three.js. It's private while the assets get cleared.` },
       { id: 'circle.what', topic: 'circle', intent: 'what', src: FILE,
-        text: `Hold to spin and let go while the implement crosses the red window. Speed builds while you hold (hold too long and you lose it), the window sets the direction, and hitting its center gives the best release angle. The mark is projectile physics from a real release height. The discus adds lift, tuned so a 25.33 m/s release at 36° lands at 75.56 m, matching SECTOR's reconstruction of the world record.`,
+        text: `**DISCUS DISASTER** is a 3D discus throw I built: hold to spin, let go as the needle crosses the green, and set the nose angle. The flight is a real aerodynamics model (lift and drag by angle of attack, plus wind), so a headwind actually helps, like it does in real discus. There's a stadium announcer, pigeons and a golf cart to hit, Rookie and Pro modes, and a leaderboard. It runs right here in this window.`,
         acts: [{ label: 'TAKE A THROW', do: 'throw' }] },
 
       /* ---------- GENERAL ---------- */
@@ -291,7 +291,7 @@
         chips: ['How does the throw work?', 'What has he shipped?'] },
       { id: 'games', intent: 'what', src: FILE,
         kw: ['game', 'games', 'gaming', 'playable', 'fun', 'something to play'],
-        text: `Two, plus one on this page: **RAGDOLL RIOT**, a stickman brawler you can play right here, and **Infinite Edition**, an arcade racer in Three.js (private for now). And The Circle, the throw game on this desktop.`,
+        text: `Two, plus one on this page: **RAGDOLL RIOT**, a stickman brawler you can play right here, and **Infinite Edition**, an arcade racer in Three.js (private for now). And **DISCUS DISASTER**, the 3D discus game you can play on this desktop.`,
         acts: [{ label: '▶ PLAY RAGDOLL RIOT', do: 'embed:ragdoll' }, { label: 'TAKE A THROW', do: 'throw' }] },
       { id: 'greeting', intent: 'what', src: FILE,
         kw: ['hi', 'hello', 'hey', 'yo', 'sup', 'whats up', 'good morning', 'good afternoon', 'good evening', 'howdy', 'hiya', 'wassup'],
