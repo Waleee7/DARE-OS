@@ -1,32 +1,67 @@
-# DARE_OS · v2.0
+<p align="center">
+  <img src="img/logo.svg" width="96" alt="DARE-OS logo">
+</p>
 
-🌐 **Live:** [dare-os.vercel.app](https://dare-os.vercel.app/)
+<h1 align="center">DARE-OS</h1>
 
-Personal portfolio for **Akinwale "Josh" Dare** — student-athlete · AI engineer · builder of brains.
+<p align="center">
+  The portfolio of <b>Joshua Dare</b>: software engineer and college thrower (discus, hammer).<br>
+  Built as a desktop you can actually use.
+</p>
 
-CS undergrad at Life University, front-end dev at DailyIFA, and a regular at hackathons (including the May 2026 SF Anthropic Hackathon that produced [Sandy](https://github.com/Waleee7/chain-recall)). Throws discus and hammer — top-3 all-time Georgia HS boys discus, [verified athlete profile on World Athletics](https://worldathletics.org/athletes/united-states/joshua-dare-14939088).
+<p align="center">
+  <a href="https://dare-os.vercel.app"><b>dare-os.vercel.app</b></a>
+</p>
 
-## What's on the page
+<p align="center">
+  <img src="docs/desktop-retro98.jpg" alt="DARE-OS in the Retro 98 theme, with the Projects window open" width="860">
+</p>
 
-- **Hero** — rotating operator core (animated SVG), name, tagline, CTAs
-- **Currently building** — Echo · Sandy · Trading Signals Discord · Maestro/Scout/Forge (with status pills: shipped · in build · stealth)
-- **Selected projects** — Echo, Sandy, Options Trading Course, ThrowingTracker, GlobalLingo, DOGG_OS
-- **Athletics** — PRs (48.06m discus + 16.31m shot put both at Hayward Field), #3 GA HS all-time badge, championship photos, link to World Athletics profile
-- **About** — the operator narrative
-- **Timeline** — SF Anthropic Hackathon · DailyIFA · Life University · Independent
-- **Contact** — email · LinkedIn · GitHub · World Athletics
+## What's inside
 
-## Stack
+- **Four themes.** Retro 98 (default), Windows 11, Mac Light and Throws Night, each with its own window chrome, Start menu and icon names. Shareable with `?theme=`.
+- **15 projects** in a file explorer, grouped into sports tech, client builds, games and media, AI and dev tools, and learning apps. Each one opens a full write-up.
+- **Ask Josh.** A chat that answers questions about my work from a fact file, with no AI model and no API calls. It follows up on the last project you asked about and says so when something isn't in the file.
+- **The Circle.** A discus throw game on canvas: hold to spin, release in the window. Speed, angle and height set the mark.
+- **MS-DOS Prompt / Terminal**, a Recycle Bin, live status checks on every shipped project, and deep links to any window.
+- **Phone layout.** A home screen with a dock, built for one-handed use.
 
-Pure HTML + CSS + vanilla JS. One file, GitHub Pages friendly. Animations via CSS keyframes, SMIL on the SVG, IntersectionObserver for scroll-reveal. Fonts: Inter + JetBrains Mono.
+<p align="center">
+  <img src="docs/phone-retro98.jpg" width="190" alt="Retro 98 on a phone">
+  <img src="docs/phone-win11.jpg" width="190" alt="Windows 11 on a phone">
+  <img src="docs/phone-throws.jpg" width="190" alt="Throws Night on a phone">
+  <img src="docs/phone-mac.jpg" width="190" alt="Mac Light on a phone">
+</p>
 
-## Roadmap
+## Featured work
 
-- v2.0 — full content rewrite, Jarvis aesthetic, animated SVG hero, athletics with PRs ✅
-- v2.1 — case-study pages for Echo & Sandy with screenshots and architecture
-- v2.2 — blog section pulling from a Markdown folder
-- v3.0 — possible rebuild on Next.js + R3F to share components with Echo
+| Project | What it is |
+|---|---|
+| **SECTOR** | Measures a throw (release speed, angle, height) from a single phone video |
+| **ThrowingTracker** | Training log and analytics for throwers, offline-first |
+| **GlobalLingo** | Translation app with a Three.js globe (click a country to pick its language) and haptics on mobile |
+| **echo** | MCP memory server with a 3D brain view (React Three Fiber) |
+| **RAGDOLL RIOT** | Browser brawler with ragdoll physics |
+| **BLOX LIFE** | 3D video engine (Three.js, Web Audio, FFmpeg) that renders short skits |
+| **Infinite Edition** | Arcade racing game with drift physics in Three.js (private, in progress) |
+| **Claude Notch** | Native macOS app that puts coding sessions in the notch |
+| **DARE CHECK** | Free website safety grade |
+| **Client sites** | D'extensionz (live store) and CleanBins Tuscaloosa |
 
-## License
+## Built with
 
-MIT — fork it, build your own.
+Plain HTML, CSS and JavaScript. No framework and no build step. The whole page is about 235 KB of code.
+
+Tested with Node and Playwright: 178 chat checks and 65 page checks (layout, themes, keyboard, phone, no-JS fallback, zero console errors).
+
+## Contact
+
+[LinkedIn](https://www.linkedin.com/in/akinwaledare) · [GitHub](https://github.com/Waleee7) · jdare354@gmail.com
+
+<details>
+<summary>More screenshots</summary>
+<br>
+<img src="docs/desktop-win11.jpg" alt="Windows 11 theme" width="860">
+<img src="docs/desktop-throws.jpg" alt="Throws Night theme" width="860">
+<img src="docs/desktop-mac.jpg" alt="Mac Light theme" width="860">
+</details>

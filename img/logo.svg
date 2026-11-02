@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="DARE-OS">
+  <rect width="64" height="64" rx="12" fill="#008080"/>
+  <!-- beveled Retro 98 window -->
+  <rect x="9" y="11" width="46" height="42" fill="#c0c0c0"/>
+  <path d="M9 53V11h46" fill="none" stroke="#fff" stroke-width="2"/>
+  <path d="M9 53h46V11" fill="none" stroke="#404040" stroke-width="2"/>
+  <rect x="12" y="14" width="40" height="8" fill="#000080"/>
+  <rect x="45" y="15.5" width="5" height="5" fill="#c0c0c0"/>
+  <!-- D -->
+  <path d="M16 27h9a9 9 0 0 1 0 18h-9z" fill="#000080"/>
+  <path d="M21 32h4a4 4 0 0 1 0 8h-4z" fill="#c0c0c0"/>
+  <!-- discus release line from The Circle -->
+  <path d="M41 45l9-13" stroke="#e01b1b" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="41" cy="45" r="4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <circle cx="41" cy="45" r="1.6" fill="#e01b1b"/>
+</svg>
