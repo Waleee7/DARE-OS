@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Joshua Dare | Software Engineer, Student-Athlete</title>
+<meta name="description" content="Joshua Dare: software engineer and college thrower (discus, hammer) in Atlanta. A computer-vision app that measures throws from a phone, live client builds, a browser game, an MCP server and a GPU video engine, with every number measured.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0d14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="js/kb.js" defer></script>
+<script src="js/ask.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/chat.js" defer></script>
+<script src="js/throw.js" defer></script>
+<script src="js/live.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#work">Skip to the work</a>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="5" cy="17" r="3.2" fill="none" stroke="#ff3e3e" stroke-width="2"/><path d="M7.5 15 L20 6 M7.5 15 L21 13" stroke="#eef1f6" stroke-width="1.6"/></svg>
+      J. DARE
+    </a>
+    <ul><li><a href="#throw">THROW</a></li><li><a href="#work">WORK</a></li><li><a href="#also">SHIPPED</a></li><li><a href="#athlete">ATHLETE</a></li></ul>
+    <div class="nav-r">
+      <button class="ask-btn" type="button" data-ask>ASK <kbd>/</kbd></button>
+      <a class="contact-btn" href="#contact">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <!-- the throwing sector: circle, the 34.92° sector lines and distance arcs -->
+  <svg class="sector" viewBox="0 0 1000 620" aria-hidden="true">
+    <g fill="none" stroke="rgba(238,241,246,.14)" stroke-width="1.2">
+      <circle cx="120" cy="560" r="16" stroke="rgba(255,62,62,.7)" stroke-width="2"/>
+      <path d="M120 560 L980 30"/><path d="M120 560 L995 300"/>
+      <path d="M332 429 A 250 250 0 0 1 359 487" /><path d="M459 351 A 400 400 0 0 1 503 444"/>
+      <path d="M587 272 A 550 550 0 0 1 648 401"/><path d="M714 194 A 700 700 0 0 1 792 357"/><path d="M842 115 A 850 850 0 0 1 937 314"/>
+    </g>
+    <g fill="rgba(238,241,246,.22)" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2">
+      <text x="300" y="420">20M</text><text x="428" y="342">30M</text><text x="556" y="263">40M</text><text x="684" y="186">50M</text><text x="812" y="107">60M</text>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="hero-text">
+      <p class="tagline">SOFTWARE ENGINEER · STUDENT-ATHLETE · ATLANTA</p>
+      <p class="intro"><b>Joshua Dare.</b> <span class="u" data-count="sites">8</span> products live right now, <span class="u">2</span> client builds and <span class="u">317</span> passing tests, shipped between discus and hammer practice.</p>
+      <h1 aria-label="If it isn't measured, it didn't count."><span class="ln"><span>If it isn't </span></span><span class="ln"><span>measured, it </span></span><span class="ln"><span>didn't <em>count.</em></span></span></h1>
+      <p class="small">College thrower: discus and hammer, Life University.<br>B.S. Computer Information Systems, March 2027.</p>
+      <div class="cta">
+        <button class="btn main" type="button" data-ask>ASK MY PORTFOLIO</button>
+        <a class="btn" href="#throw">TAKE A THROW ↓</a>
+        <span class="hint">or press <kbd>/</kbd> anywhere</span>
+      </div>
+      <p class="ticker"><b>LIVE</b> · D'EXTENSIONZ · CLIENT STOREFRONT ON STRIPE LIVE MODE</p>
+    </div>
+    <aside class="card" aria-label="Scorecard">
+      <header><span>SCORECARD</span><span data-stamp>MEASURED 25·10·26</span></header>
+      <dl>
+        <div data-live="sites" title="Each product's live URL, probed from your browser when this page loaded"><dt><span class="dot" aria-hidden="true"></span>LIVE</dt><dd><b>8</b> <span data-v>products answering</span></dd></div>
+        <div title="SECTOR 54 · ThrowingTracker 107 · DARE Desk 106 · RAGDOLL RIOT 50 headless checks, all run 25 Oct 2026"><dt>TESTED</dt><dd><b>317</b> passing · 4 projects</dd></div>
+        <div title="SECTOR's accuracy harness: a rendered 68.14 m throw, measured back from the pixels"><dt>PRECISE</dt><dd><b>4.4 cm</b> off on a 68 m throw</dd></div>
+        <div title="480 frames at 1440×900 and 2× pixel ratio, headless Chrome on an M3 Pro"><dt>FAST</dt><dd><b>8.3 ms</b> frames · 12 ragdolls</dd></div>
+        <div title="D'extensionz and CleanBins Tuscaloosa"><dt>CLIENTS</dt><dd><b>2</b> live · 1 on live Stripe</dd></div>
+        <div data-live="repos" title="Public repos on github.com/Waleee7, from the GitHub API"><dt><span class="dot" aria-hidden="true"></span>OPEN SOURCE</dt><dd><b>13</b> <span data-v>public repos</span></dd></div>
+        <div data-live="push" title="Latest public push, from the GitHub API"><dt><span class="dot" aria-hidden="true"></span>LAST PUSH</dt><dd><b>25 Oct</b> <span data-v>· ragdoll-riot</span></dd></div>
+      </dl>
+      <p class="how">green dot: fetched live in your browser · hover a row to see how it's counted</p>
+      <a class="roles" href="#contact"><span>OPEN TO 2027 ROLES</span><span>→</span></a>
+    </aside>
+  </div>
+</header>
+
+<main>
+  <section class="circle" id="throw" aria-labelledby="throw-h">
+    <div class="wrap">
+      <div class="c-head">
+        <p class="kick">THE CIRCLE · TAKE A THROW</p>
+        <h2 id="throw-h">Your attempt.</h2>
+        <p>Hold to spin. Let go while the implement crosses the red window. Release speed, angle and height decide the mark: the same three numbers SECTOR measures from a phone video.</p>
+      </div>
+      <div class="field">
+        <canvas aria-hidden="true"></canvas>
+        <button type="button" class="hold" aria-describedby="throw-help"><span class="sr">Hold to spin, release to throw</span></button>
+        <p class="f-prompt" aria-hidden="true"><b>HOLD</b> TO SPIN · LET GO IN THE <b>RED</b></p>
+      </div>
+      <div class="hud">
+        <div class="imp" role="group" aria-label="Implement">
+          <button type="button" data-impl="discus" aria-pressed="true">DISCUS <span>2 KG</span></button>
+          <button type="button" data-impl="hammer" aria-pressed="false">HAMMER <span>7.26 KG</span></button>
+        </div>
+        <div class="readout" aria-hidden="true">
+          <span class="r-label" data-r="label">MARK</span>
+          <div class="r-num"><b data-r="num">0.00</b><span data-r="unit">m</span></div>
+          <p class="r-line"><span class="verdict" data-r="verdict"></span><span data-r="rel">Hold to spin. Let go in the red.</span></p>
+        </div>
+        <dl class="r-stats">
+          <div><dt>YOUR BEST</dt><dd data-r="best">—</dd></div>
+          <div><dt>ATTEMPTS</dt><dd data-r="tries">0</dd></div>
+        </dl>
+        <p class="r-ref" data-r="ref">Alekna's 75.56 m world record needed a 25.33 m/s release at 36°.<cite>SECTOR'S RECONSTRUCTION</cite></p>
+        <a class="r-link" href="#work" data-open="sector">THE REAL THING: SECTOR MEASURES THROWS FROM VIDEO →</a>
+      </div>
+      <p class="sr" id="throw-help">Press and hold, or hold Space, to spin. Let go while the implement passes the red window to land inside the sector.</p>
+      <p class="sr" aria-live="polite" data-r="live"></p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="sec" id="work" aria-labelledby="work-h">
+      <p class="kick">EIGHT ATTEMPTS · ALL FAIR</p>
+      <h2 id="work-h">Work that had to land</h2>
+      <div class="tabs" role="tablist" aria-label="Projects">
+        <button role="tab" aria-selected="true" aria-controls="a-sector" id="t-sector" data-id="sector"><b>01</b>SECTOR</button>
+        <button role="tab" aria-selected="false" aria-controls="a-dextensionz" id="t-dextensionz" data-id="dextensionz"><b>02</b>D'EXTENSIONZ</button>
+        <button role="tab" aria-selected="false" aria-controls="a-ragdoll" id="t-ragdoll" data-id="ragdoll"><b>03</b>RAGDOLL RIOT</button>
+        <button role="tab" aria-selected="false" aria-controls="a-echo" id="t-echo" data-id="echo"><b>04</b>ECHO</button>
+        <button role="tab" aria-selected="false" aria-controls="a-blox" id="t-blox" data-id="blox"><b>05</b>BLOX LIFE</button>
+        <button role="tab" aria-selected="false" aria-controls="a-daredesk" id="t-daredesk" data-id="daredesk"><b>06</b>DARE DESK</button>
+        <button role="tab" aria-selected="false" aria-controls="a-notch" id="t-notch" data-id="notch"><b>07</b>CLAUDE NOTCH</button>
+        <button role="tab" aria-selected="false" aria-controls="a-trackside" id="t-trackside" data-id="trackside"><b>08</b>TRACKSIDE</button>
+      </div>
+
+      <div class="attempt on" id="a-sector" role="tabpanel" aria-labelledby="t-sector">
+        <div>
+          <span class="lab">ATTEMPT 01 · FAIR <i>· SPORTS TECH · COMPUTER VISION</i></span>
+          <h3>SECTOR</h3>
+          <p class="what">Point a phone at the ring, click four points on the rim, and SECTOR recovers a throw's release speed, angle and height and its official distance. All of it runs in the browser. Nothing is uploaded.</p>
+          <div class="release"><span>THE RELEASE</span><p>The demo footage and your own video go through the same <code>analyze()</code>. No demo-only code path can drift from the real one, which is the only reason the error numbers mean anything.</p></div>
+          <div class="marks"><div><b>4.4 cm</b><span>OFF ON A 68 M THROW</span></div><div><b>54</b><span>TESTS PASSING</span></div><div><b>3</b><span>RUNTIME DEPENDENCIES</span></div></div>
+          <p class="note">Validated against rendered footage with known answers. Surveyed real throws are next.</p>
+          <div class="go"><a href="https://sector-ochre.vercel.app" target="_blank" rel="noopener">RUN THE TRACKER →</a><a class="ghost" href="https://github.com/Waleee7/sector" target="_blank" rel="noopener">SOURCE ↗</a><span>NEXT.JS 16 · TYPESCRIPT · WEB WORKERS · RANSAC · RK4</span></div>
+        </div>
+        <figure class="shot" data-embed="sector" data-src="https://sector-ochre.vercel.app" data-title="SECTOR, running live">
+          <img src="../img/sector.jpg" alt="SECTOR tracking a reconstruction of Mykolas Alekna's 75.56 m discus world record" loading="lazy" width="1200" height="750">
+          <button type="button" class="play-here" data-embed-btn>▶ RUN IT HERE</button>
+        </figure>
+      </div>
+
+      <div class="attempt" id="a-dextensionz" role="tabpanel" aria-labelledby="t-dextensionz">
+        <div>
+          <span class="lab">ATTEMPT 02 · FAIR <i>· CLIENT BUILD</i></span>
+          <h3>D'extensionz</h3>
+          <p class="what">A luxury hair brand's storefront, built for a paying client, taking real cards.</p>
+          <div class="release"><span>THE RELEASE</span><p>Stripe Checkout in live mode, so card data never touches my code.</p></div>
+          <div class="marks"><div><b>LIVE</b><span>STRIPE LIVE MODE</span></div><div><b>1</b><span>PAYING CLIENT</span></div><div><b>0</b><span>CARD NUMBERS ON MY SERVER</span></div></div>
+          <div class="go"><a href="https://dextensionz-site.vercel.app" target="_blank" rel="noopener">SEE IT LIVE →</a><span>NEXT.JS 16 · REACT 19 · TAILWIND 4 · GSAP · STRIPE</span></div>
+        </div>
+        <figure class="shot"><img src="../img/dextensionz.jpg" alt="The D'extensionz storefront homepage" loading="lazy" width="1200" height="750"></figure>
+      </div>
+
+      <div class="attempt" id="a-ragdoll" role="tabpanel" aria-labelledby="t-ragdoll">
+        <div>
+          <span class="lab">ATTEMPT 03 · FAIR <i>· BROWSER GAME</i></span>
+          <h3>Ragdoll Riot</h3>
+          <p class="what">A stickman ragdoll brawler with boss waves, shield guys, electric ropes and a super meter. Runs on any phone, and right here.</p>
+          <div class="release"><span>THE RELEASE</span><p>One rig, two modes: fighters are posed with two-bone IK, and a hit hands the same eleven points to a Verlet integrator, so launching a body is just "stop posing it". No engine, no dependencies, and 50 headless checks gate every deploy.</p></div>
+          <div class="marks"><div><b>8.3 ms</b><span>AVG FRAME</span></div><div><b>12</b><span>RAGDOLLS ON SCREEN</span></div><div><b>50</b><span>BROWSER CHECKS</span></div></div>
+          <div class="go"><a href="https://ragdoll-riot.vercel.app" target="_blank" rel="noopener">PLAY FULL SCREEN →</a><a class="ghost" href="https://github.com/Waleee7/ragdoll-riot" target="_blank" rel="noopener">SOURCE ↗</a><span>CANVAS · WEB AUDIO · PLAYWRIGHT</span></div>
+        </div>
+        <figure class="shot" data-embed="ragdoll" data-src="https://ragdoll-riot.vercel.app" data-title="RAGDOLL RIOT, playable">
+          <img src="../img/ragdoll.jpg" alt="RAGDOLL RIOT mid-fight, with the live ropes and a tip" loading="lazy" width="1200" height="750">
+          <button type="button" class="play-here" data-embed-btn>▶ PLAY IT HERE</button>
+        </figure>
+      </div>
+
+      <div class="attempt" id="a-echo" role="tabpanel" aria-labelledby="t-echo">
+        <div>
+          <span class="lab">ATTEMPT 04 · FAIR <i>· AI TOOLING · MCP SERVER</i></span>
+          <h3>echo</h3>
+          <p class="what">An open-source MCP server that gives AI assistants a memory that lasts between sessions, with a 3D brain dashboard of everything it remembers.</p>
+          <div class="release"><span>THE RELEASE</span><p>Every memory is a plain JSON file with its provenance and a freshness score that halves every 30 days. No database to host or migrate, and you can read exactly what your AI knows in a text editor.</p></div>
+          <div class="marks"><div><b>5</b><span>MCP TOOLS</span></div><div><b>7</b><span>BRAIN REGIONS</span></div><div><b>MIT</b><span>OPEN SOURCE</span></div></div>
+          <div class="go"><a href="https://echo-ruby-omega.vercel.app" target="_blank" rel="noopener">SEE THE DEMO →</a><a class="ghost" href="https://github.com/Waleee7/echo" target="_blank" rel="noopener">SOURCE ↗</a><span>TYPESCRIPT · NEXT.JS 15 · REACT THREE FIBER · MCP</span></div>
+        </div>
+        <figure class="shot"><img src="../img/echo.jpg" alt="The echo dashboard: a 3D memory brain waiting for its first memory" loading="lazy" width="1200" height="750"></figure>
+      </div>
+
+      <div class="attempt" id="a-blox" role="tabpanel" aria-labelledby="t-blox">
+        <div>
+          <span class="lab">ATTEMPT 05 · FAIR <i>· MEDIA ENGINE</i></span>
+          <h3>Blox Life</h3>
+          <p class="what">A 3D engine that turns written skits into vertical videos: blocky characters, voices, beats and captions.</p>
+          <div class="release"><span>THE RELEASE</span><p>Every frame is a pure function of time, so frames render in any order. Headless Chrome draws them on the laptop's GPU through Metal, about ten times faster than software rendering.</p></div>
+          <div class="marks"><div><b>50 s</b><span>FOR 10 VIDEOS</span></div><div><b>1080×1920</b><span>EVERY FRAME</span></div><div><b>−14</b><span>LUFS, PLATFORM LOUDNESS</span></div></div>
+          <div class="go"><span>THREE.JS · WEB AUDIO · PLAYWRIGHT · FFMPEG</span></div>
+        </div>
+        <figure class="shot phone">
+          <video src="../media/blox-noob-pro.mp4" poster="../img/blox.jpg" muted loop playsinline preload="none" aria-label="A BLOX LIFE skit: the noob wins the sword fight" width="1080" height="1920"></video>
+          <button type="button" class="sound" data-sound aria-pressed="false">SOUND OFF</button>
+        </figure>
+      </div>
+
+      <div class="attempt" id="a-daredesk" role="tabpanel" aria-labelledby="t-daredesk">
+        <div>
+          <span class="lab">ATTEMPT 06 · FAIR <i>· TRADING ENGINE</i></span>
+          <h3>DARE Desk</h3>
+          <p class="what">A rules-based options decision engine with an active scanner. Paper-first: it trades on paper until the rules prove out, because wrong numbers cost money.</p>
+          <div class="release"><span>THE RELEASE</span><p>Zod schemas at every edge and a Vitest suite for the rules. Credentials stay out of the repo.</p></div>
+          <div class="marks"><div><b>106</b><span>TESTS PASSING</span></div><div><b>12</b><span>TEST FILES</span></div><div><b>8.0 s</b><span>FULL SUITE</span></div></div>
+          <div class="go"><a href="https://github.com/Waleee7/dare-desk" target="_blank" rel="noopener">READ THE SOURCE →</a><span>TYPESCRIPT · ZOD · VITEST</span></div>
+        </div>
+        <figure class="shot"><pre class="term"><span class="dim">$ npx vitest run</span>
+
+ <span class="ok">✓</span> 12 test files
+
+ Test Files  <span class="ok">12 passed</span> (12)
+      Tests  <span class="ok">106 passed</span> (106)
+   Duration  7.97s
+
+<span class="dim">run 25 Oct 2026</span></pre></figure>
+      </div>
+
+      <div class="attempt" id="a-notch" role="tabpanel" aria-labelledby="t-notch">
+        <div>
+          <span class="lab">ATTEMPT 07 · FAIR <i>· macOS DEV TOOL</i></span>
+          <h3>Claude Notch</h3>
+          <p class="what">A Dynamic Island for AI coding sessions: a pixel Claude lives in the MacBook notch and drops down when a task finishes or needs you.</p>
+          <div class="release"><span>THE RELEASE</span><p>Native Swift with SwiftUI on an AppKit panel, fed by the coding agent's own hooks. Everything stays on the Mac.</p></div>
+          <div class="marks"><div><b>MIT</b><span>OPEN SOURCE</span></div><div><b>0</b><span>SERVERS</span></div><div><b>3</b><span>SESSION STATES</span></div></div>
+          <div class="go"><a href="https://github.com/Waleee7/claude-notch" target="_blank" rel="noopener">READ THE SOURCE →</a><span>SWIFT · SWIFTUI · APPKIT</span></div>
+        </div>
+        <figure class="shot"><img src="../img/notch.jpg" alt="Claude Notch showing three coding sessions in the notch" loading="lazy" width="1200" height="750"></figure>
+      </div>
+
+      <div class="attempt" id="a-trackside" role="tabpanel" aria-labelledby="t-trackside">
+        <div>
+          <span class="lab">ATTEMPT 08 · FAIR <i>· MEASUREMENT · PYTHON</i></span>
+          <h3>trackside</h3>
+          <p class="what">Track and field measurement from one ordinary camera: sprint finish timing, and the flight of a thrown implement.</p>
+          <div class="release"><span>THE RELEASE</span><p>Every number comes back with its uncertainty. A mark without an error bar isn't a measurement.</p></div>
+          <div class="marks"><div><b>0.58 ms</b><span>WORST FINISH-TIMING ERROR</span></div><div><b>29×</b><span>FINER THAN THE FRAME RATE</span></div><div><b>±σ</b><span>ON EVERY NUMBER</span></div></div>
+          <p class="note">Measured on synthetic scenes with known answers, with sub-pixel motion, motion blur and sensor noise.</p>
+          <div class="go"><a href="https://github.com/Waleee7/trackside" target="_blank" rel="noopener">READ THE SOURCE →</a><span>PYTHON · OPENCV · NUMPY · SCIPY</span></div>
+        </div>
+        <figure class="shot diagram">
+          <svg viewBox="0 0 560 340" role="img" aria-label="Diagram: an implement's flight path with release speed, angle and height marked">
+            <g fill="none" stroke="rgba(238,241,246,.25)"><path d="M20 300 H540"/></g>
+            <path d="M70 250 Q 260 20 500 300" fill="none" stroke="#ff3e3e" stroke-width="3" stroke-dasharray="7 6"/>
+            <circle cx="70" cy="250" r="7" fill="#eef1f6"/>
+            <path d="M70 250 L150 170" stroke="#eef1f6" stroke-width="2"/><path d="M70 250 H160" stroke="rgba(238,241,246,.4)"/>
+            <path d="M70 300 V250" stroke="rgba(238,241,246,.4)" stroke-dasharray="3 4"/>
+            <g fill="#eef1f6" font-family="JetBrains Mono, monospace" font-size="13">
+              <text x="160" y="160">release speed ± σ</text><text x="168" y="238">angle ± σ</text><text x="80" y="290">height ± σ</text>
+              <text x="350" y="330">predicted distance ± σ</text>
+            </g>
+          </svg>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sec" id="also" aria-labelledby="also-h">
+      <p class="kick">ALSO SHIPPED</p>
+      <h2 id="also-h">More on the board</h2>
+      <div class="also">
+        <article><img src="../img/cleanbins.jpg" alt="CleanBins Tuscaloosa homepage" loading="lazy" width="1200" height="750"><div class="body"><span class="tag">CLIENT BUILD · LIVE</span><h3>CleanBins Tuscaloosa</h3><p>Site for a trash-bin cleaning service, approved by the owner and live.</p><a href="https://cleanbins-tuscaloosa.vercel.app" target="_blank" rel="noopener">VISIT ↗</a></div></article>
+        <article><img src="../img/throwingtracker.jpg" alt="ThrowingTracker start screen" loading="lazy" width="1200" height="750"><div class="body"><span class="tag">SPORTS TECH · LIVE</span><h3>ThrowingTracker</h3><p>Offline-first training log for throwers: marks, Meet Day mode, landing-zone scatter and frame-by-frame video review. 107 tests.</p><a href="https://throwing-tracker.vercel.app" target="_blank" rel="noopener">VISIT ↗</a><a href="https://github.com/Waleee7/ThrowingTracker" target="_blank" rel="noopener">SOURCE ↗</a></div></article>
+        <article><img src="../img/sandy.jpg" alt="Sandy's title card: I am Sandy, the institutional memory of Rosewood" loading="lazy" width="1200" height="750"><div class="body"><span class="tag">HACKATHON · TEAM BUILD</span><h3>Sandy</h3><p>SF Anthropic Hackathon, May 2026, with James Olusoga. Claude reads a guest's history across a hotel chain and briefs staff the moment they walk in.</p><a href="https://chain-recall.vercel.app" target="_blank" rel="noopener">DEMO ↗</a><a href="https://github.com/Waleee7/chain-recall" target="_blank" rel="noopener">SOURCE ↗</a></div></article>
+        <article><img src="../img/globallingo.jpg" alt="GlobalLingo start screen" loading="lazy" width="1200" height="750"><div class="body"><span class="tag">3D · TRANSLATION</span><h3>GlobalLingo</h3><p>Translation app with an interactive Three.js globe: click a country to pick its language. Streaks, rewards and haptics on mobile.</p><a href="https://global-lingo.vercel.app" target="_blank" rel="noopener">VISIT ↗</a><a href="https://github.com/Waleee7/GlobalLingo" target="_blank" rel="noopener">SOURCE ↗</a></div></article>
+        <article><img src="../img/course.jpg" alt="The options course's module map" loading="lazy" width="1200" height="750"><div class="body"><span class="tag">EDTECH · LIVE</span><h3>Options Course</h3><p>Gamified options trading course: 13 modules, quizzes, real-chart challenges, XP and badges. No sign-up.</p><a href="https://optionstradingcourse.vercel.app" target="_blank" rel="noopener">VISIT ↗</a><a href="https://github.com/Waleee7/options-trading-course" target="_blank" rel="noopener">SOURCE ↗</a></div></article>
+        <article><svg class="ph" viewBox="0 0 320 180" aria-hidden="true"><rect width="320" height="180" fill="#05070b"/><path d="M20 160 C 120 160, 140 40, 300 30" fill="none" stroke="rgba(238,241,246,.3)" stroke-width="18"/><path d="M20 160 C 120 160, 140 40, 300 30" fill="none" stroke="#ff3e3e" stroke-width="2" stroke-dasharray="10 9"/><path d="M60 150 C 130 150, 150 70, 230 52" fill="none" stroke="rgba(255,62,62,.35)" stroke-width="4"/></svg><div class="body"><span class="tag">GAME · IN PROGRESS</span><h3>Infinite Edition</h3><p>An arcade racing game with drift physics, built in Three.js. Private while the assets get cleared.</p></div></article>
+      </div>
+    </section>
+
+    <section class="sec athlete" id="athlete" aria-labelledby="ath-h">
+      <div>
+        <p class="kick">THE ATHLETE</p>
+        <h2 id="ath-h">Discus. Hammer.</h2>
+        <p>I'm a college thrower at Life University. A throw only counts if it lands inside the sector and someone measures it. I hold my software to the same rule: it's live, it's tested, or it isn't on this page.</p>
+        <p>Training and shipping both reward the same thing: small, measured improvements, every day.</p>
+        <div class="onfile">
+          <h3>MARKS ON FILE</h3>
+          <ol>
+            <li><b>51.92 m</b><span>DISCUS · 1.5 KG · MARIETTA · 2021</span></li>
+            <li><b>48.06 m</b><span>DISCUS · 1.75 KG · HAYWARD FIELD, EUGENE · 2022</span></li>
+            <li><b>45.30 m</b><span>DISCUS · 2 KG · ATLANTA · 2023</span></li>
+            <li><b>16.31 m</b><span>SHOT PUT · 6 KG · HAYWARD FIELD, EUGENE · 2022</span></li>
+          </ol>
+          <a href="https://worldathletics.org/athletes/united-states/joshua-dare-14939088" target="_blank" rel="noopener">EVERY RESULT: WORLD ATHLETICS ↗</a>
+        </div>
+      </div>
+      <ul class="facts">
+        <li><span>EVENTS</span><span>Discus · Hammer</span></li>
+        <li><span>SCHOOL</span><span>Life University, Marietta, GA</span></li>
+        <li><span>DEGREE</span><span>B.S. Computer Information Systems, March 2027</span></li>
+        <li><span>EXPERIENCE</span><span>Front-end developer, DailyIFA</span></li>
+        <li><span>HACKATHON</span><span>SF Anthropic Hackathon, May 2026</span></li>
+        <li><span>BASE</span><span>Atlanta, GA</span></li>
+        <li><span>STACK</span><span>TypeScript · React/Next.js · Swift · Python · Three.js</span></li>
+      </ul>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="c-h">
+      <p class="kick" style="margin:0">OPEN TO 2027 ROLES · TAKING CLIENT BUILDS</p>
+      <h2 id="c-h">Let's put something on the board.</h2>
+      <div class="row">
+        <a class="btn main" data-email href="#contact">EMAIL ME</a>
+        <button class="btn" type="button" data-ask>ASK THE PORTFOLIO</button>
+        <a class="btn" href="https://github.com/Waleee7" target="_blank" rel="noopener">GITHUB</a>
+        <a class="btn" href="https://www.linkedin.com/in/akinwaledare" target="_blank" rel="noopener">LINKEDIN</a>
+      </div>
+    </section>
+
+    <footer class="foot"><span>JOSHUA DARE · ATLANTA · 2026</span><span data-pagestats>EVERY MARK ON THIS PAGE WAS MEASURED</span></footer>
+  </div>
+</main>
+
+<div class="scrim" data-chat-close></div>
+<aside class="chat" id="chat" aria-label="Ask the portfolio" inert>
+  <div class="chat-head">
+    <div><span class="label">ASK THE PORTFOLIO</span><span class="stamp">NO GUESSING · RUNS IN YOUR BROWSER</span></div>
+    <button type="button" class="chat-x" data-chat-close aria-label="Close the chat">✕</button>
+  </div>
+  <div class="chat-thread" role="log" aria-live="polite" aria-label="Conversation"></div>
+  <div class="chat-chips" aria-label="Suggested questions"></div>
+  <form class="chat-form" autocomplete="off">
+    <label class="sr" for="chat-in">Ask a question</label>
+    <input id="chat-in" name="q" maxlength="240" placeholder="Ask about a project, the stack, the throws…" enterkeyhint="send">
+    <button type="submit">SEND</button>
+  </form>
+  <p class="chat-note">Answers come from Josh's fact file and are matched to your question inside this tab. Nothing you type leaves your browser. Type <kbd>/help</kbd> for commands.</p>
+</aside>
+</body>
+</html>

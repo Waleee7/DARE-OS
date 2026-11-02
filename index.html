@@ -1,900 +1,671 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Akinwale "Josh" Dare — Student-athlete · AI engineer</title>
-<meta name="description" content="Akinwale (Josh) Dare — NCAA throws athlete building AI memory systems. CS @ Life University. #3 all-time GA HS boys discus." />
-
-<!-- Open Graph / social preview -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Akinwale 'Josh' Dare — NCAA throws athlete building AI" />
-<meta property="og:description" content="The only AI engineer in his bracket who throws 199 feet. Builds AI memory systems, MCP servers, agent ecosystems." />
-<meta property="og:image" content="https://dare-os.vercel.app/assets/og-image.svg" />
-<meta property="og:url" content="https://dare-os.vercel.app/" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Akinwale 'Josh' Dare" />
-<meta name="twitter:description" content="NCAA throws athlete building AI memory systems · #3 all-time GA HS discus" />
-<meta name="twitter:image" content="https://dare-os.vercel.app/assets/og-image.svg" />
-
-<!-- Favicon (inline SVG — cyan core) -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23050b14' stroke='%234FC3FF' stroke-width='1.5'/><circle cx='16' cy='16' r='9' fill='none' stroke='%234FC3FF' stroke-width='1' stroke-dasharray='2 2' opacity='0.6'/><circle cx='16' cy='16' r='4' fill='%239DDCFF' opacity='0.9'/></svg>" />
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Joshua Dare | Software Engineer, Student-Athlete</title>
+<meta name="description" content="Joshua Dare: software engineer and college thrower (discus, hammer) in Atlanta. A computer-vision app that measures throws from a phone, live client builds, a browser game, an MCP server and a GPU video engine, with every number measured.">
+<link rel="canonical" href="https://dare-os.vercel.app/">
+<meta name="theme-color" content="#008080">
+<script>
+// The theme is set before first paint: ?theme= (shared links), then the visitor's saved pick, then Retro 98.
+(function (d) {
+  var T = { retro98: 'win', throws: 'mac', mac: 'mac', win11: 'win' }, own = Object.prototype.hasOwnProperty, t = null;
+  d.classList.add('js');
+  try { t = new URLSearchParams(location.search).get('theme'); } catch (e) { t = null; }
+  if (!own.call(T, t)) { try { t = localStorage.getItem('jd-theme'); } catch (e) { t = null; } }
+  if (!own.call(T, t)) t = 'retro98';
+  d.setAttribute('data-theme', t);
+  d.setAttribute('data-chrome', T[t]);
+})(document.documentElement);
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg-0: #050b14;
-    --bg-1: #0a1828;
-    --bg-2: #112236;
-    --line: rgba(79, 195, 255, 0.18);
-    --line-warm: rgba(255, 180, 90, 0.25);
-    --text: #cfe7ff;
-    --text-dim: rgba(207, 231, 255, 0.65);
-    --text-faint: rgba(207, 231, 255, 0.40);
-    --cyan: #4FC3FF;
-    --cyan-soft: #9DDCFF;
-    --amber: #FFD080;
-    --amber-warm: #FFA947;
-    --emerald: #6FFFAA;
-    --magenta: #FF7AD9;
-    --violet: #B47BFF;
-    --rose: #FF6E8A;
-    --shadow-cyan: 0 0 30px rgba(79, 195, 255, 0.25);
-    --shadow-glow: 0 0 50px rgba(79, 195, 255, 0.45);
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--bg-0);
-    color: var(--text);
-    overflow-x: hidden;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-  ::selection { background: var(--cyan); color: var(--bg-0); }
-  a { color: var(--cyan); text-decoration: none; transition: color 0.2s; }
-  a:hover { color: var(--cyan-soft); }
-
-  body::before {
-    content: "";
-    position: fixed; inset: 0; z-index: -2;
-    background:
-      radial-gradient(ellipse at 20% 0%, rgba(79, 195, 255, 0.18), transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba(180, 123, 255, 0.14), transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(255, 208, 128, 0.05), transparent 70%);
-    animation: bg-drift 24s ease-in-out infinite alternate;
-  }
-  body::after {
-    content: "";
-    position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background-image: repeating-linear-gradient(0deg,
-      rgba(79, 195, 255, 0.022) 0px, rgba(79, 195, 255, 0.022) 1px,
-      transparent 1px, transparent 3px);
-    mix-blend-mode: screen;
-  }
-  @keyframes bg-drift {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(-3%, 2%) scale(1.05); }
-  }
-
-  .hud-corner {
-    position: fixed; width: 26px; height: 26px;
-    border: 1.5px solid rgba(79, 195, 255, 0.5);
-    filter: drop-shadow(0 0 4px rgba(79, 195, 255, 0.4));
-    z-index: 5; pointer-events: none;
-  }
-  .hud-corner.tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
-  .hud-corner.tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
-  .hud-corner.bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0; }
-  .hud-corner.br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
-
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-    backdrop-filter: blur(14px) saturate(140%);
-    background: rgba(5, 11, 20, 0.6);
-    border-bottom: 1px solid var(--line);
-    padding: 14px 32px;
-    display: flex; align-items: center; justify-content: space-between;
-    font-family: 'JetBrains Mono', monospace; font-size: 12px;
-  }
-  nav .brand { color: var(--cyan); letter-spacing: 0.25em; text-transform: uppercase; }
-  nav .brand .dot {
-    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
-    background: var(--cyan); box-shadow: 0 0 10px var(--cyan);
-    animation: pulse 2s ease-in-out infinite; margin-right: 8px;
-  }
-  nav ul { display: flex; gap: 22px; list-style: none; }
-  nav ul a { color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.15em; }
-  nav ul a:hover { color: var(--cyan); }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-  section { max-width: 1100px; margin: 0 auto; padding: 110px 32px 60px; position: relative; }
-  .section-label {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    color: var(--cyan); letter-spacing: 0.3em; text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .section-label::before {
-    content: ""; display: inline-block; width: 24px; height: 1px; background: var(--cyan);
-  }
-  h2.section-title {
-    font-size: clamp(28px, 4vw, 44px); font-weight: 700; margin-bottom: 36px;
-    letter-spacing: -0.02em;
-  }
-  h2.section-title .accent { color: var(--cyan); }
-
-  .hero {
-    min-height: 92vh;
-    display: grid; grid-template-columns: 1.4fr 1fr;
-    gap: 50px; align-items: center; padding-top: 130px;
-  }
-  .hero-text .eyebrow {
-    font-family: 'JetBrains Mono', monospace; font-size: 12px;
-    color: var(--cyan); letter-spacing: 0.3em; text-transform: uppercase;
-    margin-bottom: 18px; display: inline-flex; align-items: center; gap: 10px;
-  }
-  .hero-text .eyebrow::before {
-    content: ""; width: 8px; height: 8px; border-radius: 50%;
-    background: var(--emerald); box-shadow: 0 0 12px var(--emerald);
-    animation: pulse 1.8s infinite;
-  }
-  .hero-text h1 {
-    font-size: clamp(40px, 6.5vw, 78px); line-height: 1.02;
-    font-weight: 800; letter-spacing: -0.035em; margin-bottom: 12px;
-    background: linear-gradient(135deg, #ffffff 0%, var(--cyan-soft) 60%, var(--cyan) 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .hero-text h1 .alt {
-    color: var(--amber); -webkit-text-fill-color: var(--amber);
-    font-style: italic; font-weight: 500;
-  }
-  .hero-text .positioning {
-    display: inline-block;
-    background: linear-gradient(135deg, rgba(255, 169, 71, 0.16), rgba(79, 195, 255, 0.16));
-    border: 1px solid var(--line-warm);
-    padding: 9px 16px; border-radius: 999px;
-    font-size: clamp(14px, 1.3vw, 16px); color: var(--text);
-    margin-bottom: 18px; font-weight: 500;
-  }
-  .hero-text .positioning strong {
-    color: var(--amber); font-weight: 700;
-  }
-  .hero-text .tagline {
-    font-size: clamp(15px, 1.4vw, 18px); color: var(--text-dim);
-    margin-bottom: 12px; max-width: 540px; font-weight: 500;
-  }
-  .hero-text .tagline .pipe { color: var(--cyan); margin: 0 10px; opacity: 0.7; }
-  .hero-text .subline {
-    font-size: 14px; color: var(--text-dim); max-width: 540px; margin-bottom: 28px;
-  }
-  .stats-row {
-    display: flex; gap: 22px; margin-bottom: 30px; flex-wrap: wrap;
-  }
-  .stat { display: flex; flex-direction: column; min-width: 80px; }
-  .stat .num {
-    font-size: clamp(26px, 3vw, 34px); font-weight: 800;
-    color: var(--cyan); line-height: 1;
-    font-variant-numeric: tabular-nums;
-    text-shadow: 0 0 12px rgba(79, 195, 255, 0.4);
-  }
-  .stat .lbl {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--text-faint); text-transform: uppercase;
-    letter-spacing: 0.15em; margin-top: 4px;
-  }
-  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 13px 22px; border-radius: 999px; font-size: 13px;
-    font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
-    transition: all 0.25s; cursor: pointer; border: 1px solid;
-  }
-  .btn-primary {
-    background: var(--cyan); color: var(--bg-0); border-color: var(--cyan);
-    box-shadow: 0 0 24px rgba(79, 195, 255, 0.4);
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px); box-shadow: 0 0 36px rgba(79, 195, 255, 0.7);
-    color: var(--bg-0);
-  }
-  .btn-ghost {
-    background: transparent; color: var(--text); border-color: rgba(207, 231, 255, 0.25);
-  }
-  .btn-ghost:hover {
-    border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px);
-  }
-
-  .hero-orb { display: flex; align-items: center; justify-content: center; position: relative; flex-direction: column; gap: 10px; }
-  .hero-orb svg {
-    width: clamp(280px, 35vw, 420px); height: auto;
-    filter: drop-shadow(0 0 40px rgba(79, 195, 255, 0.25));
-  }
-  /* Live Echo embed — the actual deployed brain dashboard */
-  .echo-live-wrap {
-    position: relative; width: clamp(300px, 36vw, 440px);
-    aspect-ratio: 1; border-radius: 18px; overflow: hidden;
-    border: 1px solid var(--line);
-    background: var(--bg-0);
-    box-shadow: 0 0 60px rgba(79, 195, 255, 0.25), inset 0 0 30px rgba(79, 195, 255, 0.1);
-  }
-  .echo-live-wrap iframe {
-    position: absolute; top: -60px; left: -380px;
-    width: 1200px; height: 720px;
-    border: 0; transform-origin: top left;
-    transform: scale(0.55); pointer-events: none;
-  }
-  .echo-live-badge {
-    position: absolute; top: 10px; left: 10px; z-index: 5;
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(5, 11, 20, 0.85); backdrop-filter: blur(8px);
-    border: 1px solid rgba(111, 255, 170, 0.5);
-    color: var(--emerald); padding: 5px 10px; border-radius: 999px;
-    font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    text-transform: uppercase; letter-spacing: 0.2em;
-  }
-  .echo-live-badge .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--emerald); box-shadow: 0 0 8px var(--emerald);
-    animation: pulse 1.4s infinite;
-  }
-  .echo-live-cta {
-    position: absolute; bottom: 10px; right: 10px; z-index: 5;
-    background: rgba(5, 11, 20, 0.85); backdrop-filter: blur(8px);
-    border: 1px solid var(--cyan);
-    color: var(--cyan); padding: 7px 14px; border-radius: 999px;
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    text-transform: uppercase; letter-spacing: 0.18em;
-    text-decoration: none; transition: all 0.25s;
-  }
-  .echo-live-cta:hover {
-    background: var(--cyan); color: var(--bg-0); transform: translateY(-1px);
-  }
-  .echo-caption {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.2em;
-    text-align: center;
-  }
-
-  .scroll-cue {
-    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    letter-spacing: 0.3em; color: var(--text-faint); text-transform: uppercase;
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
-    animation: float 2.5s ease-in-out infinite;
-  }
-  @keyframes float {
-    0%, 100% { transform: translate(-50%, 0); opacity: 0.6; }
-    50% { transform: translate(-50%, 6px); opacity: 1; }
-  }
-
-  .build-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-  }
-  .build-card {
-    border: 1px solid var(--line);
-    background: linear-gradient(150deg, rgba(17, 34, 54, 0.7), rgba(10, 24, 40, 0.5));
-    backdrop-filter: blur(8px);
-    padding: 20px; border-radius: 12px; position: relative; overflow: hidden;
-    transition: all 0.3s;
-  }
-  .build-card::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px; background: var(--accent, var(--cyan));
-    box-shadow: 0 0 12px var(--accent, var(--cyan));
-  }
-  .build-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--accent, var(--cyan));
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-  }
-  .build-card .head {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 10px; gap: 10px;
-  }
-  .build-card .name { font-weight: 700; font-size: 16px; color: var(--text); }
-  .build-card .status {
-    font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    padding: 3px 8px; border-radius: 999px; text-transform: uppercase;
-    letter-spacing: 0.15em; white-space: nowrap;
-  }
-  .status-shipped { background: rgba(111, 255, 170, 0.15); color: var(--emerald); border: 1px solid rgba(111, 255, 170, 0.4); }
-  .status-live    { background: rgba(79, 195, 255, 0.15); color: var(--cyan); border: 1px solid rgba(79, 195, 255, 0.4); }
-  .status-build   { background: rgba(255, 208, 128, 0.15); color: var(--amber); border: 1px solid rgba(255, 208, 128, 0.4); }
-  .status-stealth { background: rgba(180, 123, 255, 0.15); color: var(--violet); border: 1px solid rgba(180, 123, 255, 0.4); }
-  .build-card .desc { color: var(--text-dim); font-size: 14px; margin-bottom: 14px; }
-  .build-card .stack {
-    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
-  }
-  .build-card .stack span {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--text-faint); padding: 2px 7px; border-radius: 4px;
-    background: rgba(207, 231, 255, 0.05); border: 1px solid var(--line);
-  }
-  .build-card .links a {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    margin-right: 14px; color: var(--accent, var(--cyan));
-  }
-  .build-card .links a:hover { text-decoration: underline; }
-
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-  }
-  .project {
-    border: 1px solid var(--line); border-radius: 12px; padding: 22px;
-    background: rgba(10, 24, 40, 0.5); backdrop-filter: blur(8px);
-    transition: all 0.3s; position: relative;
-  }
-  .project:hover {
-    transform: translateY(-3px); border-color: var(--accent, var(--cyan));
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), 0 0 30px var(--glow, rgba(79, 195, 255, 0.25));
-  }
-  .project .top {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
-  }
-  .project .icon {
-    width: 38px; height: 38px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--accent, var(--cyan));
-    box-shadow: 0 0 16px var(--glow, rgba(79, 195, 255, 0.25));
-  }
-  .project h3 { font-size: 17px; font-weight: 700; }
-  .project p { color: var(--text-dim); font-size: 14px; margin-bottom: 14px; }
-  .project .stack {
-    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
-  }
-  .project .stack span {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--text-faint); padding: 2px 7px; border-radius: 4px;
-    background: rgba(207, 231, 255, 0.05); border: 1px solid var(--line);
-  }
-  .project .links a {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    margin-right: 14px; color: var(--accent, var(--cyan));
-  }
-  .project .links a:hover { text-decoration: underline; }
-
-  .athletics {
-    border: 1px solid var(--line-warm); border-radius: 14px;
-    padding: 28px; position: relative; overflow: hidden;
-    background: linear-gradient(135deg, rgba(255, 169, 71, 0.06), rgba(10, 24, 40, 0.55));
-  }
-  .athletics::before {
-    content: ""; position: absolute; inset: 0;
-    background: radial-gradient(circle at 90% 10%, rgba(255, 169, 71, 0.18), transparent 60%);
-    pointer-events: none;
-  }
-  .athletics-top {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    gap: 24px; margin-bottom: 22px; flex-wrap: wrap; position: relative;
-  }
-  .athletics .head { flex: 1; min-width: 260px; }
-  .athletics .head h3 {
-    font-size: 22px; font-weight: 700; margin-bottom: 6px;
-  }
-  .athletics .head .school {
-    color: var(--text-dim); font-size: 14px; margin-bottom: 12px;
-  }
-  .athletics .verified {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(111, 255, 170, 0.1); color: var(--emerald);
-    padding: 6px 12px; border-radius: 999px; font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; border: 1px solid rgba(111, 255, 170, 0.35);
-    text-transform: uppercase; letter-spacing: 0.15em;
-  }
-  .pr-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 14px; position: relative; margin-bottom: 18px;
-  }
-  .pr {
-    background: rgba(5, 11, 20, 0.55); border: 1px solid var(--line);
-    border-radius: 10px; padding: 16px; transition: border-color 0.25s;
-  }
-  .pr:hover { border-color: var(--amber); }
-  .pr .ev { font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--amber); text-transform: uppercase; letter-spacing: 0.2em; }
-  .pr .mark { font-size: 30px; font-weight: 800; line-height: 1;
-    margin: 8px 0 4px; color: #fff; letter-spacing: -0.02em; }
-  .pr .where { font-size: 12px; color: var(--text-dim); }
-  .pr .where strong { color: var(--cyan-soft); }
-  .achievements {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px; position: relative;
-  }
-  .achievements img {
-    width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px;
-    border: 1px solid var(--line); transition: all 0.3s; cursor: pointer;
-  }
-  .achievements img:hover {
-    border-color: var(--amber); transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(255, 169, 71, 0.2);
-  }
-  .badge-3 {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: linear-gradient(135deg, var(--amber), var(--amber-warm));
-    color: var(--bg-0); padding: 10px 18px; border-radius: 999px;
-    font-weight: 800; font-size: 13px; text-transform: uppercase;
-    letter-spacing: 0.1em; box-shadow: 0 0 24px rgba(255, 169, 71, 0.4);
-  }
-  .badge-3 .num {
-    background: var(--bg-0); color: var(--amber);
-    width: 28px; height: 28px; border-radius: 50%;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 16px;
-  }
-
-  .about p {
-    font-size: 17px; line-height: 1.7; color: var(--text);
-    max-width: 720px; margin-bottom: 16px;
-  }
-  .about p strong { color: var(--cyan); font-weight: 600; }
-
-  .timeline { position: relative; padding-left: 28px; }
-  .timeline::before {
-    content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--cyan), transparent);
-  }
-  .tl-item { position: relative; margin-bottom: 32px; padding-left: 12px; }
-  .tl-item::before {
-    content: ""; position: absolute; left: -28px; top: 6px;
-    width: 18px; height: 18px; border-radius: 50%;
-    background: var(--bg-0); border: 2px solid var(--cyan);
-    box-shadow: 0 0 12px var(--cyan);
-  }
-  .tl-item .role { font-size: 17px; font-weight: 700; margin-bottom: 3px; }
-  .tl-item .org {
-    color: var(--cyan); font-size: 14px; margin-bottom: 4px;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .tl-item .date {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.15em;
-    margin-bottom: 8px;
-  }
-  .tl-item .desc { color: var(--text-dim); font-size: 14px; }
-
-  .contact-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-  }
-  .contact-card {
-    border: 1px solid var(--line); border-radius: 12px; padding: 20px;
-    text-align: center; transition: all 0.3s;
-    background: rgba(10, 24, 40, 0.5); backdrop-filter: blur(8px);
-  }
-  .contact-card:hover {
-    transform: translateY(-3px); border-color: var(--cyan);
-    box-shadow: var(--shadow-cyan);
-  }
-  .contact-card .icon { font-size: 28px; margin-bottom: 8px; }
-  .contact-card .lbl {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.2em;
-  }
-  .contact-card .val {
-    color: var(--text); font-weight: 600; font-size: 14px; margin-top: 4px;
-    word-break: break-all;
-  }
-
-  footer {
-    text-align: center; padding: 40px 32px 30px;
-    border-top: 1px solid var(--line); margin-top: 60px;
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    color: var(--text-faint); letter-spacing: 0.15em;
-  }
-  footer .ticker { color: var(--cyan); }
-
-  .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s ease-out; }
-  .reveal.in { opacity: 1; transform: translateY(0); }
-
-  @media (max-width: 880px) {
-    nav { padding: 12px 18px; }
-    nav ul { display: none; }
-    section { padding: 90px 18px 40px; }
-    .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 100px; gap: 30px; }
-    .hero-orb { order: -1; }
-    .hero-orb svg { width: 220px; }
-    .hud-corner { width: 18px; height: 18px; }
-  }
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=JetBrains+Mono:wght@400;500;700&family=VT323&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="js/kb.js" defer></script>
+<script src="js/ask.js" defer></script>
+<script src="js/wm.js" defer></script>
+<script src="js/shell.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/chat.js" defer></script>
+<script src="js/throw.js" defer></script>
+<script src="js/term.js" defer></script>
+<script src="js/live.js" defer></script>
 </head>
 <body>
+<a class="skip" href="#desk">Skip to the desktop</a>
 
-<div class="hud-corner tl"></div>
-<div class="hud-corner tr"></div>
-<div class="hud-corner bl"></div>
-<div class="hud-corner br"></div>
+<!-- One icon set for every theme. The shell clones these; each theme colours and frames them. -->
+<template id="ic-doc"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="a" d="M7 3h12l6 6v20H7z"/><path class="b" d="M19 3v6h6z"/><path class="c" d="M11 14h10M11 18h10M11 22h7"/></svg></template>
+<template id="ic-folder"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="b" d="M3 6h9l3 3h14v18H3z"/><path class="a" d="M3 12h26v15H3z"/></svg></template>
+<template id="ic-discus"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="c" d="M12.5 19.5L28.5 6M13.6 23.4l16.4-3.6"/><circle class="a" cx="9" cy="23" r="5.5"/><circle class="d" cx="9" cy="23" r="2"/></svg></template>
+<template id="ic-chat"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="a" d="M4 6h24v15H15l-7 6v-6H4z"/><path class="c" style="stroke-width:3.2" d="M10.5 13.5h0M16 13.5h0M21.5 13.5h0"/></svg></template>
+<template id="ic-medal"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="b" d="M9 3h6l3 8h-6zM23 3h-6l-3 8h6z"/><circle class="a" cx="16" cy="20" r="8"/><path class="d" d="M16 15.6L17.12 18.46L20.18 18.64L17.81 20.59L18.59 23.56L16 21.9L13.41 23.56L14.19 20.59L11.82 18.64L14.88 18.46Z"/></svg></template>
+<template id="ic-mail"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="a" d="M3 8h26v17H3z"/><path class="c" d="M3.5 8.5L16 18l12.5-9.5"/></svg></template>
+<template id="ic-term"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="b" d="M3 5h26v22H3z"/><path class="a" d="M3 5h26v4H3z"/><path class="c" d="M8 14l4 3-4 3M14.5 21h8"/></svg></template>
+<template id="ic-gear"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="a" d="M25.37 13.92L29.06 14.05L29.06 17.95L25.37 18.08L24.10 21.16L26.61 23.85L23.85 26.61L21.16 24.10L18.08 25.37L17.95 29.06L14.05 29.06L13.92 25.37L10.84 24.10L8.15 26.61L5.39 23.85L7.90 21.16L6.63 18.08L2.94 17.95L2.94 14.05L6.63 13.92L7.90 10.84L5.39 8.15L8.15 5.39L10.84 7.90L13.92 6.63L14.05 2.94L17.95 2.94L18.08 6.63L21.16 7.90L23.85 5.39L26.61 8.15L24.10 10.84Z"/><circle class="e" cx="16" cy="16" r="4.6"/></svg></template>
+<template id="ic-bin"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="a" d="M8 10h16l-1.6 18H9.6z"/><path class="b" d="M5.5 7h21v3h-21zM13 4h6v3h-6z"/><path class="c" d="M13 14v10M16 14v10M19 14v10"/></svg></template>
+<template id="ic-app"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="e" d="M3 6h26v21H3z"/><path class="a" d="M3 6h26v5H3z"/><path class="c" d="M8 16h9M8 20h13"/></svg></template>
+<template id="ic-cam"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="c" d="M4 11V4h7M21 4h7v7M28 21v7h-7M11 28H4v-7"/><circle class="a" cx="16" cy="16" r="6.5"/><circle class="e" cx="16" cy="16" r="2.6"/></svg></template>
+<template id="ic-stick"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="c" d="M16 11v9M16 14l-6.5 4.5M16 14l7-3.5M16 20l-5 8M16 20l5.5 8"/><circle class="a" cx="16" cy="7" r="3.8"/></svg></template>
+<template id="ic-bag"><svg class="ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="a" d="M6 11h20l-1.5 17h-17z"/><path class="c" d="M11.5 14V9a4.5 4.5 0 0 1 9 0v5"/></svg></template>
 
-<nav>
-  <div class="brand"><span class="dot"></span>DARE_OS · v2.0</div>
-  <ul>
-    <li><a href="#building">Building</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#athletics">Athletics</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<section class="hero" id="top">
-  <div class="hero-text reveal">
-    <div class="eyebrow">SYS :: AVAILABLE FOR WORK</div>
-    <h1>Akinwale Dare<br><span class="alt">— Josh —</span></h1>
-    <p class="positioning">
-      The only AI engineer in his bracket who throws <strong>199 feet</strong>.
-    </p>
-    <p class="tagline">
-      NCAA throws athlete <span class="pipe">·</span> AI engineer <span class="pipe">·</span> builder of brains
-    </p>
-    <p class="subline">
-      Discipline from the throwing circle, shipped to the terminal. CS @ Life University,
-      shipping production AI tools, MCP servers, and agent systems.
-    </p>
-
-    <!-- Animated stats counter -->
-    <div class="stats-row">
-      <div class="stat"><span class="num" data-target="7">0</span><span class="lbl">projects shipped</span></div>
-      <div class="stat"><span class="num" data-target="199" data-suffix="ft">0</span><span class="lbl">discus PR</span></div>
-      <div class="stat"><span class="num" data-target="5">0</span><span class="lbl">MCP tools live</span></div>
-      <div class="stat"><span class="num" data-target="3" data-prefix="#">0</span><span class="lbl">all-time GA discus</span></div>
-    </div>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#projects">View work →</a>
-      <a class="btn btn-ghost" href="https://github.com/Waleee7" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/akinwaledare" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
+<!-- Mac-style themes: the menu bar -->
+<header class="menubar" aria-label="Menu bar">
+  <button class="mb-logo" type="button" data-launch="readme" aria-label="About Josh Dare"><span data-icon="discus"></span></button>
+  <b class="mb-name">Josh Dare</b>
+  <nav class="mb-menu" aria-label="Menu">
+    <button type="button" data-launch="projects">Projects</button>
+    <button type="button" data-launch="circle">The Circle</button>
+    <button type="button" data-launch="ask">Ask</button>
+    <button type="button" data-launch="contact">Contact</button>
+  </nav>
+  <div class="mb-right">
+    <span class="live-pill" title="Products answering right now, probed from your browser"><span class="ldot" aria-hidden="true"></span><span><span data-count="sites">8</span>/8 live</span></span>
+    <button class="mb-search" type="button" data-launch="ask" aria-label="Search: ask the portfolio"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M12.6 12.6L17 17"/></svg></button>
+    <span class="clock" data-clock="mac"></span>
   </div>
-  <div class="hero-orb reveal">
-    <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-label="Rotating operator core">
+</header>
+
+<main class="desk" id="desk" tabindex="-1">
+  <h1 class="sr">Joshua Dare: software engineer and college thrower. A portfolio laid out as a desktop.</h1>
+
+  <div class="wall" aria-hidden="true">
+    <!-- Throws Night: the throwing sector, chalked on the desktop -->
+    <svg class="wall-sector" viewBox="0 0 1000 620" preserveAspectRatio="xMaxYMax slice">
+      <g fill="none" stroke="rgba(238,241,246,.11)" stroke-width="1.2">
+        <circle cx="120" cy="560" r="16" stroke="rgba(255,62,62,.7)" stroke-width="2"/>
+        <path d="M120 560 L980 30"/><path d="M120 560 L995 300"/>
+        <path d="M332 429 A 250 250 0 0 1 359 487"/><path d="M459 351 A 400 400 0 0 1 503 444"/>
+        <path d="M587 272 A 550 550 0 0 1 648 401"/><path d="M714 194 A 700 700 0 0 1 792 357"/><path d="M842 115 A 850 850 0 0 1 937 314"/>
+      </g>
+      <g fill="rgba(238,241,246,.2)" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2">
+        <text x="300" y="420">20M</text><text x="428" y="342">30M</text><text x="556" y="263">40M</text><text x="684" y="186">50M</text><text x="812" y="107">60M</text>
+      </g>
+    </svg>
+    <!-- Windows 11: a bloom of soft blue petals -->
+    <svg class="wall-bloom" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
       <defs>
-        <radialGradient id="g1" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#9DDCFF" stop-opacity="0.9"/>
-          <stop offset="60%" stop-color="#4FC3FF" stop-opacity="0.22"/>
-          <stop offset="100%" stop-color="#4FC3FF" stop-opacity="0"/>
-        </radialGradient>
-        <filter id="glw" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2"/>
-        </filter>
+        <radialGradient id="bl-bg" cx="50%" cy="62%" r="75%"><stop offset="0" stop-color="#2f7de1"/><stop offset=".45" stop-color="#0d3f9e"/><stop offset="1" stop-color="#061a4a"/></radialGradient>
+        <linearGradient id="bl-p" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3ff"/><stop offset=".55" stop-color="#4aa3ff"/><stop offset="1" stop-color="#1757d6"/></linearGradient>
+        <filter id="bl-soft"><feGaussianBlur stdDeviation="6"/></filter>
       </defs>
-      <circle cx="160" cy="160" r="120" fill="url(#g1)" opacity="0.7"/>
-      <g opacity="0.55">
-        <animateTransform attributeName="transform" type="rotate" from="0 160 160" to="360 160 160" dur="38s" repeatCount="indefinite"/>
-        <g transform="translate(160 160)">
-          <circle cx="0" cy="-110" r="1.1" fill="#4FC3FF"/>
-          <circle cx="34" cy="-104" r="1" fill="#4FC3FF"/>
-          <circle cx="-38" cy="-100" r="1.1" fill="#4FC3FF"/>
-          <circle cx="60" cy="-88" r="1" fill="#4FC3FF"/>
-          <circle cx="-65" cy="-82" r="1.1" fill="#4FC3FF"/>
-          <circle cx="86" cy="-68" r="1" fill="#4FC3FF"/>
-          <circle cx="-92" cy="-60" r="1" fill="#4FC3FF"/>
-          <circle cx="104" cy="-44" r="1.1" fill="#4FC3FF"/>
-          <circle cx="-106" cy="-36" r="1" fill="#4FC3FF"/>
-          <circle cx="112" cy="-16" r="1" fill="#4FC3FF"/>
-          <circle cx="-110" cy="-6" r="1.1" fill="#4FC3FF"/>
-          <circle cx="110" cy="14" r="1" fill="#4FC3FF"/>
-          <circle cx="-108" cy="24" r="1" fill="#4FC3FF"/>
-          <circle cx="102" cy="42" r="1.1" fill="#4FC3FF"/>
-          <circle cx="-98" cy="50" r="1" fill="#4FC3FF"/>
-          <circle cx="88" cy="66" r="1" fill="#4FC3FF"/>
-          <circle cx="-82" cy="72" r="1.1" fill="#4FC3FF"/>
-          <circle cx="68" cy="86" r="1" fill="#4FC3FF"/>
-          <circle cx="-58" cy="92" r="1" fill="#4FC3FF"/>
-          <circle cx="40" cy="100" r="1.1" fill="#4FC3FF"/>
-          <circle cx="-30" cy="104" r="1" fill="#4FC3FF"/>
-          <circle cx="14" cy="108" r="1" fill="#4FC3FF"/>
-        </g>
-      </g>
-      <g filter="url(#glw)">
-        <animateTransform attributeName="transform" type="rotate" from="0 160 160" to="-360 160 160" dur="52s" repeatCount="indefinite"/>
-        <g transform="translate(160 160)">
-          <line x1="0" y1="-98" x2="0" y2="12" stroke="#4FC3FF" stroke-width="0.6" opacity="0.35"/>
-          <line x1="0" y1="12" x2="76" y2="-56" stroke="#4FC3FF" stroke-width="0.6" opacity="0.35"/>
-          <line x1="0" y1="12" x2="-76" y2="-56" stroke="#4FC3FF" stroke-width="0.6" opacity="0.35"/>
-          <line x1="0" y1="12" x2="64" y2="76" stroke="#4FC3FF" stroke-width="0.6" opacity="0.35"/>
-          <line x1="0" y1="12" x2="-64" y2="76" stroke="#4FC3FF" stroke-width="0.6" opacity="0.35"/>
-          <circle cx="0" cy="-98" r="5" fill="hsl(200 80% 65%)"><animate attributeName="r" values="4;6;4" dur="3.2s" repeatCount="indefinite"/></circle>
-          <circle cx="76" cy="-56" r="5" fill="hsl(280 80% 65%)"><animate attributeName="r" values="4;6;4" dur="2.8s" repeatCount="indefinite"/></circle>
-          <circle cx="-76" cy="-56" r="5" fill="hsl(165 80% 65%)"><animate attributeName="r" values="4;6;4" dur="3.6s" repeatCount="indefinite"/></circle>
-          <circle cx="0" cy="12" r="6" fill="hsl(220 85% 70%)"><animate attributeName="r" values="5;7;5" dur="2.4s" repeatCount="indefinite"/></circle>
-          <circle cx="64" cy="76" r="5" fill="hsl(0 80% 65%)"><animate attributeName="r" values="4;6;4" dur="3.4s" repeatCount="indefinite"/></circle>
-          <circle cx="-64" cy="76" r="5" fill="hsl(250 80% 70%)"><animate attributeName="r" values="4;6;4" dur="3.8s" repeatCount="indefinite"/></circle>
-        </g>
-      </g>
-      <g transform="translate(160 160)" filter="url(#glw)">
-        <circle r="40" fill="none" stroke="#4FC3FF" stroke-width="1" opacity="0.6" stroke-dasharray="3 4">
-          <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="12s" repeatCount="indefinite"/>
-        </circle>
-        <circle r="26" fill="none" stroke="#9DDCFF" stroke-width="0.8" opacity="0.55" stroke-dasharray="2 3">
-          <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="8s" repeatCount="indefinite"/>
-        </circle>
-        <circle r="7" fill="#9DDCFF" opacity="0.8">
-          <animate attributeName="opacity" values="0.55;0.95;0.55" dur="2.6s" repeatCount="indefinite"/>
-        </circle>
+      <rect width="1600" height="1000" fill="url(#bl-bg)"/>
+      <g transform="translate(800 640)" filter="url(#bl-soft)" opacity=".9">
+        <path d="M0 0 C -120 -160 -90 -360 0 -470 C 90 -360 120 -160 0 0Z" fill="url(#bl-p)" transform="rotate(-62)" opacity=".55"/>
+        <path d="M0 0 C -120 -160 -90 -360 0 -470 C 90 -360 120 -160 0 0Z" fill="url(#bl-p)" transform="rotate(-31)" opacity=".7"/>
+        <path d="M0 0 C -130 -170 -100 -390 0 -520 C 100 -390 130 -170 0 0Z" fill="url(#bl-p)" opacity=".85"/>
+        <path d="M0 0 C -120 -160 -90 -360 0 -470 C 90 -360 120 -160 0 0Z" fill="url(#bl-p)" transform="rotate(31)" opacity=".7"/>
+        <path d="M0 0 C -120 -160 -90 -360 0 -470 C 90 -360 120 -160 0 0Z" fill="url(#bl-p)" transform="rotate(62)" opacity=".55"/>
       </g>
     </svg>
   </div>
-  <div class="scroll-cue">SCROLL<br>▼</div>
-</section>
 
-<section id="building">
-  <div class="reveal">
-    <div class="section-label">/ in-flight</div>
-    <h2 class="section-title">Currently <span class="accent">building</span></h2>
-  </div>
-  <div class="build-grid">
-    <div class="build-card reveal" style="--accent: var(--cyan);">
-      <div class="head">
-        <div class="name">🧠 Echo</div>
-        <div class="status status-shipped">Shipped · v0.2</div>
-      </div>
-      <p class="desc">Personal memory MCP server + 3D brain dashboard. Voice-to-save, hover-dwell gestures, chat-preview replay of how every memory was born. Wired into Claude as a live tool.</p>
-      <div class="stack"><span>TypeScript</span><span>Next.js 15</span><span>R3F</span><span>MCP</span><span>MediaPipe</span></div>
-      <div class="links">
-        <a href="https://echo-ruby-omega.vercel.app" target="_blank" rel="noopener">Live demo →</a>
-        <a href="https://github.com/Waleee7/echo" target="_blank" rel="noopener">Repo</a>
-      </div>
-    </div>
-    <div class="build-card reveal" style="--accent: var(--violet);">
-      <div class="head">
-        <div class="name">🤫 Sandy / chain-recall</div>
-        <div class="status status-shipped">Hackathon · May '26</div>
-      </div>
-      <p class="desc">Silent institutional memory for a members' club chain. Built at <strong>SF Anthropic Hackathon, May 2026</strong> against top-level competition.</p>
-      <div class="stack"><span>TypeScript</span><span>Claude API</span><span>Memory</span></div>
-      <div class="links">
-        <a href="https://github.com/Waleee7/chain-recall" target="_blank" rel="noopener">Repo →</a>
-      </div>
-    </div>
-    <div class="build-card reveal" style="--accent: var(--amber);">
-      <div class="head">
-        <div class="name">📈 Trading Signals Discord</div>
-        <div class="status status-build">In build</div>
-      </div>
-      <p class="desc">Paid options-signal community on Whop with a curated channel layout, structured signal posts, and member tiers. Mid-build: channel topology + Whop config next.</p>
-      <div class="stack"><span>Whop</span><span>Discord</span><span>Options</span></div>
-    </div>
-    <div class="build-card reveal" style="--accent: var(--magenta);">
-      <div class="head">
-        <div class="name">🎩 Maestro · Scout · Forge</div>
-        <div class="status status-stealth">Stealth build</div>
-      </div>
-      <p class="desc">Multi-agent ecosystem in TypeScript + Claude Agent SDK. Maestro conducts, Scout searches, Forge writes. Active build target.</p>
-      <div class="stack"><span>TypeScript</span><span>Claude SDK</span><span>Agents</span></div>
-    </div>
-  </div>
-</section>
+  <nav class="icons" aria-label="Desktop" data-launchers="desktop"></nav>
 
-<section id="projects">
-  <div class="reveal">
-    <div class="section-label">/ shipped</div>
-    <h2 class="section-title">Selected <span class="accent">projects</span></h2>
+  <!-- Phones: a home screen instead of a desktop -->
+  <div class="home">
+    <div class="sbar"><span class="clock" data-clock="phone"></span><span class="live-pill"><span class="ldot" aria-hidden="true"></span><span><span data-count="sites">8</span>/8 live</span></span></div>
+    <section class="widget" aria-label="Josh Dare at a glance">
+      <p class="w-kick">SOFTWARE ENGINEER · STUDENT-ATHLETE</p>
+      <p class="w-name">Josh Dare</p>
+      <p class="w-line">College thrower: discus and hammer, Life University.</p>
+      <p class="w-line">B.S. Computer Information Systems, March 2027.</p>
+      <p class="w-stats"><span><b data-count="sites">8</b> live</span><span><b>317</b> tests</span><span><b>2</b> clients</span></p>
+      <form class="w-ask" data-nudge>
+        <label class="sr" for="w-q">Ask Josh a question</label>
+        <input id="w-q" name="q" maxlength="240" autocomplete="off" placeholder="Ask me anything…" enterkeyhint="send">
+        <button type="submit">Ask</button>
+      </form>
+    </section>
+    <nav class="grid" aria-label="Home screen" data-launchers="grid"></nav>
+    <nav class="pdock" aria-label="Home dock" data-launchers="pdock"></nav>
   </div>
-  <div class="projects-grid">
-    <div class="project reveal" style="--accent: var(--cyan); --glow: rgba(79, 195, 255, 0.3);">
-      <div class="top"><div class="icon">🧠</div><h3>Echo</h3></div>
-      <p>Memory MCP server with a 3D brain. Hover-dwell gestures, voice-to-save, chat-preview overlay. Demo seeds each visitor with their own browser-local brain.</p>
-      <div class="stack"><span>Next.js</span><span>R3F</span><span>MCP</span></div>
-      <div class="links">
-        <a href="https://echo-ruby-omega.vercel.app" target="_blank">Demo →</a>
-        <a href="https://github.com/Waleee7/echo" target="_blank">Repo</a>
-      </div>
-    </div>
-    <div class="project reveal" style="--accent: var(--violet); --glow: rgba(180, 123, 255, 0.3);">
-      <div class="top"><div class="icon">🤫</div><h3>Sandy</h3></div>
-      <p>Silent institutional memory for a members' club chain. Built at SF Anthropic Hackathon 2026.</p>
-      <div class="stack"><span>TypeScript</span><span>Claude API</span></div>
-      <div class="links"><a href="https://github.com/Waleee7/chain-recall" target="_blank">Repo →</a></div>
-    </div>
-    <div class="project reveal" style="--accent: var(--amber); --glow: rgba(255, 208, 128, 0.3);">
-      <div class="top"><div class="icon">📚</div><h3>Options Trading Course</h3></div>
-      <p>Interactive Next.js course with modules, quizzes, challenges, and gamified XP/badges. Live and shipped.</p>
-      <div class="stack"><span>Next.js</span><span>Tailwind</span><span>Gamification</span></div>
-      <div class="links">
-        <a href="https://optionstradingcourse.vercel.app" target="_blank">Live →</a>
-        <a href="https://github.com/Waleee7/options-trading-course" target="_blank">Repo</a>
-      </div>
-    </div>
-    <div class="project reveal" style="--accent: var(--emerald); --glow: rgba(111, 255, 170, 0.3);">
-      <div class="top"><div class="icon">🥏</div><h3>ThrowingTracker</h3></div>
-      <p>Personal throws tracker — log discus and hammer sessions, surface PR progression, and visualize training load over a season.</p>
-      <div class="stack"><span>TypeScript</span><span>Web</span></div>
-      <div class="links"><a href="https://github.com/Waleee7/ThrowingTracker" target="_blank">Repo →</a></div>
-    </div>
-    <div class="project reveal" style="--accent: var(--rose); --glow: rgba(255, 110, 138, 0.3);">
-      <div class="top"><div class="icon">🌍</div><h3>GlobalLingo</h3></div>
-      <p>Web-based language learning experience focused on rapid practice loops.</p>
-      <div class="stack"><span>JavaScript</span><span>Web</span></div>
-      <div class="links"><a href="https://github.com/Waleee7/GlobalLingo" target="_blank">Repo →</a></div>
-    </div>
-    <div class="project reveal" style="--accent: var(--magenta); --glow: rgba(255, 122, 217, 0.3);">
-      <div class="top"><div class="icon">💻</div><h3>DOGG_OS</h3></div>
-      <p>The OS-style original portfolio that launched this site. This page is its v2 evolution.</p>
-      <div class="stack"><span>HTML</span><span>CSS</span><span>JS</span></div>
-      <div class="links"><a href="https://github.com/Waleee7/DARE-OS" target="_blank">Repo →</a></div>
-    </div>
-  </div>
-</section>
 
-<section id="athletics">
-  <div class="reveal">
-    <div class="section-label">/ on the track</div>
-    <h2 class="section-title">Throws stuff <span class="accent" style="color: var(--amber);">far</span></h2>
-  </div>
-  <div class="athletics reveal">
-    <div class="athletics-top">
-      <div class="head">
-        <h3>Discus · Hammer · Shot Put</h3>
-        <div class="school">Life University · Marietta, GA</div>
-        <div class="badge-3"><span class="num">3</span> All-time GA HS Boys Discus</div>
+  <!-- ============ README ============ -->
+  <section class="win" id="w-readme" data-app="readme" data-icon="doc" data-size="700x640" data-pos="left" role="dialog" aria-labelledby="t-readme">
+    <header class="wt"><h2 class="wt-t" id="t-readme">README</h2></header>
+    <div class="wb readme">
+      <div class="doc">
+        <p class="kick">SOFTWARE ENGINEER · STUDENT-ATHLETE · ATLANTA</p>
+        <p class="name">Joshua Dare</p>
+        <p class="motto">If it isn't measured, it didn't count.</p>
+        <ul class="ident">
+          <li><b>B.S. Computer Information Systems</b>, Life University, March 2027</li>
+          <li><b>Software Engineer</b>, Medland Engineers (remote), since Dec 2025</li>
+          <li><b>College thrower</b>: discus and hammer, conference champion in discus</li>
+          <li><b><span data-count="sites">8</span> products live</b>, 2 client builds and 317 passing tests</li>
+          <li><b>CompTIA A+</b> certified · President's List, Winter 2026</li>
+        </ul>
+        <div class="cta">
+          <button class="btn main" type="button" data-ask>Ask me</button>
+          <button class="btn" type="button" data-launch="projects">See projects</button>
+          <button class="btn" type="button" data-launch="circle">Take a throw</button>
+          <a class="btn" data-email href="#w-contact">Email me</a>
+        </div>
       </div>
-      <a class="verified" href="https://worldathletics.org/athletes/united-states/joshua-dare-14939088" target="_blank" rel="noopener">
-        ✓ World Athletics profile
-      </a>
+      <section class="score" data-scorecard aria-labelledby="score-h">
+        <header><h3 id="score-h">Scorecard</h3><span data-stamp>MEASURED 25·10·26</span></header>
+        <dl>
+          <div data-live="sites" title="Each product's live URL, probed from your browser when this page loaded"><dt><span class="dot" aria-hidden="true"></span>LIVE</dt><dd><b>8</b><span data-v> products answering</span></dd></div>
+          <div title="SECTOR 54 · ThrowingTracker 107 · DARE Desk 106 · RAGDOLL RIOT 50 headless checks, all run 25 Oct 2026"><dt>TESTED</dt><dd><b>317</b> passing · 4 projects</dd></div>
+          <div title="SECTOR's accuracy harness: a rendered 68.14 m throw, measured back from the pixels"><dt>PRECISE</dt><dd><b>4.4 cm</b> off on a 68 m throw</dd></div>
+          <div title="480 frames at 1440×900 and 2× pixel ratio, headless Chrome on an M3 Pro"><dt>FAST</dt><dd><b>8.3 ms</b> frames · 12 ragdolls</dd></div>
+          <div title="D'extensionz and CleanBins Tuscaloosa"><dt>CLIENTS</dt><dd><b>2</b> live · 1 on live Stripe</dd></div>
+          <div data-live="repos" title="Public repos on github.com/Waleee7, from the GitHub API"><dt><span class="dot" aria-hidden="true"></span>OPEN SOURCE</dt><dd><b>13</b> <span data-v>public repos</span></dd></div>
+          <div data-live="push" title="Latest public push, from the GitHub API"><dt><span class="dot" aria-hidden="true"></span>LAST PUSH</dt><dd><b>25 Oct</b> <span data-v>· ragdoll-riot</span></dd></div>
+        </dl>
+        <p class="how">Green dot: fetched live in your browser. Hover a row to see how it's counted.</p>
+      </section>
+      <p class="status"><span>Open to 2027 roles · taking client builds</span><span data-pagestats>Every mark on this page was measured</span></p>
     </div>
-    <div class="pr-grid">
-      <div class="pr">
-        <div class="ev">Discus · 1.75kg</div>
-        <div class="mark">48.06m</div>
-        <div class="where">at <strong>Hayward Field</strong>, Eugene OR · 2022</div>
-      </div>
-      <div class="pr">
-        <div class="ev">Discus · Open</div>
-        <div class="mark">45.30m</div>
-        <div class="where">George C. Griffin Track, Atlanta GA · 2023</div>
-      </div>
-      <div class="pr">
-        <div class="ev">Shot Put · 6kg</div>
-        <div class="mark">16.31m</div>
-        <div class="where">at <strong>Hayward Field</strong>, Eugene OR · 2022</div>
-      </div>
-      <div class="pr">
-        <div class="ev">Shot Put · Open</div>
-        <div class="mark">14.51m</div>
-        <div class="where">Birmingham AL · 2022</div>
-      </div>
-    </div>
-    <div class="achievements">
-      <img src="assets/Championship_results.jpeg" alt="Championship results" loading="lazy"/>
-      <img src="assets/outstanding_athlete.png.jpeg" alt="Outstanding athlete award" loading="lazy"/>
-      <img src="assets/pbc_champion.jpg.jpeg" alt="PBC Champion" loading="lazy"/>
-      <img src="assets/training_rain.jpeg" alt="Training in the rain" loading="lazy"/>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="about" class="about">
-  <div class="reveal">
-    <div class="section-label">/ system bio</div>
-    <h2 class="section-title">The <span class="accent">operator</span></h2>
-    <p>
-      Engineer who throws, thrower who engineers. I split my time between
-      <strong>training rings</strong> and <strong>terminal windows</strong> — the discipline that
-      ranks me top-3 all-time Georgia HS in the discus is the same discipline I bring to shipping
-      production AI tools.
-    </p>
-    <p>
-      Currently a CS undergrad at <strong>Life University</strong> (expected Fall 2026), front-end
-      dev at <strong>DailyIFA.com</strong>, and a regular at hackathons — including the SF Anthropic
-      hackathon that produced <strong>Sandy</strong> and the late-night session that produced
-      <strong>Echo</strong>.
-    </p>
-    <p>
-      I build with TypeScript, React, Next.js, R3F, MCP, and the Claude API. I like systems that
-      think, interfaces that feel alive, and tools that the user actually wants to keep open.
-    </p>
-  </div>
-</section>
+  <!-- ============ PROJECTS ============ -->
+  <section class="win" id="w-projects" data-app="projects" data-icon="folder" data-size="940x640" role="dialog" aria-labelledby="t-projects">
+    <header class="wt"><h2 class="wt-t" id="t-projects">Projects</h2></header>
+    <div class="wb explorer">
+      <div class="ex-bar"><span class="ex-label" aria-hidden="true">Address</span><span class="ex-addr" data-addr>C:\Josh\Projects</span><span class="ex-count">15 projects</span></div>
+      <div class="ex-main">
+        <nav class="ex-side" aria-label="Project groups">
+          <a href="#g-sports">Sports tech</a><a href="#g-clients">Client builds</a><a href="#g-games">Games &amp; media</a><a href="#g-tools">AI &amp; dev tools</a><a href="#g-learn">Learning apps</a>
+        </nav>
+        <div class="ex-list" tabindex="0" aria-label="Projects">
+          <section class="ex-group" id="g-sports" aria-labelledby="gh-sports">
+            <h3 id="gh-sports">Sports tech</h3>
+            <ul>
+              <li><button type="button" class="ex-item" data-project="sector"><span class="thumb"><img src="img/sector.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">SECTOR</span><span class="ex-tag">01 · Computer vision</span></button></li>
+              <li><button type="button" class="ex-item" data-project="trackside"><span class="thumb th-diagram" aria-hidden="true"><svg viewBox="0 0 160 100"><path d="M8 88H152" stroke="#9aa3b5" fill="none"/><path d="M22 74 Q 74 4 140 88" fill="none" stroke="#ff3e3e" stroke-width="3" stroke-dasharray="6 5"/><circle cx="22" cy="74" r="4" fill="#eef1f6"/></svg></span><span class="ex-name">trackside</span><span class="ex-tag">08 · Measurement, Python</span></button></li>
+              <li><button type="button" class="ex-item" data-project="throwingtracker"><span class="thumb"><img src="img/throwingtracker.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">ThrowingTracker</span><span class="ex-tag">Training log · 107 tests</span></button></li>
+            </ul>
+          </section>
+          <section class="ex-group" id="g-clients" aria-labelledby="gh-clients">
+            <h3 id="gh-clients">Client builds</h3>
+            <ul>
+              <li><button type="button" class="ex-item" data-project="dextensionz"><span class="thumb"><img src="img/dextensionz.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">D'extensionz</span><span class="ex-tag">02 · Live Stripe storefront</span></button></li>
+              <li><button type="button" class="ex-item" data-project="cleanbins"><span class="thumb"><img src="img/cleanbins.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">CleanBins Tuscaloosa</span><span class="ex-tag">Client site · live</span></button></li>
+            </ul>
+          </section>
+          <section class="ex-group" id="g-games" aria-labelledby="gh-games">
+            <h3 id="gh-games">Games &amp; media</h3>
+            <ul>
+              <li><button type="button" class="ex-item" data-project="ragdoll"><span class="thumb"><img src="img/ragdoll.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">RAGDOLL RIOT</span><span class="ex-tag">03 · Browser game</span></button></li>
+              <li><button type="button" class="ex-item" data-project="blox"><span class="thumb"><img src="img/blox.jpg" alt="" loading="lazy" width="1080" height="1920"></span><span class="ex-name">BLOX LIFE</span><span class="ex-tag">05 · 3D video engine</span></button></li>
+              <li><button type="button" class="ex-item" data-project="infinite"><span class="thumb th-race" aria-hidden="true"><svg viewBox="0 0 160 100"><rect width="160" height="100" fill="#05070b"/><path d="M10 90 C 70 90, 80 20, 152 16" fill="none" stroke="rgba(238,241,246,.3)" stroke-width="12"/><path d="M10 90 C 70 90, 80 20, 152 16" fill="none" stroke="#ff3e3e" stroke-width="2" stroke-dasharray="8 7"/></svg></span><span class="ex-name">Infinite Edition</span><span class="ex-tag">Racing game · in progress</span></button></li>
+            </ul>
+          </section>
+          <section class="ex-group" id="g-tools" aria-labelledby="gh-tools">
+            <h3 id="gh-tools">AI &amp; dev tools</h3>
+            <ul>
+              <li><button type="button" class="ex-item" data-project="darecheck"><span class="thumb"><img src="img/darecheck.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">DARE CHECK</span><span class="ex-tag">New · website safety grade</span></button></li>
+              <li><button type="button" class="ex-item" data-project="echo"><span class="thumb"><img src="img/echo.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">echo</span><span class="ex-tag">04 · MCP memory server</span></button></li>
+              <li><button type="button" class="ex-item" data-project="daredesk"><span class="thumb th-term" aria-hidden="true"><span>$ vitest run<br>✓ 106 passed</span></span><span class="ex-name">DARE Desk</span><span class="ex-tag">06 · Tested options engine</span></button></li>
+              <li><button type="button" class="ex-item" data-project="notch"><span class="thumb"><img src="img/notch.jpg" alt="" loading="lazy" width="1200" height="480"></span><span class="ex-name">Claude Notch</span><span class="ex-tag">07 · macOS dev tool</span></button></li>
+              <li><button type="button" class="ex-item" data-project="sandy"><span class="thumb"><img src="img/sandy.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">Sandy</span><span class="ex-tag">Hackathon · team build</span></button></li>
+            </ul>
+          </section>
+          <section class="ex-group" id="g-learn" aria-labelledby="gh-learn">
+            <h3 id="gh-learn">Learning apps</h3>
+            <ul>
+              <li><button type="button" class="ex-item" data-project="lingo"><span class="thumb"><img src="img/globallingo.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">GlobalLingo</span><span class="ex-tag">3D translation app</span></button></li>
+              <li><button type="button" class="ex-item" data-project="course"><span class="thumb"><img src="img/course.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">Options Course</span><span class="ex-tag">Gamified edtech · live</span></button></li>
+            </ul>
+          </section>
+        </div>
+      </div>
+      <p class="status"><span>15 projects · 8 on the main board</span><span>Open one for the full write-up</span></p>
+    </div>
+  </section>
 
-<section id="experience">
-  <div class="reveal">
-    <div class="section-label">/ timeline</div>
-    <h2 class="section-title">Track <span class="accent">record</span></h2>
-  </div>
-  <div class="timeline reveal">
-    <div class="tl-item">
-      <div class="role">SF Anthropic Hackathon — Built Sandy</div>
-      <div class="org">San Francisco · 2026</div>
-      <div class="date">May 2026</div>
-      <div class="desc">Shipped <em>Sandy</em> (chain-recall), a silent institutional-memory tool for a members' club chain. Competed against top-level builders. Came home and shipped Echo the next sprint.</div>
+  <!-- ============ THE CIRCLE ============ -->
+  <section class="win" id="w-circle" data-app="circle" data-icon="discus" data-size="1060x640" data-min="420x420" data-pos="center" role="dialog" aria-labelledby="t-circle">
+    <header class="wt"><h2 class="wt-t" id="t-circle">The Circle</h2></header>
+    <div class="wb circle-app" id="throw">
+      <div class="field">
+        <canvas aria-hidden="true"></canvas>
+        <button type="button" class="hold" aria-describedby="throw-help"><span class="sr">Hold to spin, release to throw</span></button>
+        <p class="f-prompt" aria-hidden="true"><b>HOLD</b> TO SPIN · LET GO IN THE <b>RED</b></p>
+      </div>
+      <div class="hud">
+        <p class="c-lede">Hold to spin. Let go while the implement crosses the red window. Release speed, angle and height decide the mark: the same three numbers SECTOR measures from a phone video.</p>
+        <div class="imp" role="group" aria-label="Implement">
+          <button type="button" data-impl="discus" aria-pressed="true">DISCUS <span>2 KG</span></button>
+          <button type="button" data-impl="hammer" aria-pressed="false">HAMMER <span>7.26 KG</span></button>
+        </div>
+        <div class="readout" aria-hidden="true">
+          <span class="r-label" data-r="label">MARK</span>
+          <div class="r-num"><b data-r="num">0.00</b><span data-r="unit">m</span></div>
+          <p class="r-line"><span class="verdict" data-r="verdict"></span><span data-r="rel">Hold to spin. Let go in the red.</span></p>
+        </div>
+        <dl class="r-stats">
+          <div><dt>YOUR BEST</dt><dd data-r="best">—</dd></div>
+          <div><dt>ATTEMPTS</dt><dd data-r="tries">0</dd></div>
+        </dl>
+        <p class="r-ref" data-r="ref">Alekna's 75.56 m world record needed a 25.33 m/s release at 36°.<cite>SECTOR'S RECONSTRUCTION</cite></p>
+        <a class="r-link" href="#w-p-sector" data-open="sector">THE REAL THING: SECTOR MEASURES THROWS FROM VIDEO →</a>
+      </div>
+      <p class="sr" id="throw-help">Press and hold, or hold Space, to spin. Let go while the implement passes the red window to land inside the sector.</p>
+      <p class="sr" aria-live="polite" data-r="live"></p>
     </div>
-    <div class="tl-item">
-      <div class="role">Front-End Developer</div>
-      <div class="org">DailyIFA.com</div>
-      <div class="date">Aug 2025 — Present</div>
-      <div class="desc">Production front-end work for a daily insights publication. Building UI, shipping features, owning what I ship.</div>
-    </div>
-    <div class="tl-item">
-      <div class="role">BS, Computer Science</div>
-      <div class="org">Life University · Marietta, GA</div>
-      <div class="date">Expected Fall 2026</div>
-      <div class="desc">Student-athlete: NCAA throws (discus, hammer, shot put). Member of the track &amp; field program.</div>
-    </div>
-    <div class="tl-item">
-      <div class="role">AI &amp; Automation — Independent</div>
-      <div class="org">Self-directed builds</div>
-      <div class="date">2023 — Present</div>
-      <div class="desc">Echo, Sandy, Options Trading Course, Trading Signals Discord, Maestro/Scout/Forge agents ecosystem. TypeScript-first, ship-first.</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="contact">
-  <div class="reveal">
-    <div class="section-label">/ open channel</div>
-    <h2 class="section-title">Get <span class="accent">in touch</span></h2>
-  </div>
-  <div class="contact-grid">
-    <a class="contact-card reveal" href="mailto:jdare354@gmail.com">
-      <div class="icon">✉️</div>
-      <div class="lbl">Email</div>
-      <div class="val">jdare354@gmail.com</div>
-    </a>
-    <a class="contact-card reveal" href="https://www.linkedin.com/in/akinwaledare" target="_blank" rel="noopener">
-      <div class="icon">💼</div>
-      <div class="lbl">LinkedIn</div>
-      <div class="val">akinwaledare</div>
-    </a>
-    <a class="contact-card reveal" href="https://github.com/Waleee7" target="_blank" rel="noopener">
-      <div class="icon">🐙</div>
-      <div class="lbl">GitHub</div>
-      <div class="val">@Waleee7</div>
-    </a>
-    <a class="contact-card reveal" href="https://worldathletics.org/athletes/united-states/joshua-dare-14939088" target="_blank" rel="noopener">
-      <div class="icon">🥏</div>
-      <div class="lbl">World Athletics</div>
-      <div class="val">Joshua DARE</div>
-    </a>
-  </div>
-</section>
+  <!-- ============ ASK JOSH ============ -->
+  <section class="win" id="w-ask" data-app="ask" data-icon="chat" data-size="460x660" data-min="320x380" data-pos="right" role="dialog" aria-labelledby="t-ask">
+    <header class="wt"><h2 class="wt-t" id="t-ask">Ask Josh</h2></header>
+    <div class="wb chat" id="chat">
+      <div class="chat-head"><span class="label">ASK THE PORTFOLIO</span><span class="stamp">NO GUESSING · RUNS IN YOUR BROWSER</span></div>
+      <div class="chat-thread" role="log" aria-live="polite" aria-label="Conversation" tabindex="0"></div>
+      <div class="chat-chips" role="group" aria-label="Suggested questions"></div>
+      <form class="chat-form" autocomplete="off">
+        <label class="sr" for="chat-in">Ask a question</label>
+        <input id="chat-in" name="q" maxlength="240" placeholder="Ask about a project, the stack, the throws…" enterkeyhint="send">
+        <button type="submit">Send</button>
+      </form>
+      <p class="chat-note">Answers come from Josh's fact file and are matched to your question inside this tab. Nothing you type leaves your browser. Type <kbd>/help</kbd> for commands.</p>
+    </div>
+  </section>
 
-<footer>
-  <div>DARE_OS <span class="ticker">::</span> v2.0 <span class="ticker">::</span> shipped from a hackathon high</div>
-  <div style="margin-top: 6px; opacity: 0.6;">© Akinwale Dare · built with HTML, CSS, JS &amp; the Jarvis mode</div>
+  <!-- ============ ATHLETE ============ -->
+  <section class="win" id="w-athlete" data-app="athlete" data-icon="medal" data-size="760x620" role="dialog" aria-labelledby="t-athlete">
+    <header class="wt"><h2 class="wt-t" id="t-athlete">Athlete</h2></header>
+    <div class="wb athlete">
+      <div class="ath-text">
+        <p class="kick">THE ATHLETE</p>
+        <h3 class="big">Discus. Hammer.</h3>
+        <p>I'm a college thrower at Life University. A throw only counts if it lands inside the sector and someone measures it. I hold my software to the same rule: it's live, it's tested, or it isn't on this page.</p>
+        <p>Training and shipping both reward the same thing: small, measured improvements, every day.</p>
+      </div>
+      <div class="onfile">
+        <table class="marks-t">
+          <caption>Marks on file</caption>
+          <thead><tr><th scope="col">Mark</th><th scope="col">Event</th><th scope="col">Implement</th><th scope="col">Where</th><th scope="col">Year</th></tr></thead>
+          <tbody>
+            <tr><td><b>51.92 m</b></td><td>Discus</td><td>1.5 kg</td><td>Marietta</td><td>2021</td></tr>
+            <tr><td><b>48.06 m</b></td><td>Discus</td><td>1.75 kg</td><td>Hayward Field, Eugene</td><td>2022</td></tr>
+            <tr><td><b>45.30 m</b></td><td>Discus</td><td>2 kg</td><td>Atlanta</td><td>2023</td></tr>
+            <tr><td><b>16.31 m</b></td><td>Shot put</td><td>6 kg</td><td>Hayward Field, Eugene</td><td>2022</td></tr>
+          </tbody>
+        </table>
+        <a class="wa" href="https://worldathletics.org/athletes/united-states/joshua-dare-14939088" target="_blank" rel="noopener">Every result: World Athletics ↗</a>
+      </div>
+      <ul class="facts">
+        <li><span>EVENTS</span><span>Discus · Hammer</span></li>
+        <li><span>SCHOOL</span><span>Life University, Marietta, GA</span></li>
+        <li><span>DEGREE</span><span>B.S. Computer Information Systems, March 2027</span></li>
+        <li><span>EXPERIENCE</span><span>Software Engineer, Medland Engineers (remote, Dec 2025–now) · Front-end developer, DailyIFA</span></li>
+        <li><span>HONORS</span><span>Conference champion, discus · President's List, Winter 2026</span></li>
+        <li><span>CERTIFIED</span><span>CompTIA A+ (Nov 2024)</span></li>
+        <li><span>HACKATHON</span><span>SF Anthropic Hackathon, May 2026</span></li>
+        <li><span>BASE</span><span>Atlanta, GA</span></li>
+        <li><span>STACK</span><span>TypeScript · React/Next.js · Swift · Python · Three.js</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="win" id="w-contact" data-app="contact" data-icon="mail" data-size="600x440" role="dialog" aria-labelledby="t-contact">
+    <header class="wt"><h2 class="wt-t" id="t-contact">Contact</h2></header>
+    <div class="wb contact">
+      <p class="kick">OPEN TO 2027 ROLES · TAKING CLIENT BUILDS</p>
+      <h3 class="big">Let's put something on the board.</h3>
+      <div class="row">
+        <a class="btn main" data-email href="#w-contact">Email me</a>
+        <button class="btn" type="button" data-ask>Ask the portfolio</button>
+        <a class="btn" href="https://github.com/Waleee7" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn" href="https://www.linkedin.com/in/akinwaledare" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+      <p class="note">Résumé on request: email me and I'll send the current one. Based in Atlanta, GA.</p>
+    </div>
+  </section>
+
+  <!-- ============ TERMINAL ============ -->
+  <section class="win" id="w-terminal" data-app="terminal" data-icon="term" data-size="720x460" data-min="340x240" role="dialog" aria-labelledby="t-terminal">
+    <header class="wt"><h2 class="wt-t" id="t-terminal">Terminal</h2></header>
+    <div class="wb term-app" id="term">
+      <div class="t-out" role="log" aria-live="polite" aria-label="Terminal output" tabindex="0"></div>
+      <form class="t-line" autocomplete="off">
+        <span class="t-ps" data-ps aria-hidden="true">C:\JOSH&gt;</span>
+        <label class="sr" for="t-in">Terminal command</label>
+        <input id="t-in" maxlength="240" spellcheck="false" autocapitalize="off" autocomplete="off" enterkeyhint="go">
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ SETTINGS ============ -->
+  <section class="win" id="w-settings" data-app="settings" data-icon="gear" data-size="680x600" data-pos="center" role="dialog" aria-labelledby="t-settings">
+    <header class="wt"><h2 class="wt-t" id="t-settings">Settings</h2></header>
+    <div class="wb settings">
+      <fieldset class="themes">
+        <legend>Theme</legend>
+        <label class="th-card" data-pick="retro98"><input type="radio" name="theme" value="retro98"><span class="mini" aria-hidden="true"><i class="m-win"><i class="m-tb"></i></i><i class="m-bar"></i></span><span class="th-name">Retro 98</span><span class="th-sub">Teal desktop, gray bevels, Start menu</span></label>
+        <label class="th-card" data-pick="throws"><input type="radio" name="theme" value="throws"><span class="mini" aria-hidden="true"><i class="m-win"><i class="m-tb"></i></i><i class="m-bar"></i></span><span class="th-name">Throws Night</span><span class="th-sub">Black and red, menu bar and dock</span></label>
+        <label class="th-card" data-pick="mac"><input type="radio" name="theme" value="mac"><span class="mini" aria-hidden="true"><i class="m-win"><i class="m-tb"></i></i><i class="m-bar"></i></span><span class="th-name">Mac Light</span><span class="th-sub">Glass windows, dock, system font</span></label>
+        <label class="th-card" data-pick="win11"><input type="radio" name="theme" value="win11"><span class="mini" aria-hidden="true"><i class="m-win"><i class="m-tb"></i></i><i class="m-bar"></i></span><span class="th-name">Windows 11</span><span class="th-sub">Centered taskbar, search, frosted windows</span></label>
+      </fieldset>
+      <section class="about-site" aria-labelledby="about-h">
+        <h3 id="about-h">About this desktop</h3>
+        <p>Plain HTML, CSS and JavaScript: no framework and no build step. Your theme stays in this browser. Add <code>?theme=mac</code> to a link to share a look.</p>
+        <p class="stats" data-pagestats>Every mark on this page was measured</p>
+      </section>
+    </div>
+  </section>
+
+  <!-- ============ RECYCLE BIN ============ -->
+  <section class="win" id="w-bin" data-app="bin" data-icon="bin" data-size="540x360" role="dialog" aria-labelledby="t-bin">
+    <header class="wt"><h2 class="wt-t" id="t-bin">Recycle Bin</h2></header>
+    <div class="wb bin">
+      <p>Old portfolios. Retired, not deleted: both still work.</p>
+      <ul class="files">
+        <li><a href="v1.html"><span class="f-ic" data-icon="doc"></span><span class="f-name">portfolio-v1.html</span><span class="f-sub">The first throws portfolio</span></a></li>
+        <li><a href="v2/"><span class="f-ic" data-icon="folder"></span><span class="f-name">portfolio-v2</span><span class="f-sub">The scrolling version with the chat drawer</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ PROJECT WINDOWS: the eight attempts ============ -->
+  <section class="win proj" id="w-p-sector" data-app="p-sector" data-icon="cam" data-size="980x660" role="dialog" aria-labelledby="t-p-sector">
+    <header class="wt"><h2 class="wt-t" id="t-p-sector">SECTOR</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">ATTEMPT 01 · FAIR <i>· SPORTS TECH · COMPUTER VISION</i></p>
+        <p class="case-name" aria-hidden="true">SECTOR</p>
+        <p class="what">Point a phone at the ring, click four points on the rim, and SECTOR recovers a throw's release speed, angle and height and its official distance. All of it runs in the browser. Nothing is uploaded.</p>
+        <div class="release"><h3>The release</h3><p>The demo footage and your own video go through the same <code>analyze()</code>. No demo-only code path can drift from the real one, which is the only reason the error numbers mean anything.</p></div>
+        <div class="marks"><div><b>4.4 cm</b><span>OFF ON A 68 M THROW</span></div><div><b>54</b><span>TESTS PASSING</span></div><div><b>3</b><span>RUNTIME DEPENDENCIES</span></div></div>
+        <p class="note">Validated against rendered footage with known answers. Surveyed real throws are next.</p>
+        <div class="go"><a class="btn main" href="https://sector-ochre.vercel.app" target="_blank" rel="noopener">Run the tracker ↗</a><a class="btn" href="https://github.com/Waleee7/sector" target="_blank" rel="noopener">Source ↗</a><span class="stack">NEXT.JS 16 · TYPESCRIPT · WEB WORKERS · RANSAC · RK4</span></div>
+      </div>
+      <figure class="shot" data-embed="sector" data-src="https://sector-ochre.vercel.app" data-title="SECTOR, running live">
+        <img src="img/sector.jpg" alt="SECTOR tracking a reconstruction of Mykolas Alekna's 75.56 m discus world record" loading="lazy" width="1200" height="750">
+        <button type="button" class="play-here" data-embed-btn>▶ RUN IT HERE</button>
+      </figure>
+    </div>
+  </section>
+
+  <section class="win proj" id="w-p-dextensionz" data-app="p-dextensionz" data-icon="bag" data-size="980x620" role="dialog" aria-labelledby="t-p-dextensionz">
+    <header class="wt"><h2 class="wt-t" id="t-p-dextensionz">D'extensionz</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">ATTEMPT 02 · FAIR <i>· CLIENT BUILD</i></p>
+        <p class="case-name" aria-hidden="true">D'extensionz</p>
+        <p class="what">A luxury hair brand's storefront, built for a paying client, taking real cards.</p>
+        <div class="release"><h3>The release</h3><p>Stripe Checkout in live mode, so card data never touches my code.</p></div>
+        <div class="marks"><div><b>LIVE</b><span>STRIPE LIVE MODE</span></div><div><b>1</b><span>PAYING CLIENT</span></div><div><b>0</b><span>CARD NUMBERS ON MY SERVER</span></div></div>
+        <div class="go"><a class="btn main" href="https://dextensionz-site.vercel.app" target="_blank" rel="noopener">See it live ↗</a><span class="stack">NEXT.JS 16 · REACT 19 · TAILWIND 4 · GSAP · STRIPE</span></div>
+      </div>
+      <figure class="shot"><img src="img/dextensionz.jpg" alt="The D'extensionz storefront homepage" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
+
+  <section class="win proj" id="w-p-ragdoll" data-app="p-ragdoll" data-icon="stick" data-size="980x660" role="dialog" aria-labelledby="t-p-ragdoll">
+    <header class="wt"><h2 class="wt-t" id="t-p-ragdoll">RAGDOLL RIOT</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">ATTEMPT 03 · FAIR <i>· BROWSER GAME</i></p>
+        <p class="case-name" aria-hidden="true">Ragdoll Riot</p>
+        <p class="what">A stickman ragdoll brawler with boss waves, shield guys, electric ropes and a super meter. Runs on any phone, and right here.</p>
+        <div class="release"><h3>The release</h3><p>One rig, two modes: fighters are posed with two-bone IK, and a hit hands the same eleven points to a Verlet integrator, so launching a body is just "stop posing it". No engine, no dependencies, and 50 headless checks gate every deploy.</p></div>
+        <div class="marks"><div><b>8.3 ms</b><span>AVG FRAME</span></div><div><b>12</b><span>RAGDOLLS ON SCREEN</span></div><div><b>50</b><span>BROWSER CHECKS</span></div></div>
+        <div class="go"><a class="btn main" href="https://ragdoll-riot.vercel.app" target="_blank" rel="noopener">Play full screen ↗</a><a class="btn" href="https://github.com/Waleee7/ragdoll-riot" target="_blank" rel="noopener">Source ↗</a><span class="stack">CANVAS · WEB AUDIO · PLAYWRIGHT</span></div>
+      </div>
+      <figure class="shot" data-embed="ragdoll" data-src="https://ragdoll-riot.vercel.app" data-title="RAGDOLL RIOT, playable">
+        <img src="img/ragdoll.jpg" alt="RAGDOLL RIOT mid-fight, with the live ropes and a tip" loading="lazy" width="1200" height="750">
+        <button type="button" class="play-here" data-embed-btn>▶ PLAY IT HERE</button>
+      </figure>
+    </div>
+  </section>
+
+  <section class="win proj" id="w-p-echo" data-app="p-echo" data-icon="app" data-size="980x620" role="dialog" aria-labelledby="t-p-echo">
+    <header class="wt"><h2 class="wt-t" id="t-p-echo">echo</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">ATTEMPT 04 · FAIR <i>· AI TOOLING · MCP SERVER</i></p>
+        <p class="case-name" aria-hidden="true">echo</p>
+        <p class="what">An open-source MCP server that gives AI assistants a memory that lasts between sessions, with a 3D brain dashboard of everything it remembers.</p>
+        <div class="release"><h3>The release</h3><p>Every memory is a plain JSON file with its provenance and a freshness score that halves every 30 days. No database to host or migrate, and you can read exactly what your AI knows in a text editor.</p></div>
+        <div class="marks"><div><b>5</b><span>MCP TOOLS</span></div><div><b>7</b><span>BRAIN REGIONS</span></div><div><b>MIT</b><span>OPEN SOURCE</span></div></div>
+        <div class="go"><a class="btn main" href="https://echo-ruby-omega.vercel.app" target="_blank" rel="noopener">See the demo ↗</a><a class="btn" href="https://github.com/Waleee7/echo" target="_blank" rel="noopener">Source ↗</a><span class="stack">TYPESCRIPT · NEXT.JS 15 · REACT THREE FIBER · MCP</span></div>
+      </div>
+      <figure class="shot"><img src="img/echo.jpg" alt="The echo dashboard: a 3D memory brain waiting for its first memory" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
+
+  <section class="win proj" id="w-p-blox" data-app="p-blox" data-icon="app" data-size="900x680" role="dialog" aria-labelledby="t-p-blox">
+    <header class="wt"><h2 class="wt-t" id="t-p-blox">BLOX LIFE</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">ATTEMPT 05 · FAIR <i>· MEDIA ENGINE</i></p>
+        <p class="case-name" aria-hidden="true">Blox Life</p>
+        <p class="what">A 3D engine that turns written skits into vertical videos: blocky characters, voices, beats and captions.</p>
+        <div class="release"><h3>The release</h3><p>Every frame is a pure function of time, so frames render in any order. Headless Chrome draws them on the laptop's GPU through Metal, about ten times faster than software rendering.</p></div>
+        <div class="marks"><div><b>50 s</b><span>FOR 10 VIDEOS</span></div><div><b>1080×1920</b><span>EVERY FRAME</span></div><div><b>−14</b><span>LUFS, PLATFORM LOUDNESS</span></div></div>
+        <div class="go"><span class="stack">THREE.JS · WEB AUDIO · PLAYWRIGHT · FFMPEG</span></div>
+      </div>
+      <figure class="shot phone">
+        <video src="media/blox-noob-pro.mp4" poster="img/blox.jpg" muted loop playsinline preload="none" aria-label="A BLOX LIFE skit: the noob wins the sword fight" width="1080" height="1920"></video>
+        <button type="button" class="sound" data-sound aria-pressed="false">SOUND OFF</button>
+      </figure>
+    </div>
+  </section>
+
+  <section class="win proj" id="w-p-daredesk" data-app="p-daredesk" data-icon="term" data-size="940x600" role="dialog" aria-labelledby="t-p-daredesk">
+    <header class="wt"><h2 class="wt-t" id="t-p-daredesk">DARE Desk</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">ATTEMPT 06 · FAIR <i>· TRADING ENGINE</i></p>
+        <p class="case-name" aria-hidden="true">DARE Desk</p>
+        <p class="what">A rules-based options decision engine with an active scanner. Paper-first: it trades on paper until the rules prove out, because wrong numbers cost money.</p>
+        <div class="release"><h3>The release</h3><p>Zod schemas at every edge and a Vitest suite for the rules. Credentials stay out of the repo.</p></div>
+        <div class="marks"><div><b>106</b><span>TESTS PASSING</span></div><div><b>12</b><span>TEST FILES</span></div><div><b>8.0 s</b><span>FULL SUITE</span></div></div>
+        <div class="go"><a class="btn main" href="https://github.com/Waleee7/dare-desk" target="_blank" rel="noopener">Read the source ↗</a><span class="stack">TYPESCRIPT · ZOD · VITEST</span></div>
+      </div>
+      <figure class="shot"><pre class="term"><span class="dim">$ npx vitest run</span>
+
+ <span class="ok">✓</span> 12 test files
+
+ Test Files  <span class="ok">12 passed</span> (12)
+      Tests  <span class="ok">106 passed</span> (106)
+   Duration  7.97s
+
+<span class="dim">run 25 Oct 2026</span></pre></figure>
+    </div>
+  </section>
+
+  <section class="win proj" id="w-p-notch" data-app="p-notch" data-icon="app" data-size="940x600" role="dialog" aria-labelledby="t-p-notch">
+    <header class="wt"><h2 class="wt-t" id="t-p-notch">Claude Notch</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">ATTEMPT 07 · FAIR <i>· macOS DEV TOOL</i></p>
+        <p class="case-name" aria-hidden="true">Claude Notch</p>
+        <p class="what">A Dynamic Island for AI coding sessions: a pixel Claude lives in the MacBook notch and drops down when a task finishes or needs you.</p>
+        <div class="release"><h3>The release</h3><p>Native Swift with SwiftUI on an AppKit panel, fed by the coding agent's own hooks. Everything stays on the Mac.</p></div>
+        <div class="marks"><div><b>MIT</b><span>OPEN SOURCE</span></div><div><b>0</b><span>SERVERS</span></div><div><b>3</b><span>SESSION STATES</span></div></div>
+        <div class="go"><a class="btn main" href="https://github.com/Waleee7/claude-notch" target="_blank" rel="noopener">Read the source ↗</a><span class="stack">SWIFT · SWIFTUI · APPKIT</span></div>
+      </div>
+      <figure class="shot"><img src="img/notch.jpg" alt="Claude Notch showing three coding sessions in the notch" loading="lazy" width="1200" height="480"></figure>
+    </div>
+  </section>
+
+  <section class="win proj" id="w-p-trackside" data-app="p-trackside" data-icon="cam" data-size="940x620" role="dialog" aria-labelledby="t-p-trackside">
+    <header class="wt"><h2 class="wt-t" id="t-p-trackside">trackside</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">ATTEMPT 08 · FAIR <i>· MEASUREMENT · PYTHON</i></p>
+        <p class="case-name" aria-hidden="true">trackside</p>
+        <p class="what">Track and field measurement from one ordinary camera: sprint finish timing, and the flight of a thrown implement.</p>
+        <div class="release"><h3>The release</h3><p>Every number comes back with its uncertainty. A mark without an error bar isn't a measurement.</p></div>
+        <div class="marks"><div><b>0.58 ms</b><span>WORST FINISH-TIMING ERROR</span></div><div><b>29×</b><span>FINER THAN THE FRAME RATE</span></div><div><b>±σ</b><span>ON EVERY NUMBER</span></div></div>
+        <p class="note">Measured on synthetic scenes with known answers, with sub-pixel motion, motion blur and sensor noise.</p>
+        <div class="go"><a class="btn main" href="https://github.com/Waleee7/trackside" target="_blank" rel="noopener">Read the source ↗</a><span class="stack">PYTHON · OPENCV · NUMPY · SCIPY</span></div>
+      </div>
+      <figure class="shot diagram">
+        <svg viewBox="0 0 560 340" role="img" aria-label="Diagram: an implement's flight path with release speed, angle and height marked">
+          <g fill="none" stroke="rgba(238,241,246,.25)"><path d="M20 300 H540"/></g>
+          <path d="M70 250 Q 260 20 500 300" fill="none" stroke="#ff3e3e" stroke-width="3" stroke-dasharray="7 6"/>
+          <circle cx="70" cy="250" r="7" fill="#eef1f6"/>
+          <path d="M70 250 L150 170" stroke="#eef1f6" stroke-width="2"/><path d="M70 250 H160" stroke="rgba(238,241,246,.4)"/>
+          <path d="M70 300 V250" stroke="rgba(238,241,246,.4)" stroke-dasharray="3 4"/>
+          <g fill="#eef1f6" font-family="JetBrains Mono, monospace" font-size="13">
+            <text x="160" y="160">release speed ± σ</text><text x="168" y="238">angle ± σ</text><text x="80" y="290">height ± σ</text>
+            <text x="350" y="330">predicted distance ± σ</text>
+          </g>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ PROJECT WINDOWS: also shipped ============ -->
+  <section class="win proj small" id="w-p-darecheck" data-app="p-darecheck" data-icon="app" data-size="900x600" role="dialog" aria-labelledby="t-p-darecheck">
+    <header class="wt"><h2 class="wt-t" id="t-p-darecheck">DARE CHECK</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">NEW · BUILT OCT 2026 <i>· LAUNCHING SOON</i></p>
+        <p class="case-name" aria-hidden="true">DARE CHECK</p>
+        <p class="what">A free 10-second safety grade for small-business websites. Fourteen checks (HTTPS, security headers, cookies and the records that stop email spoofing), each explained in plain English, with copy-paste fixes written for the host the site actually runs on.</p>
+        <div class="release"><h3>The release</h3><p>It fetches whatever address a stranger types, so it's built like a security product first. Every resolved address is checked again at connect time, so it can't be aimed at a private network, and a server that drips one byte at a time can't hold a scan open.</p></div>
+        <div class="marks"><div><b>14</b><span>CHECKS, GRADED A–F</span></div><div><b>62</b><span>TESTS + BROWSER CHECKS</span></div><div><b>0</b><span>DEPENDENCIES</span></div></div>
+        <p class="note">Real scans: github.com A (99), wordpress.org B (88), neverssl.com F (19).</p>
+        <div class="go"><span class="stack">NODE · VANILLA JS · VERCEL FUNCTIONS</span></div>
+      </div>
+      <figure class="shot"><img src="img/darecheck.jpg" alt="DARE CHECK home page asking: Is your website safe?" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
+  <section class="win proj small" id="w-p-cleanbins" data-app="p-cleanbins" data-icon="app" data-size="860x540" role="dialog" aria-labelledby="t-p-cleanbins">
+    <header class="wt"><h2 class="wt-t" id="t-p-cleanbins">CleanBins Tuscaloosa</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">CLIENT BUILD · LIVE</p>
+        <p class="case-name" aria-hidden="true">CleanBins</p>
+        <p class="what">Site for a trash-bin cleaning service, approved by the owner and live.</p>
+        <div class="go"><a class="btn main" href="https://cleanbins-tuscaloosa.vercel.app" target="_blank" rel="noopener">Visit ↗</a></div>
+      </div>
+      <figure class="shot"><img src="img/cleanbins.jpg" alt="CleanBins Tuscaloosa homepage" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
+
+  <section class="win proj small" id="w-p-throwingtracker" data-app="p-throwingtracker" data-icon="app" data-size="860x540" role="dialog" aria-labelledby="t-p-throwingtracker">
+    <header class="wt"><h2 class="wt-t" id="t-p-throwingtracker">ThrowingTracker</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">SPORTS TECH · LIVE</p>
+        <p class="case-name" aria-hidden="true">ThrowingTracker</p>
+        <p class="what">Offline-first training log for throwers: marks, Meet Day mode, landing-zone scatter and frame-by-frame video review. 107 tests.</p>
+        <div class="go"><a class="btn main" href="https://throwing-tracker.vercel.app" target="_blank" rel="noopener">Visit ↗</a><a class="btn" href="https://github.com/Waleee7/ThrowingTracker" target="_blank" rel="noopener">Source ↗</a></div>
+      </div>
+      <figure class="shot"><img src="img/throwingtracker.jpg" alt="ThrowingTracker start screen" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
+
+  <section class="win proj small" id="w-p-sandy" data-app="p-sandy" data-icon="app" data-size="860x540" role="dialog" aria-labelledby="t-p-sandy">
+    <header class="wt"><h2 class="wt-t" id="t-p-sandy">Sandy</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">HACKATHON · TEAM BUILD</p>
+        <p class="case-name" aria-hidden="true">Sandy</p>
+        <p class="what">SF Anthropic Hackathon, May 2026, with James Olusoga. Claude reads a guest's history across a hotel chain and briefs staff the moment they walk in.</p>
+        <div class="go"><a class="btn main" href="https://chain-recall.vercel.app" target="_blank" rel="noopener">Demo ↗</a><a class="btn" href="https://github.com/Waleee7/chain-recall" target="_blank" rel="noopener">Source ↗</a></div>
+      </div>
+      <figure class="shot"><img src="img/sandy.jpg" alt="Sandy's title card: I am Sandy, the institutional memory of Rosewood" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
+
+  <section class="win proj small" id="w-p-lingo" data-app="p-lingo" data-icon="app" data-size="860x540" role="dialog" aria-labelledby="t-p-lingo">
+    <header class="wt"><h2 class="wt-t" id="t-p-lingo">GlobalLingo</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">3D · TRANSLATION</p>
+        <p class="case-name" aria-hidden="true">GlobalLingo</p>
+        <p class="what">Translation app with an interactive Three.js globe: click a country to pick its language. Streaks, rewards and haptics on mobile.</p>
+        <div class="go"><a class="btn main" href="https://global-lingo.vercel.app" target="_blank" rel="noopener">Visit ↗</a><a class="btn" href="https://github.com/Waleee7/GlobalLingo" target="_blank" rel="noopener">Source ↗</a></div>
+      </div>
+      <figure class="shot"><img src="img/globallingo.jpg" alt="GlobalLingo start screen" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
+
+  <section class="win proj small" id="w-p-course" data-app="p-course" data-icon="app" data-size="860x540" role="dialog" aria-labelledby="t-p-course">
+    <header class="wt"><h2 class="wt-t" id="t-p-course">Options Course</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">EDTECH · LIVE</p>
+        <p class="case-name" aria-hidden="true">Options Course</p>
+        <p class="what">Gamified options trading course: 13 modules, quizzes, real-chart challenges, XP and badges. No sign-up.</p>
+        <div class="go"><a class="btn main" href="https://optionstradingcourse.vercel.app" target="_blank" rel="noopener">Visit ↗</a><a class="btn" href="https://github.com/Waleee7/options-trading-course" target="_blank" rel="noopener">Source ↗</a></div>
+      </div>
+      <figure class="shot"><img src="img/course.jpg" alt="The options course's module map" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
+
+  <section class="win proj small" id="w-p-infinite" data-app="p-infinite" data-icon="app" data-size="820x500" role="dialog" aria-labelledby="t-p-infinite">
+    <header class="wt"><h2 class="wt-t" id="t-p-infinite">Infinite Edition</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">GAME · IN PROGRESS</p>
+        <p class="case-name" aria-hidden="true">Infinite Edition</p>
+        <p class="what">An arcade racing game with drift physics, built in Three.js. Private while the assets get cleared.</p>
+      </div>
+      <figure class="shot"><svg class="ph" viewBox="0 0 320 180" aria-hidden="true"><rect width="320" height="180" fill="#05070b"/><path d="M20 160 C 120 160, 140 40, 300 30" fill="none" stroke="rgba(238,241,246,.3)" stroke-width="18"/><path d="M20 160 C 120 160, 140 40, 300 30" fill="none" stroke="#ff3e3e" stroke-width="2" stroke-dasharray="10 9"/><path d="M60 150 C 130 150, 150 70, 230 52" fill="none" stroke="rgba(255,62,62,.35)" stroke-width="4"/></svg></figure>
+    </div>
+  </section>
+</main>
+
+<!-- Windows-style themes: the taskbar -->
+<footer class="taskbar" aria-label="Taskbar">
+  <div class="tb-mid">
+    <button class="start-btn" type="button" aria-expanded="false" aria-controls="startmenu"><span data-icon="discus"></span><b>Start</b></button>
+    <form class="tb-search" role="search" data-search>
+      <label class="sr" for="tb-q">Search: ask the portfolio</label>
+      <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M12.6 12.6L17 17"/></svg>
+      <input id="tb-q" name="q" placeholder="Search" maxlength="240" autocomplete="off" enterkeyhint="search">
+    </form>
+    <div class="tasks" role="group" aria-label="Open windows"></div>
+  </div>
+  <div class="tray">
+    <span class="live-pill" title="Products answering right now, probed from your browser"><span class="ldot" aria-hidden="true"></span><span><span data-count="sites">8</span>/8 live</span></span>
+    <span class="clock" data-clock="win"></span>
+  </div>
 </footer>
 
-<script>
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    }
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach((el, i) => {
-    el.style.transitionDelay = (i % 6) * 40 + 'ms';
-    io.observe(el);
-  });
+<div class="startmenu" id="startmenu" hidden>
+  <div class="sm-side" aria-hidden="true"><span><b>Josh</b>Dare<i>98</i></span></div>
+  <div class="sm-main">
+    <form class="sm-search" role="search" data-search>
+      <label class="sr" for="sm-q">Search: ask the portfolio</label>
+      <input id="sm-q" name="q" placeholder="Ask anything about Josh's work" maxlength="240" autocomplete="off" enterkeyhint="search">
+    </form>
+    <p class="sm-h">Pinned</p>
+    <ul class="sm-apps" data-launchers="start"></ul>
+    <p class="sm-h sm-rec-h">Recommended</p>
+    <ul class="sm-rec">
+      <li><button type="button" data-project="sector"><span data-icon="cam"></span><span><b>SECTOR</b><small>Throw analytics from one camera</small></span></button></li>
+      <li><button type="button" data-project="ragdoll"><span data-icon="stick"></span><span><b>RAGDOLL RIOT</b><small>Playable right here</small></span></button></li>
+      <li><button type="button" data-project="dextensionz"><span data-icon="bag"></span><span><b>D'extensionz</b><small>Client storefront on live Stripe</small></span></button></li>
+    </ul>
+    <div class="sm-foot"><span class="sm-av" aria-hidden="true">JD</span><span>Joshua Dare</span></div>
+  </div>
+</div>
 
-  // Animated stats counter — count up when visible
-  const statIO = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (!e.isIntersecting) continue;
-      const el = e.target;
-      const target = parseInt(el.dataset.target, 10);
-      const prefix = el.dataset.prefix || '';
-      const suffix = el.dataset.suffix || '';
-      const duration = 1200;
-      const start = performance.now();
-      function tick(now) {
-        const t = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - t, 3);
-        el.textContent = prefix + Math.round(target * eased) + suffix;
-        if (t < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      statIO.unobserve(el);
-    }
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.stat .num').forEach(el => statIO.observe(el));
-</script>
+<!-- The chatbot says hello: a tray balloon in the Windows themes, a notification in the Mac ones -->
+<aside class="nudge" id="nudge" aria-labelledby="nudge-t" hidden>
+  <button class="nudge-x" type="button" aria-label="Dismiss the Ask Josh greeting">×</button>
+  <p class="nudge-t" id="nudge-t"><span data-icon="chat"></span><b>Ask Josh is online</b></p>
+  <p class="nudge-b">Ask about my projects, my throws or hiring. Every answer shows its source.</p>
+  <form class="nudge-f" data-nudge>
+    <label class="sr" for="nudge-q">Ask Josh a question</label>
+    <input id="nudge-q" name="q" maxlength="240" autocomplete="off" placeholder="What's your best project?" enterkeyhint="send">
+    <button type="submit">Ask</button>
+  </form>
+  <div class="nudge-c">
+    <button type="button" data-q="What's your best project?">Best project</button>
+    <button type="button" data-q="Why should we hire you?">Why hire Josh</button>
+    <button type="button" data-q="What are your marks?">Throws</button>
+  </div>
+</aside>
 
+<!-- Mac-style themes: the dock -->
+<nav class="dock" aria-label="Dock">
+  <div class="dock-apps" data-launchers="dock"></div>
+  <div class="dock-min" role="group" aria-label="Minimized windows"></div>
+</nav>
 </body>
 </html>
