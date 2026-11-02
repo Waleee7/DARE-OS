@@ -859,3 +859,10 @@ html:not([data-theme="retro98"]) .status { justify-content: space-between; flex-
 .dd-bar a { font-weight: 700; color: var(--link); white-space: nowrap; min-height: 32px; display: inline-flex; align-items: center; }
 [data-theme="retro98"] .dd-app { padding: 4px; }
 @media (max-width: 760px) { .dd-frame { min-height: 70vh; } }
+
+/* repo status for builds without a public repo */
+.ship { display: inline-flex; align-items: center; min-height: 24px; padding: 2px 8px; margin-right: 8px; font: 700 11px/1.2 var(--font-mono); letter-spacing: .06em; border: 1px solid currentColor; border-radius: 3px; white-space: nowrap; }
+.ship-soon { color: #b45309; background: rgba(245, 158, 11, .10); }
+.ship-wip { color: #6d28d9; background: rgba(139, 92, 246, .10); }
+.ship-client { color: #0e7490; background: rgba(14, 116, 144, .10); }
+[data-theme="throws"] .ship-soon { color: #fbbf24; } [data-theme="throws"] .ship-wip { color: #c4b5fd; } [data-theme="throws"] .ship-client { color: #67e8f9; }
