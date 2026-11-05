@@ -49,6 +49,9 @@
       { id: 'echo', name: 'ECHO', alias: ['echo', 'mcp', 'mcp server', 'memory server', 'model context protocol', '3d brain', 'brain dashboard'] },
       { id: 'blox', name: 'BLOX LIFE', alias: ['blox', 'blox life', 'roblox', 'video engine', 'videos', 'tiktok', 'skit', 'rendering', 'gpu'] },
       { id: 'daredesk', name: 'DARE DESK', alias: ['dare desk', 'daredesk', 'options', 'trading engine', 'trading', 'scanner', 'stocks', 'paper trading'] },
+      { id: 'peachdash', name: 'PEACH DASH', alias: ['peach dash', 'peachdash', 'endless runner', 'atlanta game', 'runner game'] },
+      { id: 'tells', name: 'TELLS', alias: ['tells scam', 'tells app', 'tells tool', 'scam checker', 'scam detector', 'phishing', 'fake job offer'] },
+      { id: 'hushprint', name: 'HUSHPRINT', alias: ['hushprint', 'exif', 'metadata', 'photo privacy', 'gps in photos'] },
       { id: 'notch', name: 'CLAUDE NOTCH', alias: ['claude notch', 'notch', 'dynamic island', 'macos', 'mac app', 'swift', 'swiftui', 'appkit'] },
       { id: 'trackside', name: 'TRACKSIDE', alias: ['trackside', 'sprint', 'photo finish', 'finish timing', 'error bar', 'uncertainty'] },
       { id: 'darecheck', name: 'DARE CHECK', alias: ['dare check', 'darecheck', 'website safety', 'safety grade', 'is my website safe', 'security headers', 'spf', 'dmarc', 'ssrf', 'small business websites'] },
@@ -152,6 +155,21 @@
         text: `**106 tests** across 12 files, passing in 8.0 s with Vitest (run 25 Oct 2026). Zod schemas validate every input at the edges, and credentials stay out of the repo.` },
       { id: 'daredesk.stack', topic: 'daredesk', intent: 'stack', src: readme('dare-desk'),
         text: `TypeScript with Zod for validation and Vitest for the rules.` },
+
+      /* ---------- PEACH DASH ---------- */
+      { id: 'peachdash.what', topic: 'peachdash', intent: 'what', src: readme('peach-dash'),
+        text: `**PEACH DASH** is a 3D endless runner through Atlanta that runs in the browser, with power-ups, six runners and trains you can run on. The game logic is tested on its own, including an autopilot that has to survive 6,000 m.`,
+        acts: [{ label: 'OPEN THE CASE STUDY', do: 'tab:peachdash' }] },
+
+      /* ---------- TELLS ---------- */
+      { id: 'tells.what', topic: 'tells', intent: 'what', src: readme('TELLS'),
+        text: `**TELLS** checks a suspicious message in the browser, marks the exact words that look like a scam and says what to do next. Nothing is uploaded. On 45 held-out test messages it scored 95.2% precision and 83.3% recall at "be careful or worse". The messages are hand-written, and the misses are published.`,
+        acts: [{ label: 'OPEN THE CASE STUDY', do: 'tab:tells' }] },
+
+      /* ---------- HUSHPRINT ---------- */
+      { id: 'hushprint.what', topic: 'hushprint', intent: 'what', src: readme('hushprint'),
+        text: `**Hushprint** shows what a photo, PDF, Office file or video leaks, such as GPS location and author names, then strips it in the browser and re-checks the clean copy. Files never leave the device.`,
+        acts: [{ label: 'OPEN THE CASE STUDY', do: 'tab:hushprint' }] },
 
       /* ---------- CLAUDE NOTCH ---------- */
       { id: 'notch.what', topic: 'notch', intent: 'what', src: readme('claude-notch'),

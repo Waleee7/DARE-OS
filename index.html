@@ -199,6 +199,7 @@
           <section class="ex-group" id="g-games" aria-labelledby="gh-games">
             <h3 id="gh-games">Games &amp; media</h3>
             <ul>
+              <li><button type="button" class="ex-item" data-project="peachdash"><span class="thumb"><img src="img/peachdash.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">PEACH DASH</span><span class="ex-tag">New · 3D Atlanta runner</span></button></li>
               <li><button type="button" class="ex-item" data-project="ragdoll"><span class="thumb"><img src="img/ragdoll.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">RAGDOLL RIOT</span><span class="ex-tag">03 · Browser game</span></button></li>
               <li><button type="button" class="ex-item" data-project="blox"><span class="thumb"><img src="img/blox.jpg" alt="" loading="lazy" width="1080" height="1920"></span><span class="ex-name">BLOX LIFE</span><span class="ex-tag">Shipping soon · 3D video engine</span></button></li>
               <li><button type="button" class="ex-item" data-project="infinite"><span class="thumb th-race" aria-hidden="true"><svg viewBox="0 0 160 100"><rect width="160" height="100" fill="#05070b"/><path d="M10 90 C 70 90, 80 20, 152 16" fill="none" stroke="rgba(238,241,246,.3)" stroke-width="12"/><path d="M10 90 C 70 90, 80 20, 152 16" fill="none" stroke="#ff3e3e" stroke-width="2" stroke-dasharray="8 7"/></svg></span><span class="ex-name">Infinite Edition</span><span class="ex-tag">Racing game · in progress</span></button></li>
@@ -207,6 +208,8 @@
           <section class="ex-group" id="g-tools" aria-labelledby="gh-tools">
             <h3 id="gh-tools">AI &amp; dev tools</h3>
             <ul>
+              <li><button type="button" class="ex-item" data-project="tells"><span class="thumb"><img src="img/tells.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">TELLS</span><span class="ex-tag">New · scam checker</span></button></li>
+              <li><button type="button" class="ex-item" data-project="hushprint"><span class="thumb"><img src="img/hushprint.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">Hushprint</span><span class="ex-tag">New · file privacy tool</span></button></li>
               <li><button type="button" class="ex-item" data-project="darecheck"><span class="thumb"><img src="img/darecheck.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">DARE CHECK</span><span class="ex-tag">About to ship · website safety grade</span></button></li>
               <li><button type="button" class="ex-item" data-project="echo"><span class="thumb"><img src="img/echo.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">echo</span><span class="ex-tag">04 · MCP memory server</span></button></li>
               <li><button type="button" class="ex-item" data-project="daredesk"><span class="thumb th-term" aria-hidden="true"><span>$ vitest run<br>✓ 106 passed</span></span><span class="ex-name">DARE Desk</span><span class="ex-tag">06 · Tested options engine</span></button></li>
@@ -461,6 +464,48 @@
     </div>
   </section>
 
+  <section class="win proj" id="w-p-peachdash" data-app="p-peachdash" data-icon="stick" data-size="980x660" role="dialog" aria-labelledby="t-p-peachdash">
+    <header class="wt"><h2 class="wt-t" id="t-p-peachdash">PEACH DASH</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">NEW · FAIR <i>· BROWSER GAME</i></p>
+        <p class="case-name" aria-hidden="true">PEACH DASH</p>
+        <p class="what">A 3D endless runner through Atlanta that runs in the browser: dodge, jump and slide past the Capitol dome and down the BeltLine, with a goose flock on your heels.</p>
+        <div class="release"><h3>The release</h3><p>Game logic is plain TypeScript with no renderer, so it runs under test. An autopilot has to survive 6,000 m on several seeds to prove the obstacle patterns are fair. Characters, landmarks and sound are all generated in code.</p></div>
+        <div class="marks"><div><b>40</b><span>TESTS</span></div><div><b>7</b><span>PICKUPS</span></div><div><b>6</b><span>RUNNERS</span></div></div>
+        <div class="go"><a class="btn main" href="https://peach-dash.vercel.app" target="_blank" rel="noopener">Play it ↗</a><a class="btn" href="https://github.com/Waleee7/peach-dash" target="_blank" rel="noopener">Source ↗</a><span class="stack">TYPESCRIPT · THREE.JS · WEB AUDIO</span></div>
+      </div>
+      <figure class="shot"><img src="img/peachdash.jpg" alt="PEACH DASH running along the BeltLine at dusk" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
+  <section class="win proj" id="w-p-tells" data-app="p-tells" data-icon="app" data-size="980x660" role="dialog" aria-labelledby="t-p-tells">
+    <header class="wt"><h2 class="wt-t" id="t-p-tells">TELLS</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">NEW · FAIR <i>· SECURITY TOOL</i></p>
+        <p class="case-name" aria-hidden="true">TELLS</p>
+        <p class="what">Paste a suspicious text, email or job offer and TELLS shows exactly why it looks like a scam, marks the words that give it away, and says what to do next. Nothing leaves the browser.</p>
+        <div class="release"><h3>The release</h3><p>A rule engine, not a model, so every flag can point to its evidence. A content security policy blocks all network traffic, and the regexes are fuzzed for slowdowns. Accuracy comes from 45 hand-written messages kept out until the rules were frozen, and the misses are published.</p></div>
+        <div class="marks"><div><b>228</b><span>TESTS</span></div><div><b>95.2%</b><span>PRECISION, HOLDOUT</span></div><div><b>83.3%</b><span>RECALL, HOLDOUT</span></div></div>
+        <div class="go"><a class="btn main" href="https://github.com/Waleee7/TELLS" target="_blank" rel="noopener">Read the source ↗</a><span class="stack">TYPESCRIPT · CSP · TRUSTED TYPES</span></div>
+      </div>
+      <figure class="shot"><img src="img/tells.jpg" alt="TELLS call sheet stamping a fake delivery text as likely a scam" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
+  <section class="win proj" id="w-p-hushprint" data-app="p-hushprint" data-icon="app" data-size="980x660" role="dialog" aria-labelledby="t-p-hushprint">
+    <header class="wt"><h2 class="wt-t" id="t-p-hushprint">Hushprint</h2></header>
+    <div class="wb case">
+      <div class="case-text">
+        <p class="lab">NEW · FAIR <i>· PRIVACY TOOL</i></p>
+        <p class="case-name" aria-hidden="true">Hushprint</p>
+        <p class="what">Drop in a photo, PDF, Office file or video and Hushprint shows what it leaks, like the GPS spot where it was taken, then strips it in the browser. Files never leave the device.</p>
+        <div class="release"><h3>The release</h3><p>Hand-written parsers with bounded allocations, fuzzed against hostile files. Each clean copy is re-parsed to prove the metadata is gone, a checksum confirms photos lost no quality, and a copy that fails that check is never saved.</p></div>
+        <div class="marks"><div><b>117</b><span>TESTS</span></div><div><b>10</b><span>FILE TYPES</span></div><div><b>0</b><span>UPLOADS</span></div></div>
+        <div class="go"><a class="btn main" href="https://github.com/Waleee7/hushprint" target="_blank" rel="noopener">Read the source ↗</a><span class="stack">TYPESCRIPT · REACT · CSP</span></div>
+      </div>
+      <figure class="shot"><img src="img/hushprint.jpg" alt="Hushprint light table with a photo’s GPS location circled in red" loading="lazy" width="1200" height="750"></figure>
+    </div>
+  </section>
   <section class="win proj" id="w-p-notch" data-app="p-notch" data-icon="app" data-size="940x600" role="dialog" aria-labelledby="t-p-notch">
     <header class="wt"><h2 class="wt-t" id="t-p-notch">Claude Notch</h2></header>
     <div class="wb case">
@@ -468,7 +513,7 @@
         <p class="lab">ATTEMPT 07 · FAIR <i>· macOS DEV TOOL</i></p>
         <p class="case-name" aria-hidden="true">Claude Notch</p>
         <p class="what">A Dynamic Island for AI coding sessions: a pixel Claude lives in the MacBook notch and drops down when a task finishes or needs you.</p>
-        <div class="release"><h3>The release</h3><p>Native Swift with SwiftUI on an AppKit panel, fed by the coding agent's own hooks. Everything stays on the Mac.</p></div>
+        <div class="release"><h3>The release</h3><p>Native Swift with SwiftUI on an AppKit panel, fed by the coding agent's own hooks. A usage bar reads the local transcripts to estimate the 5-hour window. Everything stays on the Mac.</p></div>
         <div class="marks"><div><b>MIT</b><span>OPEN SOURCE</span></div><div><b>0</b><span>SERVERS</span></div><div><b>3</b><span>SESSION STATES</span></div></div>
         <div class="go"><a class="btn main" href="https://github.com/Waleee7/claude-notch" target="_blank" rel="noopener">Read the source ↗</a><span class="stack">SWIFT · SWIFTUI · APPKIT</span></div>
       </div>

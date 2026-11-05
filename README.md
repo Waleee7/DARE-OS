@@ -44,6 +44,9 @@
 | **RAGDOLL RIOT** | Browser brawler with ragdoll physics |
 | **BLOX LIFE** | 3D video engine (Three.js, Web Audio, FFmpeg) that renders short skits |
 | **Infinite Edition** | Arcade racing game with drift physics in Three.js (private, in progress) |
+| **PEACH DASH** | 3D endless runner through Atlanta, in the browser |
+| **TELLS** | In-browser scam checker that marks the exact words that give a message away |
+| **Hushprint** | Shows what your files leak (GPS, author names) and strips it in the browser |
 | **Claude Notch** | Native macOS app that puts coding sessions in the notch |
 | **DARE CHECK** | Free website safety grade |
 | **Client sites** | D'extensionz (live store) and CleanBins Tuscaloosa |
