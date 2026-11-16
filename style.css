@@ -1251,3 +1251,10 @@ html:not(.js) .st-top, html:not(.js) .st-hero { position: static; width: auto; h
   [data-theme="throws"] .win.open { animation: sn-fade 200ms ease-out; }
   @keyframes sn-fade { from { opacity: 0; } }
 }
+/* phones: no stadium text under 12 px (legibility, and Lighthouse's font-size audit) */
+@media (max-width: 759px), (pointer: coarse) {
+  .stage .chip, .stage .st-enter, .st-kick, .st-ph h3, .st-stamp, .r-cat, .r-mark, .r-live, .r-how, .r-what, .f-lede, .f-list li, .f-list time, .f-list .f-sep,
+  .st-hint, .st-ribbon button, .st-ribbon button span, .st-ribbon::before, .st-cta .st-btn, .st-menu span, .st-btn.sm,
+  .hfeed h2, .hfeed [data-feed-stamp], .hfeed .f-list li, .hfeed .f-list time, .hf-stage { font-size: 12px; letter-spacing: .08em; }
+  .stage .chip { letter-spacing: .1em; }
+}
