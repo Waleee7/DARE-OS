@@ -8,7 +8,7 @@
 
   const THEMES = {
     retro98: { name: 'Retro 98', chrome: 'win', color: '#008080' },
-    throws: { name: 'Throws Night', chrome: 'mac', color: '#0a0d14' },
+    throws: { name: 'Stadium Night', chrome: 'mac', color: '#070910' },
     mac: { name: 'Mac Light', chrome: 'mac', color: '#e9eef5' },
     win11: { name: 'Windows 11', chrome: 'win', color: '#0b3080' },
   };
@@ -16,6 +16,7 @@
     { id: 'readme', icon: 'doc', name: 'README', retro98: 'README.TXT' },
     { id: 'projects', icon: 'folder', name: 'Projects', retro98: 'My Projects' },
     { id: 'circle', icon: 'discus', name: 'DISCUS DISASTER' },
+    { id: 'news', icon: 'news', name: "What's New", retro98: 'WHATSNEW.TXT' },
     { id: 'ask', icon: 'chat', name: 'Ask Josh' },
     { id: 'athlete', icon: 'medal', name: 'Athlete' },
     { id: 'contact', icon: 'mail', name: 'Contact' },
@@ -26,6 +27,7 @@
   // Window titles where a theme names things its own way.
   const TITLES = {
     readme: { retro98: 'README.TXT - Notepad' },
+    news: { retro98: 'WHATSNEW.TXT - Notepad' },
     projects: { retro98: 'C:\\Josh\\Projects', win11: 'Projects - File Explorer', mac: 'Projects', throws: 'Projects' },
     terminal: { retro98: 'MS-DOS Prompt', win11: 'Windows PowerShell', mac: 'josh — zsh', throws: 'josh — zsh' },
     settings: { retro98: 'Display Properties', mac: 'System Settings', throws: 'System Settings' },
@@ -33,7 +35,7 @@
   };
   const ADDR = { retro98: 'C:\\Josh\\Projects', win11: 'This PC  ›  Josh  ›  Projects', mac: 'Josh  ›  Projects', throws: 'JOSH / PROJECTS' };
   // The phone home screen: everything not in the dock, plus the three best projects.
-  const GRID = ['readme', 'athlete', 'terminal', 'settings', 'bin', { project: 'sector', icon: 'cam', name: 'SECTOR' }, { project: 'ragdoll', icon: 'stick', name: 'RAGDOLL RIOT' }, { project: 'dextensionz', icon: 'bag', name: "D'extensionz" }];
+  const GRID = ['readme', 'news', 'athlete', 'terminal', 'settings', 'bin', { project: 'sector', icon: 'cam', name: 'SECTOR' }, { project: 'ragdoll', icon: 'stick', name: 'RAGDOLL RIOT' }, { project: 'dextensionz', icon: 'bag', name: "D'extensionz" }];
   const PDOCK = ['ask', 'projects', 'circle', 'contact'];
   const PINNED = ['readme', 'projects', 'circle', 'ask', 'terminal'];
   const app = (id) => APPS.find((a) => a.id === id);
@@ -65,7 +67,7 @@
   function render() {
     for (const box of document.querySelectorAll('[data-launchers]')) {
       const kind = box.dataset.launchers;
-      const list = kind === 'grid' ? GRID : kind === 'pdock' ? PDOCK : APPS.map((a) => a.id);
+      const list = kind === 'grid' ? GRID : kind === 'pdock' ? PDOCK : APPS.filter((a) => kind === 'start' || a.id !== 'news').map((a) => a.id);   // What's New lives in the bar, not among the icons
       if (kind === 'start') {
         box.setAttribute('role', 'menu'); box.setAttribute('aria-label', 'Programs');
         box.replaceChildren(...list.flatMap((id) => {
@@ -228,7 +230,7 @@
   setTheme(theme(), false);
   // Desktops open on the README so a recruiter has the essentials without a click.
   addEventListener('DOMContentLoaded', () => {
-    if (!wm.phone()) wm.open('readme', { focus: false });
+    if (!wm.phone() && html.dataset.view === 'os') wm.open('readme', { focus: false });
     route();
   });
 })(this);
