@@ -2,7 +2,7 @@
 // URL, a README or a test run (25 Oct 2026). To change what the chat says, edit
 // this file; js/ask.js only does the matching.
 //
-// Markup in `text`: **bold**, [label](url), and [label](mailto) for Josh's email.
+// Markup in `text`: **bold**, [label](url), and [label](mailto) for Akinwale's email.
 // `acts` become buttons: tab:<id> opens a project's window, embed:<id> runs it inline,
 // app:<id> opens a desktop app, throw opens DISCUS DISASTER, copy copies the email.
 // `auto` runs the first act.
@@ -36,10 +36,10 @@
     },
     intentNames: { what: 'OVERVIEW', how: 'HOW IT WORKS', stack: 'STACK', tests: 'TESTS & ACCURACY', perf: 'PERFORMANCE', why: 'THE DECISION', live: 'LIVE DEMO', code: 'SOURCE', archive: 'WORLD RECORDS' },
     labels: {
-      about: 'ABOUT JOSH', hire: 'AVAILABILITY', 'why-josh': 'WHY JOSH', projects: 'THE BOARD', best: 'WHERE TO START', stack: 'STACK',
+      about: 'ABOUT AKINWALE', hire: 'AVAILABILITY', 'why-josh': 'WHY AKINWALE', projects: 'THE BOARD', best: 'WHERE TO START', stack: 'STACK',
       python: 'PYTHON', '3d': '3D & GRAPHICS', testing: 'TESTS', ai: 'AI', athlete: 'THE ATHLETE', marks: 'MARKS', balance: 'SPORT + SCHOOL',
       school: 'EDUCATION', experience: 'EXPERIENCE', clients: 'CLIENT WORK', location: 'LOCATION', contact: 'CONTACT', resume: 'RESUME',
-      'ask-josh': 'ASK JOSH', weakness: 'GAPS', site: 'THIS PAGE', games: 'GAMES', greeting: 'HELLO', thanks: 'THANKS', joke: 'JOKE', help: 'COMMANDS',
+      'ask-josh': 'ASK AKINWALE', weakness: 'GAPS', site: 'THIS PAGE', games: 'GAMES', greeting: 'HELLO', thanks: 'THANKS', joke: 'JOKE', help: 'COMMANDS',
     },
 
     topics: [
@@ -102,7 +102,7 @@
         text: `Next.js 16, React 19, Tailwind 4 and GSAP for the motion, with **Stripe Checkout** handling payments in live mode.` },
       { id: 'dextensionz.why', topic: 'dextensionz', intent: 'why', src: ['live site', URL.dext],
         kw: ['payment', 'card', 'pci', 'secure', 'security'],
-        text: `Stripe Checkout in live mode, so card numbers never touch Josh's code or server: Stripe hosts the payment page. For a small brand that's the right trade. Less custom checkout UI, almost nothing to secure.` },
+        text: `Stripe Checkout in live mode, so card numbers never touch Akinwale's code or server: Stripe hosts the payment page. For a small brand that's the right trade. Less custom checkout UI, almost nothing to secure.` },
 
       /* ---------- RAGDOLL RIOT ---------- */
       { id: 'ragdoll.what', topic: 'ragdoll', intent: 'what', src: readme('ragdoll-riot'),
@@ -206,7 +206,7 @@
       { id: 'throwingtracker.what', topic: 'throwingtracker', intent: 'what', src: readme('ThrowingTracker'),
         text: `**ThrowingTracker** is an offline-first training log for throwers: marks, RPE and notes, progress charts, a Meet Day mode for six attempts, landing-zone scatter on a sector diagram, and frame-by-frame video review. Data stays in the browser (IndexedDB) and exports to JSON or CSV. **107 tests**, re-run on 15 Nov 2026. [Open it](${URL.tracker}).` },
       { id: 'sandy.what', topic: 'sandy', intent: 'what', src: readme('chain-recall'),
-        text: `**Sandy** was built at the SF Anthropic Hackathon in May 2026 by James Olusoga and Joshua Dare: silent memory for a luxury hotel chain. When a member walks into any property, Claude reads their history across the chain with tool calls and writes a prep brief, pushed live to the staff tablet over SSE, with an ElevenLabs audio version for the bell captain. [Demo](${URL.sandy}).` },
+        text: `**Sandy** was built at the SF Anthropic Hackathon in May 2026 by James Olusoga and Akinwale Dare: silent memory for a luxury hotel chain. When a member walks into any property, Claude reads their history across the chain with tool calls and writes a prep brief, pushed live to the staff tablet over SSE, with an ElevenLabs audio version for the bell captain. [Demo](${URL.sandy}).` },
       { id: 'lingo.what', topic: 'lingo', intent: 'what', src: readme('GlobalLingo'),
         text: `**GlobalLingo** is a translation app with an interactive Three.js globe: spin it, click a country to pick its language, translate phrases, keep a streak. Haptic feedback on mobile. [Open it](${URL.lingo}).` },
       { id: 'course.what', topic: 'course', intent: 'what', src: readme('options-trading-course'),
@@ -226,12 +226,12 @@
         text: `Newest first: **PEACH DASH** got lighter on phones (15 Nov). **RAGDOLL RIOT** got three locations, an endless mode, a slide and a GIANT power-up (7 Nov). **PEACH DASH** got a neon illustrated city, **Options Lab** passed 1,720 browser checks, **DARE CHECK** went live and **DISCUS DISASTER** got its art pass (5 Nov). In progress: **GROUND STOP** and a cinematic upgrade for DISCUS DISASTER.`,
         acts: [{ label: "OPEN WHAT'S NEW", do: 'app:news' }] },
       { id: 'about', intent: 'what', src: FILE,
-        kw: ['who', 'about him', 'about josh', 'josh', 'joshua', 'name', 'yourself', 'introduce', 'summary', 'tldr', 'background', 'bio', 'overview'],
-        text: `Josh Dare is a software engineer (currently at **Medland Engineers**, remote) and a college thrower (discus and hammer, conference champion in discus) at Life University, finishing a B.S. in Computer Information Systems in March 2027. He ships things you can open: a computer-vision app that measures throws from a phone video, two live client builds (one taking real card payments), a browser game, an MCP memory server and a GPU video engine.`,
+        kw: ['who', 'about him', 'about josh', 'josh', 'joshua', 'akinwale', 'wale', 'about akinwale', 'name', 'yourself', 'introduce', 'summary', 'tldr', 'background', 'bio', 'overview'],
+        text: `Akinwale Dare is a developer and builder: a software engineer at **Medland Engineers** (remote) who ships his own products, and an elite thrower (discus and hammer, conference champion in discus) at Life University, finishing a B.S. in Computer Information Systems in March 2027. He ships things you can open: a computer-vision app that measures throws from a phone video, two live client builds (one taking real card payments), a browser game, an MCP memory server and a GPU video engine.`,
         chips: ['What has he shipped?', 'Is he open to roles?', "What's his stack?"] },
       { id: 'hire', intent: 'what', src: FILE,
         kw: ['hire', 'hiring', 'job', 'role', 'available', 'availability', 'open to', 'internship', 'intern', 'full time', 'position', 'opportunity', 'recruit', 'recruiter', 'start date', 'when can he start', 'looking for work', 'new grad'],
-        text: `Yes. Josh is open to software engineering roles for 2027, after he graduates in March, and he takes client builds now. Email goes straight to him: [{email}](mailto).`,
+        text: `Yes. Akinwale is open to software engineering roles for 2027, after he graduates in March, and he takes client builds now. Email goes straight to him: [{email}](mailto).`,
         acts: [{ label: 'COPY EMAIL', do: 'copy' }],
         chips: ['Why hire him?', 'Can I see his resume?', 'Where is he based?'] },
       { id: 'why-josh', intent: 'what', src: FILE,
@@ -258,18 +258,18 @@
         acts: [{ label: 'OPEN TRACKSIDE', do: 'tab:trackside' }] },
       { id: '3d', intent: 'what', src: FILE,
         kw: ['three js', 'threejs', 'webgl', '3d', 'graphics', 'shader', 'canvas'],
-        text: `Plenty: **BLOX LIFE** renders 3D skits in Three.js on the GPU, **GlobalLingo** spins a Three.js globe, **echo** draws its memory as a React Three Fiber brain, and **Infinite Edition** is a Three.js racer. RAGDOLL RIOT and the throw on this page are hand-drawn Canvas 2D.` },
+        text: `Plenty: **BLOX LIFE** renders 3D skits in Three.js on the GPU, **GlobalLingo** spins a Three.js globe, **echo** draws its memory as a React Three Fiber brain, and **Infinite Edition** is a Three.js racer, and the night meet on this site is Three.js too, officials and all. RAGDOLL RIOT is hand-drawn Canvas 2D.` },
       { id: 'testing', intent: 'tests', src: FILE,
         kw: ['test', 'testing', 'tested', 'tests', 'quality', 'ci', 'how many tests', 'test suite', 'qa'],
         text: `**918 passing**, all re-run on 15 Nov 2026 from each public repo: SECTOR 58 (plus an accuracy harness), ThrowingTracker 107, DARE Desk 129, PEACH DASH 51, TELLS 228, Hushprint 117, Options Lab 113 and DARE CHECK 115. RAGDOLL RIOT adds 369 headless browser checks, including a 60 fps check under load.`,
         chips: ['How accurate is SECTOR?', 'How is RAGDOLL RIOT tested?'] },
       { id: 'ai', intent: 'what', src: FILE,
         kw: ['ai', 'llm', 'claude', 'gpt', 'chatgpt', 'openai', 'anthropic', 'machine learning', 'ml', 'agent', 'agents', 'copilot', 'vibe', 'write the code', 'wrote the code', 'by himself', 'himself', 'use ai', 'with ai'],
-        text: `Yes, and he's upfront about it: Josh builds with Claude Code as a pair programmer, and he builds AI tools too. **echo** is an MCP server that gives assistants long-term memory, and **Sandy** (SF Anthropic Hackathon, May 2026) uses Claude with tool calls. What he owns is the product calls, the review and the proof: every project here ships with tests or measurements.`,
+        text: `Yes, and he's upfront about it: Akinwale builds with Claude Code as a pair programmer, and he builds AI tools too. **echo** is an MCP server that gives assistants long-term memory, and **Sandy** (SF Anthropic Hackathon, May 2026) uses Claude with tool calls. What he owns is the product calls, the review and the proof: every project here ships with tests or measurements.`,
         chips: ['How does echo work?', 'Tell me about Sandy', 'How does he test?'] },
       { id: 'athlete', intent: 'what', src: FILE,
         kw: ['athlete', 'sport', 'sports', 'track', 'track and field', 'thrower', 'champion', 'conference champion', 'throws', 'throw', 'discus', 'hammer', 'shot put', 'college athlete', 'team', 'practice', 'compete', 'events', 'ncaa', 'naia'],
-        text: `Josh is a college thrower, discus and hammer, at Life University in Marietta, Georgia, and a conference champion in discus, with results on World Athletics going back to 2020. The habit carries over: a throw only counts if it lands in the sector and gets measured, so his software ships with tests and numbers.`,
+        text: `Akinwale is an elite thrower, discus and hammer, at Life University in Marietta, Georgia, and a conference champion in discus, with results on World Athletics going back to 2020. The habit carries over: a throw only counts if it lands in the sector and gets measured, so his software ships with tests and numbers.`,
         acts: [{ label: 'OPEN ATHLETE', do: 'app:athlete' }, { label: 'TAKE A THROW', do: 'throw' }],
         chips: ['What are his marks?', 'How does he balance both?', 'How does SECTOR work?'] },
       { id: 'marks', intent: 'what', src: ['World Athletics profile', URL.wa],
@@ -292,7 +292,7 @@
         chips: ["What about D'extensionz?", 'Tell me about Sandy', 'Can I see his resume?'] },
       { id: 'clients', intent: 'what', src: FILE,
         kw: ['freelance', 'client', 'clients', 'client work', 'build my', 'my website', 'my site', 'for my business', 'contract', 'agency', 'commission'],
-        text: `Yes, he takes client builds. Two are live: **D'extensionz** (a storefront on live Stripe) and **CleanBins Tuscaloosa**. Tell him what you need and by when: [email Josh](mailto).`,
+        text: `Yes, he takes client builds. Two are live: **D'extensionz** (a storefront on live Stripe) and **CleanBins Tuscaloosa**. Tell him what you need and by when: [email Akinwale](mailto).`,
         acts: [{ label: 'COPY EMAIL', do: 'copy' }] },
       { id: 'location', intent: 'what', src: FILE,
         kw: ['where', 'located', 'location', 'based', 'live', 'city', 'atlanta', 'georgia', 'relocate', 'relocation', 'remote', 'onsite', 'on site', 'hybrid', 'move'],
@@ -303,17 +303,17 @@
         acts: [{ label: 'COPY EMAIL', do: 'copy' }, { label: 'OPEN CONTACT', do: 'app:contact' }] },
       { id: 'resume', intent: 'what', src: FILE,
         kw: ['resume', 'cv', 'pdf', 'transcript'],
-        text: `Josh sends his current resume on request: [email him](mailto). This desktop is the long version: every project links to a live demo or its source.`,
+        text: `Akinwale sends his current resume on request: [email him](mailto), or see the one-page Clean look on this site. This site is the long version: every project links to a live demo or its source.`,
         acts: [{ label: 'COPY EMAIL', do: 'copy' }] },
       { id: 'ask-josh', intent: 'what', src: FILE,
         kw: ['salary', 'pay', 'compensation', 'rate', 'rates', 'price', 'pricing', 'cost', 'charge', 'quote', 'budget', 'visa', 'sponsorship', 'citizen', 'authorization', 'authorized', 'references'],
-        text: `That's a conversation for Josh himself, not a fact file: [email him](mailto).` },
+        text: `That's a conversation for Akinwale himself, not a fact file: [email him](mailto).` },
       { id: 'weakness', intent: 'what', src: FILE,
         kw: ['weakness', 'weaknesses', 'improve', 'working on', 'gap', 'bad at', 'struggle', 'limitation', 'not done', 'unfinished'],
         text: `The honest gaps, straight from his READMEs: SECTOR is validated on rendered footage, not yet on surveyed real throws, and DARE Desk still trades on paper. Both are next. He'd rather list them than have you find them.` },
       { id: 'site', intent: 'what', src: FILE,
         kw: ['this site', 'this page', 'this portfolio', 'website built', 'build this', 'built this', 'made this', 'you built', 'are you', 'you real', 'bot', 'chatbot', 'chat', 'language model', 'who are you', 'what are you', 'how do you work', 'how does this work'],
-        text: `This site is plain HTML, CSS and JavaScript: no framework, no build step. The stadium is three.js, loaded after the page is up, and its throw uses the same physics as the tests. I'm not a language model. I'm a small matcher that maps your question to answers in Josh's fact file, scored by project names, intent words and what we just talked about. That's a choice: a portfolio shouldn't invent facts. The scorecard is fetched live, and the throw uses real projectile physics.`,
+        text: `This site is plain HTML, CSS and JavaScript: no framework, no build step. The film is three.js, loaded after the page is up: five scenes at a night meet, where an official measures every project like a mark. I'm not a language model. I'm a small matcher that maps your question to answers in Akinwale's fact file, scored by project names, intent words and what we just talked about. That's a choice: a portfolio shouldn't invent facts. The board's live numbers are read by your browser as the page loads.`,
         chips: ['How does the throw work?', 'What has he shipped?'] },
       { id: 'games', intent: 'what', src: FILE,
         kw: ['game', 'games', 'gaming', 'playable', 'fun', 'something to play'],
@@ -321,26 +321,26 @@
         acts: [{ label: '▶ PLAY RAGDOLL RIOT', do: 'embed:ragdoll' }, { label: 'TAKE A THROW', do: 'throw' }] },
       { id: 'greeting', intent: 'what', src: FILE,
         kw: ['hi', 'hello', 'hey', 'yo', 'sup', 'whats up', 'good morning', 'good afternoon', 'good evening', 'howdy', 'hiya', 'wassup'],
-        text: `Hey. Ask me about any project, the stack, the throws, or whether Josh is available. (He is.)`,
+        text: `Hey. Ask me about any project, the stack, the throws, or whether Akinwale is available. (He is.)`,
         chips: ['What has he shipped?', 'Is he open to roles?', 'Play RAGDOLL RIOT'] },
       { id: 'thanks', intent: 'what', src: FILE,
         kw: ['thanks', 'thank you', 'thx', 'ty', 'appreciate', 'cool', 'nice', 'great', 'awesome', 'dope', 'impressive work', 'love it'],
-        text: `Anytime. If you've seen enough, [email Josh](mailto): he answers himself.`,
+        text: `Anytime. If you've seen enough, [email Akinwale](mailto): he answers himself.`,
         acts: [{ label: 'COPY EMAIL', do: 'copy' }] },
       { id: 'help', intent: 'what', src: FILE,
         kw: ['help', 'what can you do', 'what can i ask', 'command', 'menu'],
-        text: `Ask in plain words, or use a command:\n**/projects** the main board · **/play** RAGDOLL RIOT, right here · **/sector** run the tracker · **/throw** take a throw · **/marks** athletics · **/stack** the tech · **/contact** · **/email** copy the address · **/clear** start over` },
+        text: `Ask in plain words, or use a command:\n**/projects** the main board · **/play** RAGDOLL RIOT, right here · **/sector** run the tracker · **/throw** play DISCUS DISASTER · **/marks** athletics · **/stack** the tech · **/contact** · **/email** copy the address · **/clear** start over` },
       { id: 'joke', intent: 'what', src: FILE,
         kw: ['joke', 'funny', 'laugh', 'fun fact'],
         text: `Why do throwers make good engineers? Both get judged on where it lands, not on how it looked in the air.` },
     ],
 
     welcome: {
-      text: `Ask me anything about Josh's work. I answer from a fact file he keeps current, and I'll tell you when something isn't in it.`,
+      text: `Ask me anything about Akinwale's work. I answer from a fact file he keeps current, and I'll tell you when something isn't in it.`,
       chips: ['What has he shipped?', 'How does SECTOR work?', 'Is he open to roles?', 'Play RAGDOLL RIOT'],
     },
     fallback: {
-      text: `That's not in my fact file, and I won't guess. Josh can answer it himself: [email him](mailto). Or try one of these:`,
+      text: `That's not in my fact file, and I won't guess. Akinwale can answer it himself: [email him](mailto). Or try one of these:`,
       chips: ['What has he shipped?', "What's his stack?", 'Is he open to roles?', 'What are his marks?'],
     },
     clarify: {
@@ -348,7 +348,7 @@
       chips: ['SECTOR', 'RAGDOLL RIOT', 'echo', "D'extensionz", 'BLOX LIFE', 'DARE Desk'],
     },
     help: {
-      text: `Ask in plain words, or use a command:\n**/projects** the main board · **/play** RAGDOLL RIOT, right here · **/sector** run the tracker · **/throw** take a throw · **/marks** athletics · **/stack** the tech · **/contact** · **/email** copy the address · **/clear** start over`,
+      text: `Ask in plain words, or use a command:\n**/projects** the main board · **/play** RAGDOLL RIOT, right here · **/sector** run the tracker · **/throw** play DISCUS DISASTER · **/marks** athletics · **/stack** the tech · **/contact** · **/email** copy the address · **/clear** start over`,
     },
   };
 

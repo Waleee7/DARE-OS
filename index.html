@@ -1,42 +1,60 @@
 <!doctype html>
-<html lang="en" data-theme="throws" data-chrome="mac" data-view="stage">
+<html lang="en" data-theme="throws" data-chrome="mac" data-view="stage" data-shot="0">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Joshua Dare | Software Engineer, Student-Athlete</title>
-<meta name="description" content="Joshua Dare: software engineer and college thrower (discus, hammer) in Atlanta. Take a throw in a night stadium: every flag in the sector is a project, with its measured number on the jumbotron.">
+<title>Akinwale Dare | Developer and Builder, Elite Thrower</title>
+<meta name="description" content="Akinwale Dare: developer and builder in Atlanta, and an elite thrower (discus and hammer). Five scenes at a night meet: his work as measured marks in the sector, live numbers on the board, a short bio and how to reach him.">
 <link rel="canonical" href="https://dare-os.vercel.app/">
+<meta name="author" content="Akinwale Dare">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="img/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<meta property="og:title" content="Joshua Dare | Software Engineer, Student-Athlete">
-<meta property="og:description" content="A night stadium you can throw in: every flag is a project with its measured number. Then DARE-OS, a desktop with 16 projects, an Ask Josh chat and DISCUS DISASTER.">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Akinwale Dare">
+<meta property="og:title" content="Akinwale Dare | Developer and Builder, Elite Thrower">
+<meta property="og:description" content="Five scenes at a night meet: every project is a measured mark in the sector, the live numbers are on the board, and the tunnel is how to reach him.">
 <meta property="og:image" content="https://dare-os.vercel.app/img/og.jpg">
+<meta property="og:image:alt" content="Akinwale Dare: the view from the discus circle at a night meet">
 <meta property="og:url" content="https://dare-os.vercel.app/">
+<meta property="profile:first_name" content="Akinwale">
+<meta property="profile:last_name" content="Dare">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#070910">
+<meta name="twitter:title" content="Akinwale Dare | Developer and Builder, Elite Thrower">
+<meta name="twitter:description" content="Developer and builder. Elite thrower. Every project is a measured mark in the sector.">
+<meta name="twitter:image" content="https://dare-os.vercel.app/img/og.jpg">
+<meta name="theme-color" content="#0a0b0d">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Akinwale Dare","url":"https://dare-os.vercel.app/","image":"https://dare-os.vercel.app/img/og.jpg","jobTitle":"Software Engineer","description":"Developer and builder. Elite thrower: discus and hammer.","worksFor":{"@type":"Organization","name":"Medland Engineers"},"affiliation":{"@type":"CollegeOrUniversity","name":"Life University"},"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"knowsAbout":["TypeScript","React","Next.js","Node.js","Swift","Python","Three.js","Computer vision"],"sameAs":["https://www.linkedin.com/in/akinwaledare","https://github.com/Waleee7","https://worldathletics.org/athletes/united-states/joshua-dare-14939088"]}
+</script>
 <script>
-// Before first paint, two choices. The view: the stadium (default), the desktop (?view=os, a
-// ?theme= link, a #app/ deep link, or already entered this visit) or the plain résumé
-// (?view=clean). The theme: ?theme=, then the visitor's saved pick, then Stadium Night.
+// Before first paint: the view, the scene and the look. The view is the film (default), the
+// desktop (?view=os, a ?theme= link, a #app/ deep link, or already entered this visit) or the
+// plain résumé (?view=clean). A scene link (#the-board) always opens the film at that scene.
+// The film and the résumé always wear Cinema; the desktop wears the visitor's saved look.
 (function (d) {
-  var T = { throws: 'mac', retro98: 'win', mac: 'mac', win11: 'win' }, own = Object.prototype.hasOwnProperty, q = null, t = null, v = 'stage', w = null;
+  var T = { throws: 'mac', retro98: 'win', mac: 'mac', win11: 'win' }, S = ['the-circle', 'the-sector', 'the-board', 'the-press-box', 'the-tunnel'];
+  var own = Object.prototype.hasOwnProperty, q = null, t = null, v = 'stage', w = null, s = S.indexOf(location.hash.slice(1));
   d.classList.add('js');
   try { q = new URLSearchParams(location.search); t = q.get('theme'); w = q.get('view'); } catch (e) { q = null; }
   if (w === 'clean' || w === 'stage') v = w;
+  else if (s >= 0) v = 'stage';
   else if (w === 'os' || own.call(T, t) || /^#(app|work)\//.test(location.hash)) v = 'os';
   else { try { if (sessionStorage.getItem('jd-view') === 'os') v = 'os'; } catch (e) { /* storage blocked */ } }
   if (!own.call(T, t)) { try { t = localStorage.getItem('jd-theme'); } catch (e) { t = null; } }
-  if (!own.call(T, t)) t = 'throws';
+  if (!own.call(T, t) || v !== 'os') t = 'throws';
   d.setAttribute('data-theme', t);
   d.setAttribute('data-chrome', T[t]);
   d.setAttribute('data-view', v);
+  d.setAttribute('data-shot', String(s < 0 ? 0 : s));
 })(document.documentElement);
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=JetBrains+Mono:wght@400;500;700&family=VT323&display=swap">
+<link rel="preload" href="fonts/barlow-condensed-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="img/poster.webp" type="image/webp" media="(min-width: 760px) and (min-aspect-ratio: 4/5)">
+<link rel="preload" as="image" href="img/poster-tall.webp" type="image/webp" media="(max-width: 759px), (max-aspect-ratio: 4/5)">
+<link rel="stylesheet" href="cinema.css">
 <link rel="stylesheet" href="style.css">
 <script src="js/board.js" defer></script>
 <script src="js/throw.js" defer></script>
@@ -50,7 +68,7 @@
 <script src="js/term.js" defer></script>
 <script src="js/live.js" defer></script>
 <script src="js/news.js" defer></script>
-<script src="js/stage.js" defer></script>
+<script src="js/scenes.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#desk">Skip to the content</a>
@@ -73,10 +91,10 @@
 
 <!-- Mac-style themes: the menu bar -->
 <header class="menubar" aria-label="Menu bar">
-  <button class="mb-logo" type="button" data-launch="readme" aria-label="About Josh Dare"><span data-icon="discus"></span></button>
-  <b class="mb-name">Josh Dare</b>
+  <button class="mb-logo" type="button" data-launch="readme" aria-label="About Akinwale Dare"><span data-icon="discus"></span></button>
+  <b class="mb-name">Akinwale Dare</b>
   <nav class="mb-menu" aria-label="Menu">
-    <button type="button" class="to-stage" data-view-go="stage"><span class="to-ring" aria-hidden="true"></span>Stadium</button>
+    <button type="button" class="to-stage" data-view-go="stage"><span class="to-ring" aria-hidden="true"></span>Scenes</button>
     <button type="button" data-launch="projects">Projects</button>
     <button type="button" data-launch="circle">DISCUS DISASTER</button>
     <button type="button" data-launch="ask">Ask</button>
@@ -91,103 +109,144 @@
 </header>
 
 <main class="desk" id="desk" tabindex="-1">
-  <h1 class="sr desk-h">Joshua Dare: software engineer and college thrower, Atlanta.</h1>
+  <h1 class="sr desk-h">Akinwale Dare: developer and builder, elite thrower. Atlanta.</h1>
 
-  <!-- ============ THE CIRCLE: the night stadium you land in ============ -->
-  <section class="stage" id="stage" aria-labelledby="st-h">
-    <div class="st-world" aria-hidden="true">
-      <svg class="st-poster" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMax slice" focusable="false">
-        <defs>
-          <linearGradient id="sp-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03050a"/><stop offset=".42" stop-color="#0b1220"/><stop offset=".5" stop-color="#151d2e"/></linearGradient>
-          <linearGradient id="sp-turf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1610"/><stop offset="1" stop-color="#14301c"/></linearGradient>
-          <radialGradient id="sp-glow"><stop offset="0" stop-color="#fff4dc" stop-opacity=".9"/><stop offset=".12" stop-color="#ffe9c2" stop-opacity=".35"/><stop offset="1" stop-color="#ffe9c2" stop-opacity="0"/></radialGradient>
-        </defs>
-        <rect width="1600" height="1000" fill="url(#sp-sky)"/>
-        <circle cx="170" cy="150" r="360" fill="url(#sp-glow)"/><circle cx="1430" cy="150" r="360" fill="url(#sp-glow)"/>
-        <path d="M0 470 L0 395 L520 430 L520 470Z M1600 470 L1600 395 L1080 430 L1080 470Z" fill="#090c14"/>
-        <rect x="690" y="318" width="220" height="112" fill="#06080d" stroke="#2a3246"/><rect x="702" y="330" width="196" height="88" fill="#0e1422"/>
-        <rect x="0" y="468" width="1600" height="532" fill="url(#sp-turf)"/>
-        <path d="M800 960 L560 470 M800 960 L1040 470" stroke="#eef1f6" stroke-opacity=".5" stroke-width="2.4" fill="none"/>
-        <path d="M640 620 Q800 600 960 620 M600 540 Q800 524 1000 540 M690 760 Q800 744 910 760" stroke="#eef1f6" stroke-opacity=".16" stroke-width="2" fill="none"/>
-        <ellipse cx="800" cy="962" rx="78" ry="20" fill="#3d424b" stroke="#eef1f6" stroke-width="3"/>
-      </svg>
-      <canvas class="st-canvas"></canvas>
-      <div class="st-tags"></div>
+  <!-- ============ CINEMA: five scenes at a night meet. The 3D (js/cinema3d.js) plays behind the words ============ -->
+  <section class="cine" id="stage" aria-label="Akinwale Dare, in five scenes">
+    <div class="cine-frame">
+      <picture class="cine-poster">
+        <source media="(max-width: 759px), (max-aspect-ratio: 4/5)" srcset="img/poster-tall.webp" type="image/webp" width="780" height="740">
+        <img src="img/poster.webp" alt="" width="1600" height="866" decoding="async">
+      </picture>
+      <canvas class="cine-canvas" aria-hidden="true"></canvas>
     </div>
 
-    <header class="st-top">
-      <p class="st-brand"><span class="st-mark" aria-hidden="true"></span><b>DARE-OS</b><span class="st-who">Joshua Dare</span></p>
-      <ul class="st-chips" aria-label="Status">
-        <li class="chip on"><span class="ldot" aria-hidden="true"></span>Open to roles · Atlanta</li>
-        <li class="chip live-pill"><span class="ldot" aria-hidden="true"></span><span><span data-count="sites">11</span>/11 live</span></li>
-      </ul>
-      <nav class="st-nav" aria-label="Views">
-        <a class="st-link" href="?view=clean" data-view-go="clean">Clean look</a>
-        <a class="st-enter" href="?view=os" data-view-go="os">Enter DARE-OS <span aria-hidden="true">→</span></a>
+    <header class="cine-top">
+      <a class="cine-mark" href="#the-circle" data-go="0">Akinwale Dare</a>
+      <nav class="cine-shots" aria-label="Scenes">
+        <ol>
+          <li><a href="#the-circle" data-go="0" aria-current="step"><i>01</i><span class="l-long">The Circle</span><span class="l-short">Circle</span></a></li>
+          <li><a href="#the-sector" data-go="1"><i>02</i><span class="l-long">The Sector</span><span class="l-short">Sector</span></a></li>
+          <li><a href="#the-board" data-go="2"><i>03</i><span class="l-long">The Board</span><span class="l-short">Board</span></a></li>
+          <li><a href="#the-press-box" data-go="3"><i>04</i><span class="l-long">The Press Box</span><span class="l-short">Press</span></a></li>
+          <li><a href="#the-tunnel" data-go="4"><i>05</i><span class="l-long">The Tunnel</span><span class="l-short">Tunnel</span></a></li>
+        </ol>
+      </nav>
+      <nav class="cine-quiet" aria-label="Other ways in">
+        <button type="button" data-ask>Ask</button>
+        <a href="?view=clean" data-view-go="clean">Clean look</a>
+        <a class="cine-os" href="?view=os" data-view-go="os">DARE-OS</a>
       </nav>
     </header>
 
-    <div class="st-hero">
-      <p class="st-kick">Software engineer · Discus &amp; hammer, Life University</p>
-      <h2 class="st-h" id="st-h">If it isn't <em>measured</em>, it didn't count.</h2>
-      <p class="st-sub">I'm Josh Dare. I build software the way I train for the circle: every claim on this page comes with its number, how it was measured and when.</p>
-      <div class="st-cta">
-        <div class="st-mail">
-          <button class="st-btn main" type="button" aria-expanded="false" aria-controls="st-mailmenu" data-mail-btn>Email me <svg viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4"/></svg></button>
-          <ul class="st-menu" id="st-mailmenu" hidden>
-            <li><a href="#stage" data-mail="work"><b>Work</b><span>A role on your team</span></a></li>
-            <li><a href="#stage" data-mail="contract"><b>Contract</b><span>A build for your business</span></a></li>
-            <li><a href="#stage" data-mail="question"><b>Question</b><span>Anything else</span></a></li>
-          </ul>
-        </div>
-        <a class="st-btn" href="https://www.linkedin.com/in/akinwaledare" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
-        <a class="st-btn ghost" href="?view=clean" data-view-go="clean">Résumé</a>
-        <a class="st-btn ghost" href="https://github.com/Waleee7" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
-      </div>
-    </div>
-
-    <aside class="st-side" aria-label="Scoreboard">
-      <section class="st-read" aria-labelledby="st-read-h">
-        <header class="st-ph"><h3 id="st-read-h">Jumbotron</h3><span class="st-stamp" data-r="when">Re-run 15 Nov 2026</span></header>
-        <p class="r-mark" data-r="mark" hidden></p>
-        <p class="r-cat" data-r="cat">All 16 flags</p>
-        <p class="r-name" data-r="name">The board</p>
-        <p class="r-num"><b data-r="big">918</b> <span data-r="unit">tests</span></p>
-        <p class="r-what" data-r="what">passing across 8 projects</p>
-        <p class="r-how" data-r="how">Every flag in the sector is a project. Take a throw: where the discus lands, that project's number goes up here, with how it was measured.</p>
-        <p class="r-live" data-r="live" hidden></p>
-        <div class="r-go">
-          <button class="st-btn sm" type="button" data-read-open hidden>Open the case study</button>
-          <span class="r-step"><button type="button" data-read-step="-1" aria-label="Previous flag">‹</button><button type="button" data-read-step="1" aria-label="Next flag">›</button></span>
+    <div class="cine-panels">
+      <section class="scene" id="the-circle" data-n="0" aria-labelledby="sc-0">
+        <p class="slate"><i>01</i>The Circle</p>
+        <h1 class="sc-name" id="sc-0">Akinwale Dare</h1>
+        <p class="sc-line">Developer and builder. Elite thrower.</p>
+        <p class="sc-meta"><span class="cdot" aria-hidden="true"></span>Open to 2027 roles · Atlanta, GA</p>
+        <div class="sc-cta">
+          <div class="mail">
+            <button class="cbtn main" type="button" aria-expanded="false" aria-controls="mail-0" data-mail-btn>Email me <svg viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4"/></svg></button>
+            <ul class="mail-menu" id="mail-0" hidden>
+              <li><a href="#the-circle" data-mail="work"><b>Work</b><span>A role on your team</span></a></li>
+              <li><a href="#the-circle" data-mail="contract"><b>Contract</b><span>A build for your business</span></a></li>
+              <li><a href="#the-circle" data-mail="question"><b>Question</b><span>Anything else</span></a></li>
+            </ul>
+          </div>
+          <a class="cbtn" href="https://www.linkedin.com/in/akinwaledare" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
         </div>
       </section>
-      <section class="st-feed" aria-labelledby="st-feed-h">
-        <header class="st-ph"><h3 id="st-feed-h">Shipped this week</h3><span class="st-stamp" data-feed-stamp>Snapshot · 15 Nov</span></header>
-        <p class="f-lede">My agents ship while I train. Public pushes to <a href="https://github.com/Waleee7" target="_blank" rel="noopener">github.com/Waleee7</a>, read live from the GitHub API.</p>
-        <ol class="f-list" data-feed>
-          <li><time datetime="2026-11-15T20:00:13Z">15 Nov</time><a href="https://github.com/Waleee7/peach-dash/commit/3645750" target="_blank" rel="noopener">peach-dash</a><span>Lighter on phones</span></li>
-          <li><time datetime="2026-11-07T19:22:18Z">7 Nov</time><a href="https://github.com/Waleee7/ragdoll-riot" target="_blank" rel="noopener">ragdoll-riot</a><span>Pushed to main</span></li>
-          <li><time datetime="2026-11-06T16:13:28Z">6 Nov</time><a href="https://github.com/Waleee7/GlobalLingo" target="_blank" rel="noopener">GlobalLingo</a><span>Pushed to main</span></li>
-          <li><time datetime="2026-11-06T01:28:22Z">6 Nov</time><a href="https://github.com/Waleee7/dare-check" target="_blank" rel="noopener">dare-check</a><span>Pushed to main</span></li>
+
+      <section class="scene" id="the-sector" data-n="1" aria-labelledby="sc-1">
+        <p class="slate"><i>02</i>The Sector</p>
+        <h2 class="sr" id="sc-1">The work: every project is a mark in the sector, measured</h2>
+        <p class="pl-cat" data-p="cat">Mark 01 of 16 · Sports tech</p>
+        <p class="pl-name" data-p="name">SECTOR</p>
+        <p class="pl-num"><b data-p="big">3.9</b><span data-p="unit">cm</span></p>
+        <p class="pl-what" data-p="what">off on a 68 m reference throw</p>
+        <p class="pl-how" data-p="how">SECTOR's accuracy harness renders a 68.14 m throw with a known answer, then measures it back from the pixels alone: 68.10 m. 58 tests pass.</p>
+        <p class="pl-stamp"><span data-p="when">Re-run 15 Nov 2026</span><span class="pl-live" data-p="live" hidden></span></p>
+        <div class="pl-go">
+          <button class="cbtn" type="button" data-open-case>Open the case study</button>
+          <span class="pl-step"><button type="button" data-step="-1" aria-label="Previous mark">‹</button><button type="button" data-step="1" aria-label="Next mark">›</button></span>
+          <button class="pl-all" type="button" aria-expanded="false" aria-controls="marks" data-all-marks>All 16 marks</button>
+          <ol class="marks" id="marks" data-marks aria-label="All 16 marks" hidden></ol>
+        </div>
+      </section>
+
+      <section class="scene" id="the-board" data-n="2" aria-labelledby="sc-2">
+        <p class="slate"><i>03</i>The Board</p>
+        <h2 class="sc-h" id="sc-2">The proof</h2>
+        <ol class="rows" data-rows aria-label="The board">
+          <li><button type="button" data-row="0" aria-pressed="true"><span class="b-l">Live now</span><span class="b-v"><b>11/11</b></span><span class="b-w">products answering your browser</span><span class="b-s">Probed from your browser as the page loads</span></button></li>
+          <li><button type="button" data-row="1" aria-pressed="false"><span class="b-l">Tests</span><span class="b-v"><b>918</b></span><span class="b-w">passing across 8 projects</span><span class="b-s">Re-run from each public repo · 15 Nov 2026</span></button></li>
+          <li><button type="button" data-row="2" aria-pressed="false"><span class="b-l">Precision</span><span class="b-v"><b>3.9</b> <small>cm</small></span><span class="b-w">off on a 68 m reference throw</span><span class="b-s">SECTOR accuracy harness · 15 Nov 2026</span></button></li>
+          <li><button type="button" data-row="3" aria-pressed="false"><span class="b-l">Frame time</span><span class="b-v"><b>8.3</b> <small>ms</small></span><span class="b-w">with 12 ragdolls on screen</span><span class="b-s">RAGDOLL RIOT, M3 Pro, 475 frames · 15 Nov 2026</span></button></li>
+          <li><button type="button" data-row="4" aria-pressed="false"><span class="b-l">Clients</span><span class="b-v"><b>2</b> <small>live</small></span><span class="b-w">one taking cards on live Stripe</span><span class="b-s">D'extensionz · CleanBins Tuscaloosa</span></button></li>
+          <li><button type="button" data-row="5" aria-pressed="false"><span class="b-l">Open source</span><span class="b-v"><b>17</b> <small>repos</small></span><span class="b-w">public on GitHub</span><span class="b-s">GitHub · snapshot 15 Nov 2026</span></button></li>
+          <li><button type="button" data-row="6" aria-pressed="false"><span class="b-l">Last push</span><span class="b-v"><b>15</b> <small>Nov</small></span><span class="b-w">peach-dash</span><span class="b-s">GitHub · snapshot 15 Nov 2026</span></button></li>
         </ol>
+        <div class="shipped">
+          <p class="sh-h">Shipped this week <span data-feed-stamp>GitHub · snapshot 15 Nov</span></p>
+          <ol class="f-list" data-feed data-max="3">
+            <li><time datetime="2026-11-15T20:00:13Z">15 Nov</time><a href="https://github.com/Waleee7/peach-dash/commit/3645750" target="_blank" rel="noopener">peach-dash</a><span>Lighter on phones</span></li>
+            <li><time datetime="2026-11-07T19:22:18Z">7 Nov</time><a href="https://github.com/Waleee7/ragdoll-riot" target="_blank" rel="noopener">ragdoll-riot</a><span>Pushed to main</span></li>
+            <li><time datetime="2026-11-06T16:13:28Z">6 Nov</time><a href="https://github.com/Waleee7/GlobalLingo" target="_blank" rel="noopener">GlobalLingo</a><span>Pushed to main</span></li>
+          </ol>
+        </div>
       </section>
-    </aside>
 
-    <div class="st-throw">
-      <button class="st-take" type="button" data-take><span class="st-ring" aria-hidden="true"></span><span class="st-take-l">Take a throw</span></button>
-      <p class="st-hint">Or hold anywhere on the field to spin. Let go in the red.</p>
+      <section class="scene" id="the-press-box" data-n="3" aria-labelledby="sc-3">
+        <p class="slate"><i>04</i>The Press Box</p>
+        <h2 class="sc-h" id="sc-3">About</h2>
+        <p class="sc-body">Akinwale Dare is a developer and builder in Atlanta. He is a software engineer at Medland Engineers (remote, since December 2025) and ships his own products: computer vision that measures a throw from one phone video, two live client builds, browser games and developer tools. 918 tests pass across eight of them.</p>
+        <p class="sc-body">He is also an elite thrower: discus and hammer at Life University, and a conference champion in discus.</p>
+        <dl class="facts">
+          <div><dt>Degree</dt><dd>B.S. Computer Information Systems, Life University, March 2027</dd></div>
+          <div><dt>Honors</dt><dd>President's List, Winter 2026 · Conference champion, discus</dd></div>
+          <div><dt>Certified</dt><dd>CompTIA A+, November 2024</dd></div>
+          <div><dt>Stack</dt><dd>TypeScript · React and Next.js · Node · Swift · Python · Three.js</dd></div>
+        </dl>
+        <p class="sc-more"><a href="https://worldathletics.org/athletes/united-states/joshua-dare-14939088" target="_blank" rel="noopener">His results on World Athletics <span aria-hidden="true">↗</span></a></p>
+      </section>
+
+      <section class="scene" id="the-tunnel" data-n="4" aria-labelledby="sc-4">
+        <p class="slate"><i>05</i>The Tunnel</p>
+        <h2 class="sc-h" id="sc-4">Get in touch</h2>
+        <p class="sc-body">Open to software engineering roles for 2027, after graduating in March, and taking client builds now. Email reaches him directly: <a data-email data-email-text href="#the-tunnel">his email address</a>.</p>
+        <div class="sc-cta">
+          <div class="mail">
+            <button class="cbtn main" type="button" aria-expanded="false" aria-controls="mail-4" data-mail-btn>Email <svg viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4"/></svg></button>
+            <ul class="mail-menu" id="mail-4" hidden>
+              <li><a href="#the-tunnel" data-mail="work"><b>Work</b><span>A role on your team</span></a></li>
+              <li><a href="#the-tunnel" data-mail="contract"><b>Contract</b><span>A build for your business</span></a></li>
+              <li><a href="#the-tunnel" data-mail="question"><b>Question</b><span>Anything else</span></a></li>
+            </ul>
+          </div>
+          <a class="cbtn" href="https://www.linkedin.com/in/akinwaledare" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="cbtn" href="https://github.com/Waleee7" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+          <a class="cbtn" href="?view=clean" data-view-go="clean">Résumé</a>
+        </div>
+      </section>
     </div>
 
-    <nav class="st-ribbon" aria-label="The board: one flag per project"><ol data-flags></ol></nav>
+    <footer class="cine-foot">
+      <p class="cine-hint"><span class="h-desk">Drag to look around · Scroll to push in · ← → for scenes</span><span class="h-touch">Drag to look around · Swipe for scenes</span></p>
+      <div class="cine-step">
+        <button type="button" data-prev aria-label="Previous scene">‹</button>
+        <p class="cine-count" aria-hidden="true"><b data-count-now>01</b> / 05</p>
+        <button type="button" data-next>Next: <span>The Sector</span> <i aria-hidden="true">›</i></button>
+      </div>
+    </footer>
     <p class="sr" role="status" data-say></p>
   </section>
-
   <!-- ============ CLEAN LOOK: a plain, printable one-page résumé (?view=clean) ============ -->
   <article class="clean" id="clean" aria-labelledby="cl-h">
     <header class="cl-head">
       <div>
-        <h2 class="cl-name" id="cl-h">Joshua Dare</h2>
-        <p class="cl-role">Software Engineer · College Thrower (discus, hammer) · Atlanta, GA</p>
+        <h2 class="cl-name" id="cl-h">Akinwale Dare</h2>
+        <p class="cl-role">Software Engineer · Builder · Elite Thrower (discus, hammer) · Atlanta, GA</p>
       </div>
       <ul class="cl-contact">
         <li><a data-email data-email-text href="#clean">Email</a></li>
@@ -196,7 +255,7 @@
         <li><a href="https://dare-os.vercel.app">dare-os.vercel.app</a></li>
       </ul>
     </header>
-    <p class="cl-sum">Software engineer who ships things you can open, and proves them with tests and measurements. Open to software engineering roles for 2027, after graduating in March, and taking client builds now.</p>
+    <p class="cl-sum">Developer and builder who ships things you can open, and proves them with tests and measurements. Open to software engineering roles for 2027, after graduating in March, and taking client builds now.</p>
     <section class="cl-sec" aria-labelledby="cl-exp">
       <h3 id="cl-exp">Experience</h3>
       <div class="cl-row"><p><b>Software Engineer</b>, Medland Engineers (remote)</p><p class="cl-when">Dec 2025 – present</p></div>
@@ -231,7 +290,7 @@
       </section>
       <section class="cl-sec" aria-labelledby="cl-ath">
         <h3 id="cl-ath">Athletics</h3>
-        <p>College thrower at Life University: discus and hammer. Conference champion in discus.</p>
+        <p>Elite thrower at Life University: discus and hammer. Conference champion in discus.</p>
         <p>Discus 51.92 m (1.5 kg, 2021) · 48.06 m (1.75 kg, 2022) · 45.30 m (2 kg, 2023)</p>
       </section>
     </div>
@@ -241,7 +300,7 @@
     </section>
     <footer class="cl-foot">
       <p>Test counts were re-run on 15 Nov 2026 from each project's public repo. Live sites are probed from your browser on the main page.</p>
-      <p class="cl-act"><button type="button" data-print>Print or save as PDF</button><a href="?view=stage" data-view-go="stage">Back to the stadium</a><a href="?view=os" data-view-go="os">Open DARE-OS</a></p>
+      <p class="cl-act"><button type="button" data-print>Print or save as PDF</button><a href="?view=stage" data-view-go="stage">Back to the scenes</a><a href="?view=os" data-view-go="os">Open DARE-OS</a></p>
     </footer>
   </article>
 
@@ -249,7 +308,7 @@
     <!-- Throws Night: the throwing sector, chalked on the desktop -->
     <svg class="wall-sector" viewBox="0 0 1000 620" preserveAspectRatio="xMaxYMax slice">
       <g fill="none" stroke="rgba(238,241,246,.11)" stroke-width="1.2">
-        <circle cx="120" cy="560" r="16" stroke="rgba(255,62,62,.7)" stroke-width="2"/>
+        <circle cx="120" cy="560" r="16" stroke="rgba(255,90,31,.7)" stroke-width="2"/>
         <path d="M120 560 L980 30"/><path d="M120 560 L995 300"/>
         <path d="M332 429 A 250 250 0 0 1 359 487"/><path d="M459 351 A 400 400 0 0 1 503 444"/>
         <path d="M587 272 A 550 550 0 0 1 648 401"/><path d="M714 194 A 700 700 0 0 1 792 357"/><path d="M842 115 A 850 850 0 0 1 937 314"/>
@@ -281,14 +340,14 @@
   <!-- Phones: a home screen instead of a desktop -->
   <div class="home">
     <div class="sbar"><span class="clock" data-clock="phone"></span><span class="live-pill"><span class="ldot" aria-hidden="true"></span><span><span data-count="sites">11</span>/11 live</span></span></div>
-    <section class="widget" aria-label="Josh Dare at a glance">
-      <p class="w-kick">SOFTWARE ENGINEER · STUDENT-ATHLETE</p>
-      <p class="w-name">Josh Dare</p>
-      <p class="w-line">College thrower: discus and hammer, Life University.</p>
+    <section class="widget" aria-label="Akinwale Dare at a glance">
+      <p class="w-kick">DEVELOPER · BUILDER · ELITE THROWER</p>
+      <p class="w-name">Akinwale Dare</p>
+      <p class="w-line">Software engineer, Medland Engineers. Elite thrower: discus and hammer, Life University.</p>
       <p class="w-line">B.S. Computer Information Systems, March 2027.</p>
       <p class="w-stats"><span><b data-count="sites">11</b> live</span><span><b>918</b> tests</span><span><b>2</b> clients</span></p>
       <form class="w-ask" data-nudge>
-        <label class="sr" for="w-q">Ask Josh a question</label>
+        <label class="sr" for="w-q">Ask Akinwale a question</label>
         <input id="w-q" name="q" maxlength="240" autocomplete="off" placeholder="Ask me anything…" enterkeyhint="send">
         <button type="submit">Ask</button>
       </form>
@@ -301,7 +360,7 @@
         <li><time datetime="2026-11-07T19:22:18Z">7 Nov</time><a href="https://github.com/Waleee7/ragdoll-riot" target="_blank" rel="noopener">ragdoll-riot</a><span>Pushed to main</span></li>
         <li><time datetime="2026-11-06T16:13:28Z">6 Nov</time><a href="https://github.com/Waleee7/GlobalLingo" target="_blank" rel="noopener">GlobalLingo</a><span>Pushed to main</span></li>
       </ol>
-      <button class="hf-stage" type="button" data-view-go="stage"><span class="to-ring" aria-hidden="true"></span>Back to the stadium</button>
+      <button class="hf-stage" type="button" data-view-go="stage"><span class="to-ring" aria-hidden="true"></span>Back to the scenes</button>
     </section>
     <nav class="pdock" aria-label="Home dock" data-launchers="pdock"></nav>
   </div>
@@ -311,13 +370,13 @@
     <header class="wt"><h2 class="wt-t" id="t-readme">README</h2></header>
     <div class="wb readme">
       <div class="doc">
-        <p class="kick">SOFTWARE ENGINEER · STUDENT-ATHLETE · ATLANTA</p>
-        <p class="name">Joshua Dare</p>
+        <p class="kick">DEVELOPER · BUILDER · ELITE THROWER · ATLANTA</p>
+        <p class="name">Akinwale Dare</p>
         <p class="motto">If it isn't measured, it didn't count.</p>
         <ul class="ident">
           <li><b>B.S. Computer Information Systems</b>, Life University, March 2027</li>
           <li><b>Software Engineer</b>, Medland Engineers (remote), since Dec 2025</li>
-          <li><b>College thrower</b>: discus and hammer, conference champion in discus</li>
+          <li><b>Elite thrower</b>: discus and hammer, conference champion in discus</li>
           <li><b><span data-count="sites">11</span> products live</b>, 2 client builds and 918 passing tests</li>
           <li><b>CompTIA A+</b> certified · President's List, Winter 2026</li>
         </ul>
@@ -349,7 +408,7 @@
   <section class="win" id="w-projects" data-app="projects" data-icon="folder" data-size="940x640" role="dialog" aria-labelledby="t-projects">
     <header class="wt"><h2 class="wt-t" id="t-projects">Projects</h2></header>
     <div class="wb explorer">
-      <div class="ex-bar"><span class="ex-label" aria-hidden="true">Address</span><span class="ex-addr" data-addr>C:\Josh\Projects</span><span class="ex-count">16 projects</span></div>
+      <div class="ex-bar"><span class="ex-label" aria-hidden="true">Address</span><span class="ex-addr" data-addr>C:\Akinwale\Projects</span><span class="ex-count">16 projects</span></div>
       <div class="ex-main">
         <nav class="ex-side" aria-label="Project groups">
           <a href="#g-sports">Sports tech</a><a href="#g-clients">Client builds</a><a href="#g-games">Games &amp; media</a><a href="#g-tools">AI &amp; dev tools</a><a href="#g-learn">Learning apps</a>
@@ -359,7 +418,7 @@
             <h3 id="gh-sports">Sports tech</h3>
             <ul>
               <li><button type="button" class="ex-item" data-project="sector"><span class="thumb"><img src="img/sector.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">SECTOR</span><span class="ex-tag">01 · Computer vision</span></button></li>
-              <li><button type="button" class="ex-item" data-project="trackside"><span class="thumb th-diagram" aria-hidden="true"><svg viewBox="0 0 160 100"><path d="M8 88H152" stroke="#9aa3b5" fill="none"/><path d="M22 74 Q 74 4 140 88" fill="none" stroke="#ff3e3e" stroke-width="3" stroke-dasharray="6 5"/><circle cx="22" cy="74" r="4" fill="#eef1f6"/></svg></span><span class="ex-name">trackside</span><span class="ex-tag">08 · Measurement, Python</span></button></li>
+              <li><button type="button" class="ex-item" data-project="trackside"><span class="thumb th-diagram" aria-hidden="true"><svg viewBox="0 0 160 100"><path d="M8 88H152" stroke="#9aa3b5" fill="none"/><path d="M22 74 Q 74 4 140 88" fill="none" stroke="#ff5a1f" stroke-width="3" stroke-dasharray="6 5"/><circle cx="22" cy="74" r="4" fill="#eef1f6"/></svg></span><span class="ex-name">trackside</span><span class="ex-tag">08 · Measurement, Python</span></button></li>
               <li><button type="button" class="ex-item" data-project="throwingtracker"><span class="thumb"><img src="img/throwingtracker.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">ThrowingTracker</span><span class="ex-tag">Training log · 107 tests</span></button></li>
             </ul>
           </section>
@@ -376,8 +435,8 @@
               <li><button type="button" class="ex-item" data-project="peachdash"><span class="thumb"><img src="img/peachdash.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">PEACH DASH</span><span class="ex-tag">Phone update · 3D Atlanta runner</span></button></li>
               <li><button type="button" class="ex-item" data-project="ragdoll"><span class="thumb"><img src="img/ragdoll.jpg" alt="" loading="lazy" width="1200" height="750"></span><span class="ex-name">RAGDOLL RIOT</span><span class="ex-tag">03 · Browser game</span></button></li>
               <li><button type="button" class="ex-item" data-project="blox"><span class="thumb"><img src="img/blox.jpg" alt="" loading="lazy" width="1080" height="1920"></span><span class="ex-name">BLOX LIFE</span><span class="ex-tag">Shipping soon · 3D video engine</span></button></li>
-              <li><button type="button" class="ex-item" data-project="groundstop"><span class="thumb th-gs" aria-hidden="true"><svg viewBox="0 0 160 100"><rect width="160" height="100" fill="#05070b"/><path d="M14 78 L146 52" stroke="rgba(238,241,246,.28)" stroke-width="14"/><path d="M14 78 L146 52" stroke="#eef1f6" stroke-width="1.4" stroke-dasharray="7 6"/><circle cx="96" cy="34" r="16" fill="none" stroke="#ff3e3e" stroke-width="1.6" stroke-dasharray="4 4"/><path d="M90 34h12M96 28v12" stroke="#ff3e3e" stroke-width="1.6"/></svg></span><span class="ex-name">GROUND STOP</span><span class="ex-tag">In progress · FAA-fed sim</span></button></li>
-              <li><button type="button" class="ex-item" data-project="infinite"><span class="thumb th-race" aria-hidden="true"><svg viewBox="0 0 160 100"><rect width="160" height="100" fill="#05070b"/><path d="M10 90 C 70 90, 80 20, 152 16" fill="none" stroke="rgba(238,241,246,.3)" stroke-width="12"/><path d="M10 90 C 70 90, 80 20, 152 16" fill="none" stroke="#ff3e3e" stroke-width="2" stroke-dasharray="8 7"/></svg></span><span class="ex-name">Infinite Edition</span><span class="ex-tag">Racing game · in progress</span></button></li>
+              <li><button type="button" class="ex-item" data-project="groundstop"><span class="thumb th-gs" aria-hidden="true"><svg viewBox="0 0 160 100"><rect width="160" height="100" fill="#05070b"/><path d="M14 78 L146 52" stroke="rgba(238,241,246,.28)" stroke-width="14"/><path d="M14 78 L146 52" stroke="#eef1f6" stroke-width="1.4" stroke-dasharray="7 6"/><circle cx="96" cy="34" r="16" fill="none" stroke="#ff5a1f" stroke-width="1.6" stroke-dasharray="4 4"/><path d="M90 34h12M96 28v12" stroke="#ff5a1f" stroke-width="1.6"/></svg></span><span class="ex-name">GROUND STOP</span><span class="ex-tag">In progress · FAA-fed sim</span></button></li>
+              <li><button type="button" class="ex-item" data-project="infinite"><span class="thumb th-race" aria-hidden="true"><svg viewBox="0 0 160 100"><rect width="160" height="100" fill="#05070b"/><path d="M10 90 C 70 90, 80 20, 152 16" fill="none" stroke="rgba(238,241,246,.3)" stroke-width="12"/><path d="M10 90 C 70 90, 80 20, 152 16" fill="none" stroke="#ff5a1f" stroke-width="2" stroke-dasharray="8 7"/></svg></span><span class="ex-name">Infinite Edition</span><span class="ex-tag">Racing game · in progress</span></button></li>
             </ul>
           </section>
           <section class="ex-group" id="g-tools" aria-labelledby="gh-tools">
@@ -433,9 +492,9 @@
     </div>
   </section>
 
-  <!-- ============ ASK JOSH ============ -->
+  <!-- ============ ASK AKINWALE ============ -->
   <section class="win" id="w-ask" data-app="ask" data-icon="chat" data-size="460x660" data-min="320x380" data-pos="right" role="dialog" aria-labelledby="t-ask">
-    <header class="wt"><h2 class="wt-t" id="t-ask">Ask Josh</h2></header>
+    <header class="wt"><h2 class="wt-t" id="t-ask">Ask Akinwale</h2></header>
     <div class="wb chat" id="chat">
       <div class="chat-head"><span class="label">ASK THE PORTFOLIO</span><span class="stamp">NO GUESSING · RUNS IN YOUR BROWSER</span></div>
       <div class="chat-thread" role="log" aria-live="polite" aria-label="Conversation" tabindex="0"></div>
@@ -445,7 +504,7 @@
         <input id="chat-in" name="q" maxlength="240" placeholder="Ask about a project, the stack, the throws…" enterkeyhint="send">
         <button type="submit">Send</button>
       </form>
-      <p class="chat-note">Answers come from Josh's fact file and are matched to your question inside this tab. Nothing you type leaves your browser. Type <kbd>/help</kbd> for commands.</p>
+      <p class="chat-note">Answers come from Akinwale's fact file and are matched to your question inside this tab. Nothing you type leaves your browser. Type <kbd>/help</kbd> for commands.</p>
     </div>
   </section>
 
@@ -508,7 +567,7 @@
     <div class="wb term-app" id="term">
       <div class="t-out" role="log" aria-live="polite" aria-label="Terminal output" tabindex="0"></div>
       <form class="t-line" autocomplete="off">
-        <span class="t-ps" data-ps aria-hidden="true">C:\JOSH&gt;</span>
+        <span class="t-ps" data-ps aria-hidden="true">C:\AKINWALE&gt;</span>
         <label class="sr" for="t-in">Terminal command</label>
         <input id="t-in" maxlength="240" spellcheck="false" autocapitalize="off" autocomplete="off" enterkeyhint="go">
       </form>
@@ -521,14 +580,14 @@
     <div class="wb settings">
       <fieldset class="themes">
         <legend>Theme</legend>
-        <label class="th-card" data-pick="throws"><input type="radio" name="theme" value="throws"><span class="mini" aria-hidden="true"><i class="m-win"><i class="m-tb"></i></i><i class="m-bar"></i></span><span class="th-name">Stadium Night</span><span class="th-sub">Dark glass over the night stadium. The default</span></label>
+        <label class="th-card" data-pick="throws"><input type="radio" name="theme" value="throws"><span class="mini" aria-hidden="true"><i class="m-win"><i class="m-tb"></i></i><i class="m-bar"></i></span><span class="th-name">Cinema</span><span class="th-sub">Near-black, Laser orange, Floodlight steel. The default</span></label>
         <label class="th-card" data-pick="retro98"><input type="radio" name="theme" value="retro98"><span class="mini" aria-hidden="true"><i class="m-win"><i class="m-tb"></i></i><i class="m-bar"></i></span><span class="th-name">Retro 98</span><span class="th-sub">Teal desktop, gray bevels, Start menu</span></label>
         <label class="th-card" data-pick="mac"><input type="radio" name="theme" value="mac"><span class="mini" aria-hidden="true"><i class="m-win"><i class="m-tb"></i></i><i class="m-bar"></i></span><span class="th-name">Mac Light</span><span class="th-sub">Glass windows, dock, system font</span></label>
         <label class="th-card" data-pick="win11"><input type="radio" name="theme" value="win11"><span class="mini" aria-hidden="true"><i class="m-win"><i class="m-tb"></i></i><i class="m-bar"></i></span><span class="th-name">Windows 11</span><span class="th-sub">Centered taskbar, search, frosted windows</span></label>
       </fieldset>
       <section class="about-site" aria-labelledby="about-h">
         <h3 id="about-h">About this desktop</h3>
-        <p>Plain HTML, CSS and JavaScript: no framework and no build step. The stadium is three.js, loaded only after the page is up. Your theme stays in this browser. Add <code>?theme=mac</code> to a link to share a look.</p>
+        <p>Plain HTML, CSS and JavaScript: no framework and no build step. The film is three.js, loaded only after the page is up. Your theme stays in this browser. Add <code>?theme=mac</code> to a link to share a look.</p>
         <p class="stats" data-pagestats>Every mark on this page was measured</p>
       </section>
     </div>
@@ -728,7 +787,7 @@
       <figure class="shot diagram">
         <svg viewBox="0 0 560 340" role="img" aria-label="Diagram: an implement's flight path with release speed, angle and height marked">
           <g fill="none" stroke="rgba(238,241,246,.25)"><path d="M20 300 H540"/></g>
-          <path d="M70 250 Q 260 20 500 300" fill="none" stroke="#ff3e3e" stroke-width="3" stroke-dasharray="7 6"/>
+          <path d="M70 250 Q 260 20 500 300" fill="none" stroke="#ff5a1f" stroke-width="3" stroke-dasharray="7 6"/>
           <circle cx="70" cy="250" r="7" fill="#eef1f6"/>
           <path d="M70 250 L150 170" stroke="#eef1f6" stroke-width="2"/><path d="M70 250 H160" stroke="rgba(238,241,246,.4)"/>
           <path d="M70 300 V250" stroke="rgba(238,241,246,.4)" stroke-dasharray="3 4"/>
@@ -832,7 +891,7 @@
         <p class="what">A real-life travel sim: you're flying out today, and the live FAA status feed decides how your day goes. Real ground stops, delay programs and the reasons behind them, with a real past event to replay when the skies are quiet.</p>
         <div class="go"><span class="ship ship-wip">IN PROGRESS · NO PUBLIC LINK YET</span></div>
       </div>
-      <figure class="shot"><svg class="ph" viewBox="0 0 320 180" aria-hidden="true"><rect width="320" height="180" fill="#05070b"/><path d="M24 150 L296 96" stroke="rgba(238,241,246,.25)" stroke-width="24"/><path d="M24 150 L296 96" stroke="#eef1f6" stroke-width="2" stroke-dasharray="12 10"/><circle cx="200" cy="58" r="30" fill="none" stroke="#ff3e3e" stroke-width="2" stroke-dasharray="6 6"/><path d="M188 58h24M200 46v24" stroke="#ff3e3e" stroke-width="2"/></svg></figure>
+      <figure class="shot"><svg class="ph" viewBox="0 0 320 180" aria-hidden="true"><rect width="320" height="180" fill="#05070b"/><path d="M24 150 L296 96" stroke="rgba(238,241,246,.25)" stroke-width="24"/><path d="M24 150 L296 96" stroke="#eef1f6" stroke-width="2" stroke-dasharray="12 10"/><circle cx="200" cy="58" r="30" fill="none" stroke="#ff5a1f" stroke-width="2" stroke-dasharray="6 6"/><path d="M188 58h24M200 46v24" stroke="#ff5a1f" stroke-width="2"/></svg></figure>
     </div>
   </section>
   <section class="win proj small" id="w-p-infinite" data-app="p-infinite" data-icon="app" data-size="820x500" role="dialog" aria-labelledby="t-p-infinite">
@@ -843,7 +902,7 @@
         <p class="case-name" aria-hidden="true">Infinite Edition</p>
         <p class="what">An arcade racing game with drift physics, built in Three.js. Private while the assets get cleared.</p><div class="go"><span class="ship ship-wip">IN PROGRESS · PRIVATE REPO</span></div>
       </div>
-      <figure class="shot"><svg class="ph" viewBox="0 0 320 180" aria-hidden="true"><rect width="320" height="180" fill="#05070b"/><path d="M20 160 C 120 160, 140 40, 300 30" fill="none" stroke="rgba(238,241,246,.3)" stroke-width="18"/><path d="M20 160 C 120 160, 140 40, 300 30" fill="none" stroke="#ff3e3e" stroke-width="2" stroke-dasharray="10 9"/><path d="M60 150 C 130 150, 150 70, 230 52" fill="none" stroke="rgba(255,62,62,.35)" stroke-width="4"/></svg></figure>
+      <figure class="shot"><svg class="ph" viewBox="0 0 320 180" aria-hidden="true"><rect width="320" height="180" fill="#05070b"/><path d="M20 160 C 120 160, 140 40, 300 30" fill="none" stroke="rgba(238,241,246,.3)" stroke-width="18"/><path d="M20 160 C 120 160, 140 40, 300 30" fill="none" stroke="#ff5a1f" stroke-width="2" stroke-dasharray="10 9"/><path d="M60 150 C 130 150, 150 70, 230 52" fill="none" stroke="rgba(255,90,31,.35)" stroke-width="4"/></svg></figure>
     </div>
   </section>
 </main>
@@ -860,7 +919,7 @@
     <div class="tasks" role="group" aria-label="Open windows"></div>
   </div>
   <div class="tray">
-    <button class="to-stage" type="button" data-view-go="stage"><span class="to-ring" aria-hidden="true"></span>Stadium</button>
+    <button class="to-stage" type="button" data-view-go="stage"><span class="to-ring" aria-hidden="true"></span>Scenes</button>
     <button class="news-btn" type="button" data-launch="news"><span aria-hidden="true">★</span> What's New</button>
     <span class="live-pill" title="Products answering right now, probed from your browser"><span class="ldot" aria-hidden="true"></span><span><span data-count="sites">11</span>/11 live</span></span>
     <span class="clock" data-clock="win"></span>
@@ -868,11 +927,11 @@
 </footer>
 
 <div class="startmenu" id="startmenu" hidden>
-  <div class="sm-side" aria-hidden="true"><span><b>Josh</b>Dare<i>98</i></span></div>
+  <div class="sm-side" aria-hidden="true"><span><b>Akinwale</b>Dare<i>98</i></span></div>
   <div class="sm-main">
     <form class="sm-search" role="search" data-search>
       <label class="sr" for="sm-q">Search: ask the portfolio</label>
-      <input id="sm-q" name="q" placeholder="Ask anything about Josh's work" maxlength="240" autocomplete="off" enterkeyhint="search">
+      <input id="sm-q" name="q" placeholder="Ask anything about Akinwale's work" maxlength="240" autocomplete="off" enterkeyhint="search">
     </form>
     <p class="sm-h">Pinned</p>
     <ul class="sm-apps" data-launchers="start"></ul>
@@ -882,23 +941,23 @@
       <li><button type="button" data-project="ragdoll"><span data-icon="stick"></span><span><b>RAGDOLL RIOT</b><small>Playable right here</small></span></button></li>
       <li><button type="button" data-project="dextensionz"><span data-icon="bag"></span><span><b>D'extensionz</b><small>Client storefront on live Stripe</small></span></button></li>
     </ul>
-    <div class="sm-foot"><span class="sm-av" aria-hidden="true">JD</span><span>Joshua Dare</span></div>
+    <div class="sm-foot"><span class="sm-av" aria-hidden="true">AD</span><span>Akinwale Dare</span></div>
   </div>
 </div>
 
 <!-- The chatbot says hello: a tray balloon in the Windows themes, a notification in the Mac ones -->
 <aside class="nudge" id="nudge" aria-labelledby="nudge-t" hidden>
-  <button class="nudge-x" type="button" aria-label="Dismiss the Ask Josh greeting">×</button>
-  <p class="nudge-t" id="nudge-t"><span data-icon="chat"></span><b>Ask Josh is online</b></p>
+  <button class="nudge-x" type="button" aria-label="Dismiss the Ask Akinwale greeting">×</button>
+  <p class="nudge-t" id="nudge-t"><span data-icon="chat"></span><b>Ask Akinwale is online</b></p>
   <p class="nudge-b">Ask about my projects, my throws or hiring. Every answer shows its source.</p>
   <form class="nudge-f" data-nudge>
-    <label class="sr" for="nudge-q">Ask Josh a question</label>
+    <label class="sr" for="nudge-q">Ask Akinwale a question</label>
     <input id="nudge-q" name="q" maxlength="240" autocomplete="off" placeholder="What's your best project?" enterkeyhint="send">
     <button type="submit">Ask</button>
   </form>
   <div class="nudge-c">
     <button type="button" data-q="What's your best project?">Best project</button>
-    <button type="button" data-q="Why should we hire you?">Why hire Josh</button>
+    <button type="button" data-q="Why should we hire you?">Why hire Akinwale</button>
     <button type="button" data-q="What are your marks?">Throws</button>
   </div>
 </aside>

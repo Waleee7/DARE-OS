@@ -1,7 +1,7 @@
-// Live numbers for the scorecard. LIVE probes every product from this browser;
-// OPEN SOURCE and LAST PUSH come from the GitHub API. If a request fails, the
-// snapshot updated on 7 Nov 2026 (already in the HTML) stays on screen. The tray,
-// menu bar and phone status bar mirror the LIVE count.
+// Live numbers for the scorecard and THE BOARD scene. LIVE probes every product from
+// this browser; OPEN SOURCE and LAST PUSH come from the GitHub API. If a request fails,
+// the measured snapshot already in the HTML stays on screen. The tray, menu bar and
+// phone status bar mirror the LIVE count.
 (function () {
   const card = document.querySelector('[data-scorecard]');
   if (!card) return;
@@ -56,7 +56,7 @@
     for (const n of document.querySelectorAll('[data-count="sites"]')) n.textContent = String(up.length);
     document.documentElement.dataset.net = up.length === rs.length ? 'up' : 'part';
     if (stamp) stamp.textContent = 'LIVE · ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    L.up = up.length; tell();
+    L.up = up.length; L.total = rs.length; L.median = median; L.probedAt = Date.now(); tell();
   });
 
   /* ---- GitHub, cached for ten minutes so reloads don't spend the rate limit ---- */
@@ -72,7 +72,8 @@
   function apply(gh) {
     set('repos', String(gh.repos), `public repos · ${gh.stars} ★`, `github.com/${USER}: ${gh.repos} public repos, ${gh.stars} stars, from the GitHub API`, 'up');
     if (gh.push) set('push', ago(gh.push.at), `ago · ${gh.push.repo}`, `Latest public push: ${gh.push.repo}, ${new Date(gh.push.at).toLocaleString()}`, 'up');
-    L.repos = gh.byRepo || {}; L.events = gh.events || []; L.eventsAt = gh.at; tell();
+    L.repos = gh.byRepo || {}; L.events = gh.events || []; L.eventsAt = gh.at;
+    L.gh = { repos: gh.repos, stars: gh.stars, push: gh.push, at: gh.at }; tell();
   }
   const json = (url) => fetch(url, { headers: { Accept: 'application/vnd.github+json' } }).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
   const hit = cache.get();

@@ -15,7 +15,7 @@
     try { localStorage.setItem(KEY, latest); } catch (e) { /* blocked */ }
   }
   document.addEventListener('click', (e) => { if (e.target.closest('[data-launch="news"]')) markSeen(); });
-  // also covers a deep link and the terminal or Ask Josh opening it
+  // also covers a deep link and the terminal or Ask Akinwale opening it
   new MutationObserver(() => { if (window.JD && JD.wm && JD.wm.isOpen('news')) markSeen(); })
     .observe(document.getElementById('w-news'), { attributes: true, attributeFilter: ['hidden', 'class', 'style'] });
 })();

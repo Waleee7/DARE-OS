@@ -8,7 +8,7 @@
 
   const THEMES = {
     retro98: { name: 'Retro 98', chrome: 'win', color: '#008080' },
-    throws: { name: 'Stadium Night', chrome: 'mac', color: '#070910' },
+    throws: { name: 'Cinema', chrome: 'mac', color: '#0a0b0d' },
     mac: { name: 'Mac Light', chrome: 'mac', color: '#e9eef5' },
     win11: { name: 'Windows 11', chrome: 'win', color: '#0b3080' },
   };
@@ -17,7 +17,7 @@
     { id: 'projects', icon: 'folder', name: 'Projects', retro98: 'My Projects' },
     { id: 'circle', icon: 'discus', name: 'DISCUS DISASTER' },
     { id: 'news', icon: 'news', name: "What's New", retro98: 'WHATSNEW.TXT' },
-    { id: 'ask', icon: 'chat', name: 'Ask Josh' },
+    { id: 'ask', icon: 'chat', name: 'Ask Akinwale' },
     { id: 'athlete', icon: 'medal', name: 'Athlete' },
     { id: 'contact', icon: 'mail', name: 'Contact' },
     { id: 'terminal', icon: 'term', name: 'Terminal', retro98: 'MS-DOS Prompt', win11: 'Terminal' },
@@ -28,12 +28,12 @@
   const TITLES = {
     readme: { retro98: 'README.TXT - Notepad' },
     news: { retro98: 'WHATSNEW.TXT - Notepad' },
-    projects: { retro98: 'C:\\Josh\\Projects', win11: 'Projects - File Explorer', mac: 'Projects', throws: 'Projects' },
-    terminal: { retro98: 'MS-DOS Prompt', win11: 'Windows PowerShell', mac: 'josh — zsh', throws: 'josh — zsh' },
+    projects: { retro98: 'C:\\Akinwale\\Projects', win11: 'Projects - File Explorer', mac: 'Projects', throws: 'Projects' },
+    terminal: { retro98: 'MS-DOS Prompt', win11: 'Windows PowerShell', mac: 'akinwale — zsh', throws: 'akinwale — zsh' },
     settings: { retro98: 'Display Properties', mac: 'System Settings', throws: 'System Settings' },
     bin: { mac: 'Trash', throws: 'Trash' },
   };
-  const ADDR = { retro98: 'C:\\Josh\\Projects', win11: 'This PC  ›  Josh  ›  Projects', mac: 'Josh  ›  Projects', throws: 'JOSH / PROJECTS' };
+  const ADDR = { retro98: 'C:\\Akinwale\\Projects', win11: 'This PC  ›  Akinwale  ›  Projects', mac: 'Akinwale  ›  Projects', throws: 'AKINWALE / PROJECTS' };
   // The phone home screen: everything not in the dock, plus the three best projects.
   const GRID = ['readme', 'news', 'athlete', 'terminal', 'settings', 'bin', { project: 'sector', icon: 'cam', name: 'SECTOR' }, { project: 'ragdoll', icon: 'stick', name: 'RAGDOLL RIOT' }, { project: 'dextensionz', icon: 'bag', name: "D'extensionz" }];
   const PDOCK = ['ask', 'projects', 'circle', 'contact'];

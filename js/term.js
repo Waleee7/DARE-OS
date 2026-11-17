@@ -6,7 +6,7 @@
   if (!box || !root.Ask) return;
   const Ask = root.Ask, JD = root.JD, wm = JD.wm;
   const out = box.querySelector('.t-out'), form = box.querySelector('form'), input = form.querySelector('input'), ps = box.querySelector('[data-ps]');
-  const PS = { retro98: 'C:\\JOSH>', win11: 'PS C:\\Users\\josh>', mac: 'josh@dare ~ %', throws: 'josh@dare ~ %' };
+  const PS = { retro98: 'C:\\AKINWALE>', win11: 'PS C:\\Users\\akinwale>', mac: 'akinwale@dare ~ %', throws: 'akinwale@dare ~ %' };
   const APPS = ['readme', 'projects', 'circle', 'ask', 'athlete', 'contact', 'terminal', 'settings', 'bin'];
   const PROJECTS = wm.all().filter((id) => id.startsWith('p-')).map((id) => id.slice(2));
   const RUNNABLE = ['sector', 'ragdoll'];
@@ -33,8 +33,8 @@
   };
   function banner() {
     const dos = JD.theme && JD.theme.get() === 'retro98';
-    print(dos ? 'JOSH-DOS Version 2027.3' : "Welcome to Josh Dare's portfolio shell.", 't-dim');
-    print('Type help for commands, or ask anything about Josh\'s work.', 't-dim');
+    print(dos ? 'DARE-DOS Version 2027.3' : "Welcome to Akinwale Dare's portfolio shell.", 't-dim');
+    print('Type help for commands, or ask anything about Akinwale\'s work.', 't-dim');
     print('');
   }
   function copyEmail() {
@@ -45,7 +45,7 @@
 
   const CMDS = {
     help() {
-      for (const l of ['help              this list', 'ls                apps and projects', 'open <name>       open an app or a project (open sector)', 'run <sector|ragdoll>  run a live app in its window', 'theme [name]      list themes, or switch (theme mac)', 'whoami            who Josh is', 'email             copy Josh\'s email', 'clear             clear the screen', 'exit              close the terminal', '', 'Anything else is a question: try "how many tests" or "is he open to roles".']) print(l);
+      for (const l of ['help              this list', 'ls                apps and projects', 'open <name>       open an app or a project (open sector)', 'run <sector|ragdoll>  run a live app in its window', 'theme [name]      list themes, or switch (theme mac)', 'whoami            who Akinwale is', 'email             copy Akinwale\'s email', 'clear             clear the screen', 'exit              close the terminal', '', 'Anything else is a question: try "how many tests" or "is he open to roles".']) print(l);
     },
     ls() { print('APPS      ' + APPS.join('  ')); print('PROJECTS  ' + PROJECTS.join('  ')); },
     open(arg) {
@@ -66,7 +66,7 @@
       ps.textContent = prompt();
       print(`Theme set to ${T.name(arg)}.`);
     },
-    whoami() { print('Joshua Dare: software engineer and college thrower (discus, hammer) at Life University. B.S. Computer Information Systems, March 2027. Atlanta, GA.'); },
+    whoami() { print('Akinwale Dare: developer and builder, software engineer at Medland Engineers, and an elite thrower (discus, hammer) at Life University. B.S. Computer Information Systems, March 2027. Atlanta, GA.'); },
     email: copyEmail,
     clear() { out.replaceChildren(); },
     exit() { wm.close('terminal'); },

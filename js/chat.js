@@ -1,4 +1,4 @@
-// ASK JOSH, the chat window. Ask.answer() picks the reply from the fact file;
+// ASK AKINWALE, the chat window. Ask.answer() picks the reply from the fact file;
 // this file renders it, types it out and runs the page actions it carries.
 // Everything is built with DOM nodes, so nothing a visitor types becomes HTML.
 (function (root) {

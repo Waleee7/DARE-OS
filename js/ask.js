@@ -14,7 +14,7 @@
     'show give know want like any some much many more most get got has have had im ive id whats hows wheres whos dont doesnt ' +
     'didnt cant isnt').split(' '));
   const FOLLOW = /\b(it|its|this|that|they|them|the game|the app|the project|this one|that one)\b/;
-  const ABOUT_HIM = /\b(he|him|his|himself|josh|joshua)\b/;
+  const ABOUT_HIM = /\b(he|him|his|himself|josh|joshua|akinwale|wale)\b/;
 
   const norm = (s) => String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '')
     .replace(/['’`]/g, '').replace(/[^a-z0-9#+]+/g, ' ').trim();
@@ -159,7 +159,7 @@
       return reply(e, { topic: ctx.topic, match: label(e, true), ...matched(ih) });
     }
     // A short question with an intent and no subject ("how does the physics work?")
-    // is about the last project, unless it's about Josh himself ("what's his stack?").
+    // is about the last project, unless it's about Akinwale himself ("what's his stack?").
     const short = intent && ctx.topic && A.content.length <= 4 && !ABOUT_HIM.test(A.raw);
     if (gen.e && !(short && gen.gs <= 1)) return reply(gen.e, { match: label(gen.e), ...matched(gen.hit) });
     if (short) {
