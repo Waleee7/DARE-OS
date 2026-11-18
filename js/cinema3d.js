@@ -58,10 +58,10 @@ const SHOTS = [
     tall: { pos: [-0.35, 1.75, -2.3], look: [0.3, 0.55, 20], fov: 56 } },
   { id: 'sector', pos: [-37, 17, 11], look: [3, 0, 47], fov: 42, shift: 0.12, dolly: [-5, 9],
     tall: { pos: [-28, 26, 2], look: [4, 0, 46], fov: 60 } },
-  { id: 'board', pos: [-5, 3.0, 70], look: [0, 19.5, 138], fov: 40, shift: 0.25, dolly: [-5, 12],
-    tall: { pos: [-3, 2.4, 74], look: [0, 19, 138], fov: 52 } },
-  { id: 'press', pos: [-72.2, 14.15, 30.6], look: [-30, 3, 52], fov: 52, shift: 0.04, via: [-60, 13.8, 33], dolly: [-0.3, 1.6],
-    tall: { pos: [-72.2, 14.15, 31.2], look: [-32, 2, 50], fov: 62 } },
+  { id: 'board', pos: [8, 5, 75], look: [-4, 17.5, 138], fov: 44, shift: 0.2, dolly: [-5, 9],
+    tall: { pos: [-1, 3.2, 72], look: [0, 18.5, 138], fov: 50 } },
+  { id: 'press', pos: [-71.4, 14.0, 31.5], look: [-32, 2, 62], fov: 52, shift: 0.04, via: [-60, 13.8, 33], dolly: [-0.3, 1.4],
+    tall: { pos: [-71.4, 14.0, 31.8], look: [-34, 1.5, 60], fov: 62 } },
   { id: 'tunnel', pos: [-70.6, 1.62, 40], look: [-30, 1.75, 40], fov: 44, shift: 0.1, via: [-43, 2.2, 40], dolly: [-0.6, 5],
     tall: { pos: [-70.6, 1.6, 40], look: [-30, 1.8, 40], fov: 56 } },
 ];
@@ -172,9 +172,10 @@ export async function init(o) {
     const posts = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.038, 0.038, 5.6, 6), new THREE.MeshLambertMaterial({ color: 0x59606c }), n);
     for (let i = 0; i < n; i++) { const a = (a0 + ((a1 - a0) * i) / (n - 1)) * RAD; M.compose(V.set(CAGE * Math.sin(a), 2.8, CAGE * Math.cos(a)), Q.identity(), Sc.set(1, 1, 1)); posts.setMatrixAt(i, M); }
     posts.computeBoundingSphere(); still(posts);
-    const net = T(32, 32, (g) => { g.strokeStyle = 'rgba(205,212,226,.75)'; g.lineWidth = 1; g.strokeRect(0.5, 0.5, 32, 32); }).t;
-    net.wrapS = net.wrapT = THREE.RepeatWrapping; net.repeat.set(80, 20); net.anisotropy = aniso;
-    const netMesh = new THREE.Mesh(new THREE.CylinderGeometry(CAGE, CAGE, 5.4, 56, 1, true, a0 * RAD, (a1 - a0) * RAD), new THREE.MeshLambertMaterial({ map: net, transparent: true, opacity: 0.38, side: THREE.DoubleSide, depthWrite: false }));
+    // the net: a fine dark mesh (about 9 cm), which reads as netting and fades to a haze with distance
+    const net = T(32, 32, (g) => { g.strokeStyle = 'rgba(150,158,172,.55)'; g.lineWidth = 2; g.beginPath(); g.moveTo(0, 0); g.lineTo(32, 32); g.moveTo(32, 0); g.lineTo(0, 32); g.stroke(); }).t;
+    net.wrapS = net.wrapT = THREE.RepeatWrapping; net.repeat.set(190, 60); net.anisotropy = aniso;
+    const netMesh = new THREE.Mesh(new THREE.CylinderGeometry(CAGE, CAGE, 5.4, 56, 1, true, a0 * RAD, (a1 - a0) * RAD), new THREE.MeshLambertMaterial({ map: net, transparent: true, opacity: 0.3, side: THREE.DoubleSide, depthWrite: false }));
     netMesh.position.y = 2.75; still(netMesh);
   }
   await pause();
@@ -228,7 +229,7 @@ export async function init(o) {
     const glow = T(64, 64, (g) => { const r = g.createRadialGradient(32, 32, 0, 32, 32, 32); r.addColorStop(0, 'rgba(255,246,228,1)'); r.addColorStop(0.16, 'rgba(255,236,204,.45)'); r.addColorStop(1, 'rgba(255,236,204,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); }).t;
     const pos = new Float32Array(TOWERS.flatMap(([x, z]) => [x, H, z]));
     const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    scene.add(new THREE.Points(g, new THREE.PointsMaterial({ map: glow, size: 70, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false, toneMapped: false })));
+    scene.add(new THREE.Points(g, new THREE.PointsMaterial({ map: glow, size: 56, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false, toneMapped: false })));
   }
   await pause();
 
@@ -256,21 +257,17 @@ export async function init(o) {
       g.fillStyle = '#9fb8d0'; g.font = `600 ${27 * bk}px ${MONO}`; g.fillText('DEVELOPER · BUILDER · ELITE THROWER', pad + 4 * bk, 372 * bk);
       g.fillStyle = '#ff5a1f'; g.fillRect(pad + 4 * bk, 420 * bk, 120 * bk, 5 * bk);
     } else {
-      const r = BD.rows[BD.k % BD.rows.length], colX = W * 0.62;
-      g.fillStyle = '#9fb8d0'; g.font = `600 ${24 * bk}px ${MONO}`; g.fillText(r.label.toUpperCase(), pad, 122 * bk);
-      g.fillStyle = '#f2efe8'; const s = fit(g, r.big, `600 $px ${DISP}`, 230 * bk, colX - pad * 2.4); g.fillText(r.big, pad - 6 * bk, 330 * bk);
+      // one number at a time, full width: the label, the number, what it counts, where it comes from,
+      // and a tick per row along the bottom (the panel beside the film lists them all)
+      const n = BD.rows.length, k = BD.k % n, r = BD.rows[k];
+      g.fillStyle = '#9fb8d0'; g.font = `600 ${26 * bk}px ${MONO}`; g.fillText(r.label.toUpperCase(), pad, 128 * bk);
+      g.fillStyle = '#f2efe8'; const s = fit(g, r.big, `600 $px ${DISP}`, 250 * bk, W * 0.62); g.fillText(r.big, pad - 6 * bk, 338 * bk);
       const bw = g.measureText(r.big).width;
-      if (r.unit) { g.fillStyle = '#ff5a1f'; g.font = `600 ${Math.min(84 * bk, s * 0.38)}px ${DISP}`; g.fillText(r.unit.toUpperCase(), pad + bw + 8 * bk, 330 * bk); }
-      g.fillStyle = '#c9c6bf'; fit(g, r.what.toUpperCase(), `500 $px ${MONO}`, 24 * bk, colX - pad * 2); g.fillText(r.what.toUpperCase(), pad, 392 * bk);
-      g.fillStyle = '#8b97a8'; fit(g, r.src.toUpperCase(), `500 $px ${MONO}`, 19 * bk, colX - pad * 2); g.fillText(r.src.toUpperCase(), pad, 450 * bk);
-      g.fillStyle = '#1a1d24'; g.fillRect(colX - 24 * bk, 84 * bk, 2 * bk, H - 120 * bk);
-      const n = BD.rows.length, rowH = Math.min(52 * bk, (H - 130 * bk) / n);
-      BD.rows.forEach((x, j) => {
-        const y = 118 * bk + j * rowH, on = j === BD.k % n;
-        g.fillStyle = on ? '#ff5a1f' : '#2a2e37'; g.fillRect(colX, y - 20 * bk, 6 * bk, 26 * bk);
-        g.fillStyle = on ? '#f2efe8' : '#7d8796'; g.font = `600 ${21 * bk}px ${MONO}`; g.fillText(x.label.toUpperCase(), colX + 20 * bk, y);
-        g.textAlign = 'right'; g.fillText(`${x.big}${x.unit ? ' ' + x.unit : ''}`.toUpperCase(), W - pad, y); g.textAlign = 'left';
-      });
+      if (r.unit) { g.fillStyle = '#ff5a1f'; g.font = `600 ${Math.min(96 * bk, s * 0.4)}px ${DISP}`; g.fillText(r.unit.toUpperCase(), pad + bw + 12 * bk, 338 * bk); }
+      g.fillStyle = '#d9d5cc'; fit(g, r.what.toUpperCase(), `500 $px ${MONO}`, 27 * bk, W - pad * 2); g.fillText(r.what.toUpperCase(), pad, 398 * bk);
+      g.fillStyle = '#8b97a8'; fit(g, r.src.toUpperCase(), `500 $px ${MONO}`, 20 * bk, W - pad * 2); g.fillText(r.src.toUpperCase(), pad, 440 * bk);
+      const tw = (W - pad * 2 - (n - 1) * 10 * bk) / n;
+      for (let j = 0; j < n; j++) { g.fillStyle = j === k ? '#ff5a1f' : '#2a2e37'; g.fillRect(pad + j * (tw + 10 * bk), 470 * bk, tw, 5 * bk); }
     }
     // the LED grid, so it reads as a board and not a poster
     g.fillStyle = 'rgba(0,0,0,.3)'; const st = Math.max(3, 4 * bk);
@@ -291,17 +288,17 @@ export async function init(o) {
       span(x1, y1, z0, x0 + 0.3, y1 + 0.35, z1),            // roof
       span(x0 - 0.1, y0, z0, x0 + 0.3, y0 + 0.95, z1),      // the wall under the window
       span(x0 - 0.1, y1 - 0.55, z0, x0 + 0.3, y1, z1),      // the header over it
-      span(x0 - 1.0, y0 + 0.88, z0, x0 - 0.1, y0 + 0.95, z1), // the desk top
     ], shell);
+    // the desk top, light enough to read as a desk in the foreground
+    boxes([span(x0 - 1.0, y0 + 0.88, z0, x0 - 0.1, y0 + 0.95, z1)], new THREE.MeshLambertMaterial({ color: 0x4a443b }));
     boxes([
       span(x1 - 0.2, y0, z0, x1, y1, z1),                    // back wall (lit)
       span(x1, y0, z0 - 0.2, x0, y1, z0),                    // side walls
       span(x1, y0, z1, x0, y1, z1 + 0.2),
       span(x1, y1 - 0.06, z0, x0, y1, z1),                   // ceiling
     ], inner);
-    // window mullions, leaving the gap the camera flies through
-    const mull = []; for (let z = 27; z < z1; z += 3.5) mull.push(span(x0 + 0.02, y0 + 0.95, z - 0.05, x0 + 0.14, y1 - 0.55, z + 0.05));
-    boxes(mull, shell);
+    // one wide pane of glass: posts only at the two ends, so nothing crosses the view of the board
+    boxes([span(x0 + 0.02, y0 + 0.95, z0 + 0.2, x0 + 0.16, y1 - 0.55, z0 + 0.32), span(x0 + 0.02, y0 + 0.95, z1 - 0.32, x0 + 0.16, y1 - 0.55, z1 - 0.2)], shell);
     // ceiling lights, two monitors facing the seats, a microphone
     boxes([30, 37, 44, 51].map((z) => span(x1 + 2.2, y1 - 0.09, z - 0.6, x0 - 2.2, y1 - 0.07, z + 0.6)), new THREE.MeshBasicMaterial({ color: 0xe8dcc6 }));
     boxes([span(x0 - 0.75, y0 + 0.95, 35.2, x0 - 0.68, y0 + 1.42, 36.1), span(x0 - 0.75, y0 + 0.95, 44.2, x0 - 0.68, y0 + 1.42, 45.1)], new THREE.MeshBasicMaterial({ color: 0x1f2a36 }));
@@ -323,8 +320,9 @@ export async function init(o) {
     roof.position.set(-62, TUN.h - 0.04, 40); still(roof);
     const floor = new THREE.Mesh(new THREE.PlaneGeometry(23, TUN.z1 - TUN.z0).rotateX(-Math.PI / 2), new THREE.MeshLambertMaterial({ color: 0x1b1c20 }));
     floor.position.set(-60.5, 0.02, 40); still(floor);
-    const strips = []; for (let x = -53; x > -70; x -= 2.8) strips.push(span(x - 0.7, TUN.h - 0.09, 39.96, x + 0.7, TUN.h - 0.06, 40.04));
-    boxes(strips, new THREE.MeshBasicMaterial({ color: 0xfff4e6, toneMapped: false }));
+    // ceiling light panels across the tunnel (short along it), so they read as fittings, not a painted line
+    const strips = []; for (let x = -53.5; x > -64; x -= 3.2) strips.push(span(x - 0.32, TUN.h - 0.1, 38.7, x + 0.32, TUN.h - 0.06, 41.3));
+    boxes(strips, new THREE.MeshBasicMaterial({ color: 0xf3e7d4, toneMapped: false }));
     boxes([span(-72.2, 0, TUN.z0, -72, TUN.h, TUN.z1)], new THREE.MeshBasicMaterial({ color: 0x0d0e11 }));
     boxes([span(-72.0, 0.2, 39.1, -71.95, 2.4, 40.9)], new THREE.MeshBasicMaterial({ color: 0x6b5a44 }));
   }

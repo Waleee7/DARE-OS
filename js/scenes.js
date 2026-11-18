@@ -159,6 +159,7 @@
   function boardRows() {
     const L = JD.live || {}, gh = L.gh, push = gh && gh.push;
     const pushAgo = push ? ago(push.at).split(' ') : null;
+    const week = L.events ? feed(L.events).filter((r) => r.week).length : 0;
     return [
       { label: 'Live now', big: L.up != null ? `${L.up}/${L.total}` : '11/11', unit: '', what: 'products answering your browser', src: L.probedAt ? `Probed from your browser at ${clock(L.probedAt)} · median ${L.median} ms` : 'Probed from your browser as the page loads', live: L.up != null },
       { label: 'Tests', big: '918', unit: '', what: 'passing across 8 projects', src: 'Re-run from each public repo · 15 Nov 2026' },
@@ -166,7 +167,7 @@
       { label: 'Frame time', big: '8.3', unit: 'ms', what: 'with 12 ragdolls on screen', src: 'RAGDOLL RIOT, M3 Pro, 475 frames · 15 Nov 2026' },
       { label: 'Clients', big: '2', unit: 'live', what: 'one taking cards on live Stripe', src: "D'extensionz · CleanBins Tuscaloosa" },
       { label: 'Open source', big: gh ? String(gh.repos) : '17', unit: 'repos', what: gh ? `public on GitHub · ${gh.stars} stars` : 'public on GitHub', src: gh ? `GitHub API at ${clock(gh.at)}` : 'GitHub · snapshot 15 Nov 2026', live: !!gh },
-      { label: 'Last push', big: pushAgo ? pushAgo[0] : '15', unit: pushAgo ? pushAgo.slice(1).join(' ') : 'Nov', what: push ? push.repo : 'peach-dash', src: push ? `GitHub API · ${new Date(push.at).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}` : 'GitHub · snapshot 15 Nov 2026', live: !!push },
+      { label: 'Last push', big: pushAgo ? pushAgo[0] : '15', unit: pushAgo ? pushAgo.slice(1).join(' ') : 'Nov', what: (push ? push.repo : 'peach-dash') + (week ? ` · ${week} public update${week === 1 ? '' : 's'} this week` : ''), src: push ? `GitHub API · ${new Date(push.at).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}` : 'GitHub · snapshot 15 Nov 2026', live: !!push },
     ];
   }
   function renderBoard() {
@@ -179,8 +180,8 @@
       const v = document.createElement('span'); v.className = 'b-v';
       const big = document.createElement('b'); big.textContent = r.big; v.append(big);
       if (r.unit) { const u = document.createElement('small'); u.textContent = r.unit; v.append(' ', u); }
-      const w = document.createElement('span'); w.className = 'b-w'; w.textContent = r.what;
-      const s = document.createElement('span'); s.className = 'b-s'; s.textContent = r.src;
+      const w = document.createElement('span'); w.className = 'b-w'; w.textContent = ` ${r.what}.`;
+      const s = document.createElement('span'); s.className = 'b-s'; s.textContent = ` ${r.src}.`;
       b.append(l, v, w, s);
       b.addEventListener('click', () => { rowK = k; boardFocus(); });
       li.appendChild(b);
@@ -188,8 +189,11 @@
     }));
     boardFocus(true);
   }
+  const capWhat = $('[data-cap-what]'), capSrc = $('[data-cap-src]');
   function boardFocus(quiet) {
     for (const b of rowsBox.querySelectorAll('[data-row]')) b.setAttribute('aria-pressed', String(+b.dataset.row === rowK));
+    const r = rows[rowK];
+    if (r) { capWhat.textContent = r.what; capSrc.textContent = r.src; }
     if (three) three.board({ rows, k: rowK });
     if (!quiet) restartCycle();
   }
@@ -248,8 +252,9 @@
     for (const a of nav) { if (+a.dataset.go === scene && a.closest('.cine-shots')) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current'); }
     count.textContent = pad2(scene + 1);
     prevBtn.disabled = scene === 0;
-    nextBtn.disabled = scene === 4;
-    nextBtn.querySelector('span').textContent = scene < 4 ? NAMES[scene + 1] : NAMES[4];
+    // the last scene offers the way back to the first instead of a dead "next"
+    nextBtn.firstChild.nodeValue = scene < 4 ? 'Next: ' : 'Back to: ';
+    nextBtn.querySelector('span').textContent = NAMES[scene < 4 ? scene + 1 : 0];
   }
   function show(i, o = {}) {
     i = Math.max(0, Math.min(SCENES.length - 1, i));
@@ -270,7 +275,7 @@
     restartCycle();
   }
   for (const a of nav) a.addEventListener('click', (e) => { if (e.metaKey || e.ctrlKey || e.shiftKey) return; e.preventDefault(); show(+a.dataset.go); });
-  nextBtn.addEventListener('click', () => show(scene + 1));
+  nextBtn.addEventListener('click', () => show(scene < 4 ? scene + 1 : 0));
   prevBtn.addEventListener('click', () => show(scene - 1));
   addEventListener('hashchange', () => { const k = SCENES.indexOf(location.hash.slice(1)); if (k >= 0) { if (view() !== 'stage') setView('stage', { keepUrl: true }); show(k); } });
   for (const p of panels) { const s = p.querySelector('.slate'); if (s) s.tabIndex = -1; }
