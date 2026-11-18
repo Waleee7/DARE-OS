@@ -377,11 +377,23 @@
     }).catch(() => { cine.classList.add('flat'); });
     return loading;
   }
-  // The poster is the first picture (and the LCP): the 3D waits until it is on screen, then for idle time.
+  // The poster is the first picture (and the LCP): the 3D waits until the first paint has been
+  // presented and the poster has loaded, then two more frames (so the poster is on screen), then idle time.
   const idle = () => ('requestIdleCallback' in root ? requestIdleCallback(() => boot(), { timeout: 2000 }) : setTimeout(boot, 300));
   function start() {
-    const img = $('.cine-poster img'), next = () => requestAnimationFrame(() => setTimeout(idle, 0));
-    if (!img || img.complete) next(); else { img.addEventListener('load', next, { once: true }); img.addEventListener('error', next, { once: true }); }
+    const img = $('.cine-poster img');
+    const painted = new Promise((res) => {
+      let po = null;
+      try {
+        if (PerformanceObserver.supportedEntryTypes.includes('paint')) {
+          po = new PerformanceObserver((l) => { if (l.getEntries().some((e) => e.name === 'first-contentful-paint')) { po.disconnect(); res(); } });
+          po.observe({ type: 'paint', buffered: true });
+        }
+      } catch { po = null; }
+      if (!po) res();
+    });
+    const loaded = !img || img.complete ? null : new Promise((res) => { img.addEventListener('load', res, { once: true }); img.addEventListener('error', res, { once: true }); });
+    Promise.all([painted, loaded]).then(() => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(idle, 0))));
   }
   if (document.readyState === 'complete') start(); else addEventListener('load', start, { once: true });
   for (const ev of ['pointerdown', 'keydown', 'wheel']) addEventListener(ev, () => { if (document.readyState === 'complete') boot(); }, { once: true, passive: true });
@@ -390,6 +402,9 @@
 
   renderPlaque(); renderBoard(); chrome();
   panels[scene].classList.add('enter');
+  // the view this visit started in counts as entered (a ?theme= or #app/ link opens the desktop),
+  // so a reload after the URL is tidied stays where the visitor was
+  if (view() !== 'clean') store('jd-view', view());
 
   // Read-only view for the headless page checks.
   JD.cine = {
