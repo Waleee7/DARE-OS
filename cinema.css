@@ -62,7 +62,7 @@
 .js[data-shot="0"] .cine-mark { visibility: hidden; }
 .cine-shots ol { display: flex; gap: clamp(14px, 2vw, 30px); margin: 0; padding: 0; list-style: none; }
 .cine-shots a { position: relative; display: flex; align-items: center; gap: 9px; min-height: 44px; font: 500 11.5px/1 var(--f-text); letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--c-fg2); white-space: nowrap; transition: color 100ms ease-out; }
-.cine-shots a i { font-style: normal; color: #6f6c66; }
+.cine-shots a i { font-style: normal; color: #8d8980; }
 .cine-shots a:hover { color: var(--c-fg); }
 .cine-shots a[aria-current] { color: var(--c-fg); }
 .cine-shots a[aria-current] i { color: var(--c-main); }
@@ -146,7 +146,7 @@
 .pl-all { padding: 0 16px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
 .marks { position: absolute; left: 0; bottom: calc(100% + 8px); z-index: 6; display: grid; grid-template-columns: 1fr 1fr; width: min(640px, 92vw); max-height: min(62vh, 520px); overflow: auto; margin: 0; padding: 6px; list-style: none; background: var(--c-bg2); border: 1px solid var(--c-line); text-shadow: none; }
 .marks button { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; align-items: baseline; gap: 10px; width: 100%; min-height: 44px; padding: 8px 10px; border: 0; border-left: 2px solid transparent; background: none; color: var(--c-fg); font: 500 12.5px/1.2 var(--f-text); text-align: left; cursor: pointer; }
-.marks button i { font-style: normal; color: #6f6c66; }
+.marks button i { font-style: normal; color: #8d8980; }
 .marks button span { font: 600 17px/1 var(--f-disp); letter-spacing: .03em; text-transform: uppercase; color: var(--c-fg2); }
 .marks button:hover, .marks button:focus-visible { outline: none; background: rgba(255, 90, 31, .08); }
 .marks button[aria-current="true"] { border-left-color: var(--c-main); }

@@ -52,8 +52,8 @@
 </script>
 <link rel="preload" href="fonts/barlow-condensed-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="img/poster.webp" type="image/webp" media="(min-width: 760px) and (min-aspect-ratio: 4/5)">
-<link rel="preload" as="image" href="img/poster-tall.webp" type="image/webp" media="(max-width: 759px), (max-aspect-ratio: 4/5)">
+<link rel="preload" as="image" href="img/poster.webp" type="image/webp" fetchpriority="high" media="(min-width: 760px) and (min-aspect-ratio: 4/5)">
+<link rel="preload" as="image" href="img/poster-tall.webp" type="image/webp" fetchpriority="high" media="(max-width: 759px), (max-aspect-ratio: 4/5)">
 <link rel="stylesheet" href="cinema.css">
 <link rel="stylesheet" href="style.css">
 <script src="js/board.js" defer></script>
@@ -116,7 +116,7 @@
     <div class="cine-frame">
       <picture class="cine-poster">
         <source media="(max-width: 759px), (max-aspect-ratio: 4/5)" srcset="img/poster-tall.webp" type="image/webp" width="780" height="740">
-        <img src="img/poster.webp" alt="" width="1600" height="866" decoding="async">
+        <img src="img/poster.webp" alt="" width="1600" height="866" fetchpriority="high">
       </picture>
       <canvas class="cine-canvas" aria-hidden="true"></canvas>
     </div>

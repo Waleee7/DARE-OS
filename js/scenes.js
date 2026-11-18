@@ -372,7 +372,12 @@
     }).catch(() => { cine.classList.add('flat'); });
     return loading;
   }
-  const start = () => ('requestIdleCallback' in root ? requestIdleCallback(() => boot(), { timeout: 2000 }) : setTimeout(boot, 300));
+  // The poster is the first picture (and the LCP): the 3D waits until it is on screen, then for idle time.
+  const idle = () => ('requestIdleCallback' in root ? requestIdleCallback(() => boot(), { timeout: 2000 }) : setTimeout(boot, 300));
+  function start() {
+    const img = $('.cine-poster img'), next = () => requestAnimationFrame(() => setTimeout(idle, 0));
+    if (!img || img.complete) next(); else { img.addEventListener('load', next, { once: true }); img.addEventListener('error', next, { once: true }); }
+  }
   if (document.readyState === 'complete') start(); else addEventListener('load', start, { once: true });
   for (const ev of ['pointerdown', 'keydown', 'wheel']) addEventListener(ev, () => { if (document.readyState === 'complete') boot(); }, { once: true, passive: true });
   addEventListener('pagehide', () => { if (three) three.active(false); });
